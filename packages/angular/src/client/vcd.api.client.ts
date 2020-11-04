@@ -13,7 +13,7 @@ import { SessionType,
 } from '@vcd/bindings/vcloud/api/rest/schema_v1_5';
 import { SupportedVersionsType } from '@vcd/bindings/vcloud/api/rest/schema/versioning';
 import { Query } from '../query/index';
-import { AuthTokenHolderService, API_ROOT_URL, SESSION_SCOPE, SESSION_ORG_ID } from '../common/index';
+import { AuthTokenHolderService, API_ROOT_URL, SESSION_SCOPE, SESSION_ORG_ID } from '../container-hooks';
 import { VcdHttpClient } from './vcd.http.client';
 import { VcdTransferClient } from './vcd.transfer.client';
 
@@ -530,7 +530,7 @@ export class VcdApiClient {
         return !!this.findLink(item, linkRelType, entityRefType);
     }
 
-    public findLink(item: Navigable, rel: string, type: string): LinkType {
+    private findLink(item: Navigable, rel: string, type: string): LinkType {
         if (!item || !item.link) {
             return undefined;
         }

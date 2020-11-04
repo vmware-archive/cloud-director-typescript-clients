@@ -4,7 +4,7 @@ import { LoggingInterceptor } from './logging.interceptor';
 import { RequestHeadersInterceptor } from './request.headers.interceptor';
 import {LinkRelType, Navigable, VcdApiClient} from './vcd.api.client';
 import { VcdHttpClient } from './vcd.http.client';
-import { AuthTokenHolderService, API_ROOT_URL, SESSION_SCOPE, SESSION_ORG_ID } from '../common';
+import { AuthTokenHolderService, API_ROOT_URL, SESSION_SCOPE, SESSION_ORG_ID } from '../container-hooks';
 import { SupportedVersionsType } from '@vcd/bindings/vcloud/api/rest/schema/versioning';
 import { SessionType, TaskType, EntityReferenceType, QueryResultRecordsType } from '@vcd/bindings/vcloud/api/rest/schema_v1_5';
 import { Query } from '../query';

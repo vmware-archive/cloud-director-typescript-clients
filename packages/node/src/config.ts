@@ -27,7 +27,7 @@ const loadConfig = (fileName: string) => {
     return null
 }
 
-export function findHomeDir(): string | null {
+function findHomeDir(): string | null {
     if (process.env.HOME) {
         try {
             fs.accessSync(process.env.HOME);
@@ -123,7 +123,7 @@ export class CloudDirectorConfig {
                 org: this.authentication['org'],
                 authorizationKey: this.authentication['authorizationKey']
             }
-            config.current = alias    
+            config.current = alias
         }, fileLocation)
     }
 

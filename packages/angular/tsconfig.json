@@ -8,23 +8,20 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+    "outDir": "dist/",
     "target": "es5",
     "module": "es2015",
     "declaration": true,
     "sourceMap": false,
-    "lib": ["esnext", "dom"],
-    "outDir": "out-tsc/spec",
-    "types": [
-      "jasmine",
-      "node"
+    "lib": [
+      "dom",
+      "es5"
     ],
-    "skipLibCheck": true
   },
-  "files": [
-    "src/test.ts"
-  ],
-  "include": [
+  "exclude": [
+    "src/test.ts",
     "**/*.spec.ts",
-    "**/*.d.ts"
+    "dist/**/*",
+    "node_modules/**/*"
   ]
 }
