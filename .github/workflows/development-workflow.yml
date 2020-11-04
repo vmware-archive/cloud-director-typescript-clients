@@ -1,0 +1,66 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+name: "Development Workflow"
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+
+defaults:
+  run:
+    working-directory: "./"
+jobs:
+  dependencies:
+    runs-on: ubuntu-latest
+    name: Download dependencies
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{github.sha}}-dependencies
+      - run: |
+          npm ci
+          npm run bootstrap
+  lint:
+    runs-on: ubuntu-latest
+    name: Linting
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{github.sha}}-dependencies
+      - run: |
+          npm run lint
+  build:
+    runs-on: ubuntu-latest
+    name: Building
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{github.sha}}-dependencies
+      - run: npm run build
+  test:
+    runs-on: ubuntu-latest
+    name: Testing
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{github.sha}}-dependencies
+      - uses: actions/cache@v2
+        with:
+          path: |
+            **/dist
+            **/lib
+          key: ${{github.sha}}-artifacts
+      - run: npm run test-ci
