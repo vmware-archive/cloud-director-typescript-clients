@@ -43,6 +43,9 @@ jobs:
     name: Building
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
       - uses: actions/cache@v2
         with:
           path: |
@@ -61,6 +64,9 @@ jobs:
     name: Testing
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
       - uses: actions/cache@v2
         with:
           path: |
