@@ -26,6 +26,7 @@ jobs:
           npm run bootstrap
   lint:
     runs-on: ubuntu-latest
+    needs: [dependencies]
     name: Linting
     steps:
       - uses: actions/checkout@v2
@@ -38,18 +39,8 @@ jobs:
           npm run lint
   build:
     runs-on: ubuntu-latest
+    needs: [dependencies, lint, test]
     name: Building
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        with:
-          path: |
-            **/node_modules
-          key: ${{github.sha}}-dependencies
-      - run: npm run build
-  test:
-    runs-on: ubuntu-latest
-    name: Testing
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
@@ -63,4 +54,16 @@ jobs:
             **/dist
             **/lib
           key: ${{github.sha}}-artifacts
+      - run: npm run build
+  test:
+    runs-on: ubuntu-latest
+    needs: [dependencies]
+    name: Testing
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: |
+            **/node_modules
+          key: ${{github.sha}}-dependencies
       - run: npm run test-ci
