@@ -421,15 +421,15 @@ describe('API client utility code', () => {
 
     describe('canPerformAction', () => {
 
-        const type = "DummyType";
+        const type = 'DummyType';
         let item: Navigable;
 
         beforeEach(() => {
             item = {
                 link: [{
                     rel: LinkRelType.remove,
-                    type: type,
-                    href: "https://dummy-url.com"
+                    type,
+                    href: 'https://dummy-url.com'
                 }]
             };
         });

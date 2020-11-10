@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpHandler, HttpInterceptor, HttpRequest, HttpEvent, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from "rxjs/operators";
-import { parseHeaderHateoasLinks } from ".";
+import { map } from 'rxjs/operators';
+import { parseHeaderHateoasLinks } from '.';
 
 // tslint:disable:variable-name
 @Injectable()
@@ -62,12 +62,12 @@ export class RequestHeadersInterceptor implements HttpInterceptor {
                         return res;
                     }
 
-                    if (res.headers.has("link")) {
-                        res.body["link"] = parseHeaderHateoasLinks(res.headers.get("link"));
+                    if (res.headers.has('link')) {
+                        res.body.link = parseHeaderHateoasLinks(res.headers.get('link'));
                     }
-                    
-                    if (res.headers.has("Link")) {
-                        res.body["link"] = parseHeaderHateoasLinks(res.headers.get("Link"));
+
+                    if (res.headers.has('Link')) {
+                        res.body.link = parseHeaderHateoasLinks(res.headers.get('Link'));
                     }
                 }
                 return res;
