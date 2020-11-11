@@ -88,10 +88,10 @@ export function parseHeaderHateoasLinks(header: string): LinkType[] {
     return results;
 }
 
-export enum LinkRelType{
-    add = "add",
-    remove = "remove",
-    edit = "edit",
+export enum LinkRelType {
+    add = 'add',
+    remove = 'remove',
+    edit = 'edit',
 }
 
 /**
@@ -251,7 +251,7 @@ export class VcdApiClient {
         let url = `${this._baseUrl}/${endpoint}`;
 
         if (queryBuilder) {
-            url = `${url}${queryBuilder.getCloudAPI()}`
+            url = `${url}${queryBuilder.getCloudAPI()}`;
         }
 
         return this.validateRequestContext().pipe(
@@ -526,7 +526,7 @@ export class VcdApiClient {
    * @param linkRelType - the link rel type, pass either LinkRelType or string
    * @param entityRefType - the entity reference type
    */
-    public canPerformAction(item: Navigable, linkRelType: LinkRelType | string, entityRefType?: string): boolean{
+    public canPerformAction(item: Navigable, linkRelType: LinkRelType | string, entityRefType?: string): boolean {
         return !!this.findLink(item, linkRelType, entityRefType);
     }
 
