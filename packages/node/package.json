@@ -37,5 +37,8 @@
     "test-ci": "npm run test",
     "coverage": "nyc -r text -e .ts -x \"**/*.[sS]pec.ts\" npm run test"
   },
-  "types": "lib/index.d.ts"
+  "types": "lib/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  }
 }
