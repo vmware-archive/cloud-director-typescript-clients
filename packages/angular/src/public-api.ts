@@ -2,5 +2,13 @@
  * Public API Surface of sdk
  */
 
-export * from './client';
+import * as query from './query';
+import * as client from './client';
+
 export * from './query';
+export * from './client';
+
+export {
+    client,
+    query
+};
