@@ -27,6 +27,25 @@ const loadConfig = (fileName: string) => {
     return null
 }
 
+const readConfig = (fileLocation?: string) => {
+    fileLocation = fileLocation || DEFAULT_CONFIG_LOCATION
+    const dirName = path.dirname(fileLocation)
+    if (!fs.existsSync(dirName)) {
+        log(`Config location doesn't exists. Creating: ${dirName}`)
+        fs.mkdirSync(dirName)
+    }
+    return loadConfig(fileLocation) || {}
+}
+
+const updateConfig = (configMutation: (config: any) => void, fileLocation?: string) => {
+    fileLocation = fileLocation || DEFAULT_CONFIG_LOCATION
+    const config = readConfig(fileLocation)
+    configMutation(config)
+    fs.writeFileSync(fileLocation, JSON.stringify(config))
+}
+
+
+
 function findHomeDir(): string | null {
     if (process.env.HOME) {
         try {
@@ -97,26 +116,8 @@ export class CloudDirectorConfig {
         }
     }
 
-    private updateConfig(
-        configMutation: (config: any) => void,
-        fileLocation?: string) {
-            fileLocation = fileLocation || DEFAULT_CONFIG_LOCATION
-            const dirName = path.dirname(fileLocation)
-            if (!fs.existsSync(dirName)) {
-                log(`Config location doesn't exists. Creating: ${dirName}`)
-                fs.mkdirSync(dirName)
-            }
-            const config = loadConfig(fileLocation) || {}
-            configMutation(config)
-            fs.writeFileSync(fileLocation, JSON.stringify(config))
-    }
-
-    public use(alias: string, fileLocation?: string): void {
-        this.updateConfig((config) => { config.current = alias }, fileLocation)
-    }
-
     public saveConfig(alias: string, fileLocation?: string): void {
-        this.updateConfig((config) => {
+        updateConfig((config) => {
             config[alias] = {
                 basePath: this.basePath,
                 username: this.authentication['username'],
@@ -125,6 +126,27 @@ export class CloudDirectorConfig {
             }
             config.current = alias
         }, fileLocation)
+    }
+
+    static getConfigurations(fileLocation?: string) {
+        const config = readConfig(fileLocation);
+        return {
+            current: config.current,
+            configurations: Object.keys(config)
+                .filter(key => key !== 'current')
+                .map(key => {
+                    return {
+                        key,
+                        basePath: config[key].basePath,
+                        username: config[key].username,
+                        org: config[key].org || 'System'
+                    }
+                })
+        }
+    }
+
+    static use(alias: string, fileLocation?: string): void {
+        updateConfig((config) => { config.current = alias }, fileLocation)
     }
 
     static async withUsernameAndPassword(basePath: string, username: string, org: string, password: string): Promise<CloudDirectorConfig> {

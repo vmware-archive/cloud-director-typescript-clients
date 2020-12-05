@@ -46,11 +46,7 @@ describe('Config Tests', () => {
     it('Can update current config', () => {
         spyOn(fs, 'existsSync').and.returnValues(true, false)
         const writeConfigSpy = spyOn(fs, 'writeFileSync')
-        const config = CloudDirectorConfig.fromParams('http://www.example.com',
-            'administrator',
-            "system",
-            "testKey")
-        config.use('testNew', '/test/file/location')
+        CloudDirectorConfig.use('testNew', '/test/file/location')
         expect(writeConfigSpy).toHaveBeenCalledWith('/test/file/location', JSON.stringify({
             "current": "testNew"
         }))
