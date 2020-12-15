@@ -29,6 +29,7 @@ describe('Config Tests', () => {
         spyOn(fs, 'existsSync').and.returnValues(true, false)
         const writeConfigSpy = spyOn(fs, 'writeFileSync')
         const config = CloudDirectorConfig.fromParams('http://www.example.com',
+            { authorized: true },
             'administrator',
             "system",
             "testKey")
@@ -51,6 +52,16 @@ describe('Config Tests', () => {
             "current": "testNew"
         }))
     });
+    it('Throws when client is unauthorized', async () => {
+        const config = CloudDirectorConfig.fromParams('http://www.example.com',
+            { authorized: false },
+            'administrator',
+            "system",
+            "testKey")
+        expect(() => {
+            const client = config.makeApiClient(AccessControlsApi)            
+        }).toThrow();
+    });
     it('Can create authenticated client', async () => {
         const scope = nock('http://www.example.com', {
             reqheaders: {
@@ -60,11 +71,12 @@ describe('Config Tests', () => {
             .post('/1.0.0/entities/test/accessControls')
             .reply(200, { id: '123ABC' })
         const config = CloudDirectorConfig.fromParams('http://www.example.com',
+            { authorized: true },
             'administrator',
             "system",
             "testKey")
         const client = config.makeApiClient(AccessControlsApi)
-        await client.createEntityAccessControlGrant("test", {accessLevelId: "", grantType: "", id: "", objectId: "test"})
+        await client.createEntityAccessControlGrant("test", { accessLevelId: "", grantType: "", id: "", objectId: "test" })
         expect(scope.isDone()).toBeTrue()
     });
     it('create config with username and password provider login', async () => {

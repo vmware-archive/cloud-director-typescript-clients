@@ -6,7 +6,10 @@ import { URL } from 'url';
 const log = debug('vcd:api-client:transfer')
 
 export class TransferClient {
-    constructor(private url: string, private authorizationKey: string) {
+    constructor(
+        private url: string,
+        private authorizationKey: string,
+        private rejectUnauthorized: boolean = true) {
     }
 
     public async upload(filePath: string, contentType: string) {
@@ -18,6 +21,7 @@ export class TransferClient {
             hostname: urlObj.hostname,
             port: urlObj.port,
             path: urlObj.pathname,
+            rejectUnauthorized: this.rejectUnauthorized,
             method: "PUT",
             headers: {
                 'Content-Type': contentType,
