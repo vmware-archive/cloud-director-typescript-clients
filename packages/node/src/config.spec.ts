@@ -17,6 +17,7 @@ describe('Config Tests', () => {
             "current": "test",
             "test": {
                 "basePath": "https://mock.host.com/cloudapi",
+                "authorized":true,
                 "username": "administrator",
                 "org": "System",
                 "authorizationKey": "testKey"
@@ -37,6 +38,7 @@ describe('Config Tests', () => {
         expect(writeConfigSpy).toHaveBeenCalledWith('/test/file/location', JSON.stringify({
             "test": {
                 "basePath": "http://www.example.com",
+                "authorized": true,
                 "username": "administrator",
                 "org": "system",
                 "authorizationKey": "testKey"
@@ -59,7 +61,7 @@ describe('Config Tests', () => {
             "system",
             "testKey")
         expect(() => {
-            const client = config.makeApiClient(AccessControlsApi)            
+            const client = config.makeApiClient(AccessControlsApi)
         }).toThrow();
     });
     it('Can create authenticated client', async () => {
