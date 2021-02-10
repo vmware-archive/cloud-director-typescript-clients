@@ -1,15 +1,13 @@
 {
   "name": "@vcd/node-client",
   "description": "VMware Cloud Director Client bindings for NodeJS",
-  "version": "0.0.5-alpha.3",
+  "version": "0.0.5-alpha.4",
   "author": "VMware",
   "license": "BSD-2",
   "dependencies": {
-    "@types/bluebird": "*",
     "@types/mqtt": "^2.5.0",
     "@types/paho-mqtt": "^1.0.4",
     "@types/request": "*",
-    "bluebird": "^3.7.2",
     "debug": "^4.1.1",
     "mqtt": "4.1.0",
     "paho-mqtt": "^1.1.0",
@@ -19,7 +17,7 @@
   "devDependencies": {
     "@types/debug": "^4.1.5",
     "@types/jasmine": "^3.5.4",
-    "@types/node": "8.10.34",
+    "@types/node": "^10.14.20",
     "jasmine": "^3.5.0",
     "jasmine-ts": "^0.3.0",
     "nock": "^13.0.4",
@@ -28,7 +26,7 @@
     "typescript": "^3.6.3"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.14.2 <13.0.0"
   },
   "main": "lib/index.js",
   "scripts": {

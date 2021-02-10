@@ -1,6 +1,6 @@
 /**
- * vCloud Director OpenAPI
- * vCloud Director OpenAPI is a new vCloud Director API that is defined using the OpenAPI standards.<br/> This ReSTful API borrows some elements of the legacy vCloud Director API and establishes new patterns for use as described below. <h4>Authentication</h4> Authentication and Authorization schemes are the same as those for the legacy APIs. You can authenticate using the JWT token via the <code>Authorization</code> header or specifying a session using <code>x-vcloud-authorization</code> (The latter form is deprecated). <h4>Operation Patterns</h4> This API follows the following general guidelines to establish a consistent CRUD pattern: <table> <tr>   <th>Operation</th><th>Description</th><th>Response Code</th><th>Response Content</th> </tr><tr>   <td>GET /items<td>Returns a paginated list of items<td>200<td>Response will include Navigational links to the items in the list. </tr><tr>   <td>POST /items<td>Returns newly created item<td>201<td>Content-Location header links to the newly created item </tr><tr>   <td>GET /items/urn<td>Returns an individual item<td>200<td>A single item using same data type as that included in list above </tr><tr>   <td>PUT /items/urn<td>Updates an individual item<td>200<td>Updated view of the item is returned </tr><tr>   <td>DELETE /items/urn<td>Deletes the item<td>204<td>No content is returned. </tr> </table> <h5>Asynchronous operations</h5> Asynchronous operations are determined by the server. In those cases, instead of responding as described above, the server responds with an HTTP Response code 202 and an empty body. The tracking task (which is the same task as all legacy vCD operations use) is linked via the URI provided in the <code>Location</code> header.<br/> All API calls can choose to service a request asynchronously or synchronously as determined by the server upon interpreting the request. Operations that choose to exhibit this dual behavior will have both options documented by specifying both response code(s) below. The caller must be prepared to handle responses to such API calls by inspecting the HTTP Response code. <h5>Error Conditions</h5> <b>All</b> operations report errors using the following vCD error reporting rules: <ul>   <li>400: Bad Request - In event of bad request due to incorrect data or other user error</li>   <li>401: Bad Request - If user is unauthenticated or their session has expired</li>   <li>403: Forbidden - If the user is not authorized or the entity does not exist</li> </ul> <h4>OpenAPI Design Concepts and Principles</h4> <ul>   <li>IDs are full Uniform Resource Names (URNs).</li>   <li>vCloud OpenAPI's <code>Content-Type</code> is always <code>application/json</code></li>   <li>REST links are in the Link header.</li>   <ul>     <li>Multiple relationships for any link are represented by multiple values in a space-separated list.</li>     <li>Links have a custom vCloud Director-specific &quot;model&quot; attribute that hints at the applicable data         type for the links.</li>     <li>title + rel + model attributes evaluates to a unique link.</li>     <li>Links follow Hypermedia as the Engine of Application State (HATEOAS) principles. Links are present if         certain operations are present and permitted for the user&quot;s current role and the state of the         referred entities.</li>   </ul>   <li>APIs follow a flat structure relying on cross-referencing other entities instead of the navigational style       used by the legacy vCloud APIs.</li>   <li>Most endpoints that return a list support filtering and sorting similar to the query service in the legacy       vCloud APIs.</li>   <li>Accept header must be included to specify the API version for the request similar to calls to existing legacy       vCloud APIs.</li>   <li>Each feature has a version in the path element present in its URL.<br/>       <b>Note</b> API URL's without a version in their paths must be considered experimental.</li> </ul> 
+ * VMware Cloud Director OpenAPI
+ * VMware Cloud Director OpenAPI is a new API that is defined using the OpenAPI standards.<br/> This ReSTful API borrows some elements of the legacy VMware Cloud Director API and establishes new patterns for use as described below. <h4>Authentication</h4> Authentication and Authorization schemes are the same as those for the legacy APIs. You can authenticate using the JWT token via the <code>Authorization</code> header or specifying a session using <code>x-vcloud-authorization</code> (The latter form is deprecated). <h4>Operation Patterns</h4> This API follows the following general guidelines to establish a consistent CRUD pattern: <table> <tr>   <th>Operation</th><th>Description</th><th>Response Code</th><th>Response Content</th> </tr><tr>   <td>GET /items<td>Returns a paginated list of items<td>200<td>Response will include Navigational links to the items in the list. </tr><tr>   <td>POST /items<td>Returns newly created item<td>201<td>Content-Location header links to the newly created item </tr><tr>   <td>GET /items/urn<td>Returns an individual item<td>200<td>A single item using same data type as that included in list above </tr><tr>   <td>PUT /items/urn<td>Updates an individual item<td>200<td>Updated view of the item is returned </tr><tr>   <td>DELETE /items/urn<td>Deletes the item<td>204<td>No content is returned. </tr> </table> <h5>Asynchronous operations</h5> Asynchronous operations are determined by the server. In those cases, instead of responding as described above, the server responds with an HTTP Response code 202 and an empty body. The tracking task (which is the same task as all legacy API operations use) is linked via the URI provided in the <code>Location</code> header.<br/> All API calls can choose to service a request asynchronously or synchronously as determined by the server upon interpreting the request. Operations that choose to exhibit this dual behavior will have both options documented by specifying both response code(s) below. The caller must be prepared to handle responses to such API calls by inspecting the HTTP Response code. <h5>Error Conditions</h5> <b>All</b> operations report errors using the following error reporting rules: <ul>   <li>400: Bad Request - In event of bad request due to incorrect data or other user error</li>   <li>401: Bad Request - If user is unauthenticated or their session has expired</li>   <li>403: Forbidden - If the user is not authorized or the entity does not exist</li> </ul> <h4>OpenAPI Design Concepts and Principles</h4> <ul>   <li>IDs are full Uniform Resource Names (URNs).</li>   <li>OpenAPI's <code>Content-Type</code> is always <code>application/json</code></li>   <li>REST links are in the Link header.</li>   <ul>     <li>Multiple relationships for any link are represented by multiple values in a space-separated list.</li>     <li>Links have a custom VMware Cloud Director-specific &quot;model&quot; attribute that hints at the applicable data         type for the links.</li>     <li>title + rel + model attributes evaluates to a unique link.</li>     <li>Links follow Hypermedia as the Engine of Application State (HATEOAS) principles. Links are present if         certain operations are present and permitted for the user&quot;s current role and the state of the         referred entities.</li>   </ul>   <li>APIs follow a flat structure relying on cross-referencing other entities instead of the navigational style       used by the legacy VMware Cloud Director APIs.</li>   <li>Most endpoints that return a list support filtering and sorting similar to the query service in the legacy       VMware Cloud Director APIs.</li>   <li>Accept header must be included to specify the API version for the request similar to calls to existing legacy       VMware Cloud Director APIs.</li>   <li>Each feature has a version in the path element present in its URL.<br/>       <b>Note</b> API URL's without a version in their paths must be considered experimental.</li> </ul> 
  *
  * OpenAPI spec version: 35.0
  * 
@@ -12,7 +12,6 @@
 
 import request = require('request');
 import http = require('http');
-import Promise = require('bluebird');
 
 let defaultBasePath = 'https://localhost/cloudapi';
 
@@ -70,7 +69,7 @@ export class Advisory {
     */
     'message': string;
     /**
-    * Priority for an advisory that indicates the level of urgency. These priorities are listed in descending sort order. <ul>   <li>     <em>MANDATORY</em>: Mandatory message that is always displayed;     these advisories cannot be snoozed or dismissed (see documentation     on displayStart and displayEnd)   </li>   <li>     <em>CRITICAL</em>: Equivalent of a \"red\" warning   </li>   <li>     <em>IMPORTANT</em>: Equivalent of a \"yellow\" warning   </li>   <li>     <em>NOTICE</em>: Informational message   </li> </ul> 
+    * Priority for an advisory that indicates the level of urgency. These priorities are listed in ascending sort order. <ul>   <li>     <em>MANDATORY</em>: A mandatory message which is always displayed;     these advisories cannot be snoozed or dismissed (see documentation     on displayStart and displayEnd)   </li>   <li>     <em>CRITICAL</em>: A high priority, potentially actionable message which can be     snoozed or dismissed   </li>   <li>     <em>IMPORTANT</em>: A potentially actionable message which can be snoozed or dismissed   </li>   <li>     <em>NOTICE</em>: An informational message which can be dismissed (but not snoozed)   </li> </ul> 
     */
     'priority': string;
     /**
@@ -1488,7 +1487,7 @@ export class EdgeLoadBalancerPersistenceProfile {
     */
     'name': string;
     /**
-    * Type of persistence strategy to use. Supported values are: <ul> <li>CLIENT_IP - The client’s IP is used as the identifier and mapped to the server. <li>HTTP_COOKIE - Load Balancer inserts a cookie into HTTP responses. Cookie name must be provided as value. <li>CUSTOM_HTTP_HEADER - Custom, static mappings of header values to specific servers are used. Header name must be provided as value. <li>APP_COOKIE - Load Balancer reads existing server cookies or URI embedded data such as JSessionID. Cookie name must be provided as value. <li>TLS - Information is embedded in the client’s SSL/TLS ticket ID. This will use default system profile \"System-Persistence-TLS\". </ul> 
+    * Type of persistence strategy to use. Supported values are: <ul> <li>CLIENT_IP - The client’s IP is used as the identifier and mapped to the server. <li>HTTP_COOKIE - Load Balancer inserts a cookie into HTTP responses. Cookie name must be provided as value. <li>CUSTOM_HTTP_HEADER - Custom, static mappings of header values to specific servers are used. Header name must be provided as value. <li>APP_COOKIE - Load Balancer reads existing server cookies or URI embedded data such as JSessionID. Cookie name must be provided as value. <li>TLS - Information is embedded in the client’s SSL/TLS ticket ID. This will use default system profile \"System-Persistence-TLS\". </ul> Using <em>CUSTOM_HTTP_HEADER</em>, <em>APP_COOKIE</em>, <em>TLS</em> persistence types may require additional licensing. 
     */
     'type': string;
     /**
@@ -1548,7 +1547,7 @@ export class EdgeLoadBalancerServicePort {
     */
     'portEnd': number;
     /**
-    * A flag indicating whether SSL termination is enabled at the port or not. This can only be enabled if HTTPS and L4_TLS Application Profile types are used. For HTTPS, if SSL is disabled for a specific port, traffic from that port will be redirected to the first SSL port specified. This allows for automatic HTTP to HTTPS redirects. Disabling SSL for HTTPS and L4_TLS is allowed only with additional licensing. 
+    * A flag indicating whether SSL termination is enabled at the port or not. This can only be enabled if HTTPS and L4_TLS Application Profile types are used. At least one service port must have ssl enabled when using HTTPS or L4_TLS Application Profile types. For HTTPS, if SSL is disabled for a specific port, traffic from that port will be redirected to the first SSL port specified. This allows for automatic HTTP to HTTPS redirects. Disabling SSL for HTTPS and L4_TLS is allowed only with additional licensing. 
     */
     'sslEnabled': boolean;
 }
@@ -2007,11 +2006,11 @@ export class FirewallRule {
     'name': string;
     'description': string;
     /**
-    * List of source groups for firewall rule. It specifies the sources of network traffic for the firewall rule. Null value or an empty list will be treated as \"ANY\" which means traffic from any source. 
+    * List of source groups for firewall rule. It specifies the sources of network traffic for the firewall rule. Null value or an empty list will be treated as \"ANY\" which means traffic from any source. For Distributed Firewall rules, an entry with an id of urn:vcloud:firewallGroup:internal can be used to specify all internal vDC Group network traffic. 
     */
     'sourceFirewallGroups': Array<EntityReference>;
     /**
-    * List of source groups for firewall rule. It specifies the destinations of network traffic for the firewall rule. Null value or an empty list will be treated as \"ANY\" which means traffic to any destination. 
+    * List of source groups for firewall rule. It specifies the destinations of network traffic for the firewall rule. Null value or an empty list will be treated as \"ANY\" which means traffic to any destination. For Distributed Firewall rules, an entry with an id of urn:vcloud:firewallGroup:internal can be used to specify all internal vDC Group network traffic. 
     */
     'destinationFirewallGroups': Array<EntityReference>;
     /**
@@ -2386,10 +2385,6 @@ export class LoadBalancerController {
     * Cleartext password to connect to the Load Balancer Controller.
     */
     'password': string;
-    /**
-    * True if the Load Balancer Controller is enabled for use with vCloud Director.
-    */
-    'isEnabled': boolean;
     /**
     * The license type of the Load Balancer Controller. <ul> <li>BASIC - Basic edition of the NSX Advanced Load Balancer. <li>ENTERPRISE - Full featured edition of the NSX Advanced Load Balancer. </ul> 
     */
@@ -3290,7 +3285,7 @@ export class Proxy {
     */
     'parentProxy': EntityReference;
     /**
-    * IP address or FQDN of the host being proxied. This is not editable once the proxy has been created.
+    * IP address or FQDN of the host being proxied. Lower case formatting will be applied to the value of the property. This is not editable once the proxy has been created. 
     */
     'targetHost': string;
     /**
@@ -3753,6 +3748,9 @@ export class Sddc {
 * An available network connections exposed by the SDDC
 */
 export class SddcEndpoint {
+    /**
+    * This is a required property.
+    */
     'name': string;
     'id': string;
     /**
@@ -3760,7 +3758,11 @@ export class SddcEndpoint {
     */
     'endpoint': string;
     /**
-    * The URL target of the SDDC endpoint. This is the URL that the browser tab  will be pointed to when the endpoint is launched via the H5 UI of VCD. 
+    * An optional identifier to a Proxy that can be used to establish a connection to the endpoint. Deprecated in Api 35.0 and replaced by proxy. 
+    */
+    'proxyId': string;
+    /**
+    * The URL target of the SDDC endpoint. This is the URL that the browser tab  will be pointed to when the endpoint is launched via the H5 UI of VCD. This is a required property. 
     */
     'targetUrl': string;
     /**
@@ -3768,7 +3770,7 @@ export class SddcEndpoint {
     */
     'proxy': EntityReference;
     /**
-    * The EntityReference of the parent SDDC entity. This is not editable once the endpoint has been created.
+    * The EntityReference of the parent SDDC entity. This is a required property to create the endpoint and once set cannot be edited.
     */
     'sddc': EntityReference;
     /**
@@ -3796,7 +3798,7 @@ export class SddcProxy {
     */
     'tenantVisible': boolean;
     /**
-    * IP address or FQDN of the host being proxied. This is not editable once the proxy has been created.
+    * IP address or FQDN of the host being proxied. Lower case formatting will be applied to the value of the property. This is not editable once the proxy has been created. 
     */
     'targetHost': string;
     /**
@@ -4060,17 +4062,17 @@ export class SslSettings {
 */
 export class StoragePolicySettings {
     /**
-    * Max IOPS for any disk associated with this storage policy.
+    * Maximum IOPS for any disk associated with this storage policy.
     */
     'diskIopsMax': number;
     /**
-    * Default IOPS to apply to any disk associated with the storage policy. If set to zero, diskIopsPerGbMax is used as the default IOPS to be assigned to any disk associated with this storage policy. 
-    */
-    'diskIopsDefault': number;
-    /**
-    * Maximum IOPS that can be assigned to any disk associated with this storage policy based on the size of the disk (in GB). This is also the value used for any disk associated with this policy if diskIopsDefault is set to 0. 
+    * Maximum IOPS that can be assigned to any disk associated with this storage policy based on the size of the disk (in GB). This is also the default IOPS value used for any disk associated with this policy. If set to zero, Default Disk IOPS is used as the default IOPS to be assigned to any disk associated with this storage policy. 
     */
     'diskIopsPerGbMax': number;
+    /**
+    * Default IOPS value to use for any disk associated with the storage policy. This default is only used when Disk IOPS Per GB Max is set to zero. 
+    */
+    'diskIopsDefault': number;
     /**
     * The sum of IOPS across all disks associated with this policy will be limited to this value. 
     */
@@ -4538,8 +4540,8 @@ export namespace UploadMetadataResponse {
 export class UploadSpec {
     'fileName': string;
     'size': number;
-    'checksum'?: string;
-    'checksumAlgo'?: UploadSpec.ChecksumAlgoEnum;
+    'checksum': string;
+    'checksumAlgo': UploadSpec.ChecksumAlgoEnum;
 }
 
 export namespace UploadSpec {
@@ -5517,7 +5519,7 @@ export class AdvisoryDefinition {
     */
     'message': string;
     /**
-    * Priority for an advisory that indicates the level of urgency. These priorities are listed in descending sort order. <ul>   <li>     <em>MANDATORY</em>: Mandatory message that is always displayed;     these advisories cannot be snoozed or dismissed (see documentation     on displayStart and displayEnd)   </li>   <li>     <em>CRITICAL</em>: Equivalent of a \"red\" warning   </li>   <li>     <em>IMPORTANT</em>: Equivalent of a \"yellow\" warning   </li>   <li>     <em>NOTICE</em>: Informational message   </li> </ul> 
+    * Priority for an advisory that indicates the level of urgency. These priorities are listed in ascending sort order. <ul>   <li>     <em>MANDATORY</em>: A mandatory message which is always displayed;     these advisories cannot be snoozed or dismissed (see documentation     on displayStart and displayEnd)   </li>   <li>     <em>CRITICAL</em>: A high priority, potentially actionable message which can be     snoozed or dismissed   </li>   <li>     <em>IMPORTANT</em>: A potentially actionable message which can be snoozed or dismissed   </li>   <li>     <em>NOTICE</em>: An informational message which can be dismissed (but not snoozed)   </li> </ul> 
     */
     'priority': string;
     /**
@@ -6088,11 +6090,11 @@ export class DfwRule {
     'name': string;
     'description': string;
     /**
-    * List of source groups for firewall rule. It specifies the sources of network traffic for the firewall rule. Null value or an empty list will be treated as \"ANY\" which means traffic from any source. 
+    * List of source groups for firewall rule. It specifies the sources of network traffic for the firewall rule. Null value or an empty list will be treated as \"ANY\" which means traffic from any source. For Distributed Firewall rules, an entry with an id of urn:vcloud:firewallGroup:internal can be used to specify all internal vDC Group network traffic. 
     */
     'sourceFirewallGroups': Array<EntityReference>;
     /**
-    * List of source groups for firewall rule. It specifies the destinations of network traffic for the firewall rule. Null value or an empty list will be treated as \"ANY\" which means traffic to any destination. 
+    * List of source groups for firewall rule. It specifies the destinations of network traffic for the firewall rule. Null value or an empty list will be treated as \"ANY\" which means traffic to any destination. For Distributed Firewall rules, an entry with an id of urn:vcloud:firewallGroup:internal can be used to specify all internal vDC Group network traffic. 
     */
     'destinationFirewallGroups': Array<EntityReference>;
     /**
@@ -6225,11 +6227,11 @@ export class EdgeFirewallRule {
     'name': string;
     'description': string;
     /**
-    * List of source groups for firewall rule. It specifies the sources of network traffic for the firewall rule. Null value or an empty list will be treated as \"ANY\" which means traffic from any source. 
+    * List of source groups for firewall rule. It specifies the sources of network traffic for the firewall rule. Null value or an empty list will be treated as \"ANY\" which means traffic from any source. For Distributed Firewall rules, an entry with an id of urn:vcloud:firewallGroup:internal can be used to specify all internal vDC Group network traffic. 
     */
     'sourceFirewallGroups': Array<EntityReference>;
     /**
-    * List of source groups for firewall rule. It specifies the destinations of network traffic for the firewall rule. Null value or an empty list will be treated as \"ANY\" which means traffic to any destination. 
+    * List of source groups for firewall rule. It specifies the destinations of network traffic for the firewall rule. Null value or an empty list will be treated as \"ANY\" which means traffic to any destination. For Distributed Firewall rules, an entry with an id of urn:vcloud:firewallGroup:internal can be used to specify all internal vDC Group network traffic. 
     */
     'destinationFirewallGroups': Array<EntityReference>;
     /**
@@ -6491,6 +6493,10 @@ export class EdgeLoadBalancerPoolCommonProperties {
     * The number of enabled members in the pool that are operational.
     */
     'upMemberCount': number;
+    /**
+    * The localized message on the health of the pool.
+    */
+    'healthMessage': string;
 }
 
 /**
@@ -8690,6 +8696,10 @@ export class EdgeLoadBalancerPool {
     */
     'upMemberCount': number;
     /**
+    * The localized message on the health of the pool.
+    */
+    'healthMessage': string;
+    /**
     * Name for the Load Balancer Pool. Name is unique across all pools for an Edge Gateway.
     */
     'name': string;
@@ -8702,7 +8712,7 @@ export class EdgeLoadBalancerPool {
     */
     'gracefulTimeoutPeriod': number;
     /**
-    * The algorithm for choosing a member within the pool's list of available members for each new connection. Default value is \"LEAST_CONNECTIONS\". Supported algorithms are: <ul> <li>LEAST_CONNECTIONS <li>ROUND_ROBIN <li>FASTEST_RESPONSE <li>CONSISTENT_HASH <li>LEAST_LOAD <li>FEWEST_SERVERS <li>RANDOM <li>FEWEST_TASKS <li>CORE_AFFINITY </ul> 
+    * The algorithm for choosing a member within the pool's list of available members for each new connection. Default value is \"LEAST_CONNECTIONS\". Supported algorithms are: <ul> <li>LEAST_CONNECTIONS <li>ROUND_ROBIN <li>CONSISTENT_HASH <li>FASTEST_RESPONSE <li>LEAST_LOAD <li>FEWEST_SERVERS <li>RANDOM <li>FEWEST_TASKS <li>CORE_AFFINITY </ul> <em>CONSISTENT_HASH</em> uses Source IP Address hash. Using <em>FASTEST_RESPONSE</em>, <em>LEAST_LOAD</em>, <em>FEWEST_SERVERS</em>, <em>RANDOM</em>, <em>FEWEST_TASKS</em>, <em>CORE_AFFINITY</em> algorithms may require additional licensing. 
     */
     'algorithm': string;
     /**
@@ -8779,6 +8789,10 @@ export class EdgeLoadBalancerPoolSummary {
     * The number of enabled members in the pool that are operational.
     */
     'upMemberCount': number;
+    /**
+    * The localized message on the health of the pool.
+    */
+    'healthMessage': string;
     /**
     * Name for the Load Balancer Pool. Name is unique across all pools for an Edge Gateway.
     */
@@ -9154,7 +9168,7 @@ export class AccessControlsApi {
      * @param objectId 
      * @param accessControlGrant 
      */
-    public createEntityAccessControlGrant (objectId: string, accessControlGrant: AccessControlGrant) : Promise<{ response: http.ClientResponse; body: AccessControlGrant;  }> {
+    public createEntityAccessControlGrant (objectId: string, accessControlGrant: AccessControlGrant) : Promise<{ response: http.IncomingMessage; body: AccessControlGrant;  }> {
         const localVarPath = this.basePath + '/1.0.0/entities/{objectId}/accessControls'
             .replace('{' + 'objectId' + '}', String(objectId));
         let queryParameters: any = {};
@@ -9195,7 +9209,7 @@ export class AccessControlsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: AccessControlGrant;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: AccessControlGrant;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -9215,7 +9229,7 @@ export class AccessControlsApi {
      * @param objectId 
      * @param accessControlId 
      */
-    public getEntityAccessControlGrant (objectId: string, accessControlId: string) : Promise<{ response: http.ClientResponse; body: AccessControlGrant;  }> {
+    public getEntityAccessControlGrant (objectId: string, accessControlId: string) : Promise<{ response: http.IncomingMessage; body: AccessControlGrant;  }> {
         const localVarPath = this.basePath + '/1.0.0/entities/{objectId}/accessControls/{accessControlId}'
             .replace('{' + 'objectId' + '}', String(objectId))
             .replace('{' + 'accessControlId' + '}', String(accessControlId));
@@ -9256,7 +9270,7 @@ export class AccessControlsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: AccessControlGrant;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: AccessControlGrant;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -9277,7 +9291,7 @@ export class AccessControlsApi {
      * @param page Page to fetch, zero offset.
      * @param pageSize Results per page to fetch.
      */
-    public queryEntityAccessControlGrants (objectId: string, page: number, pageSize: number) : Promise<{ response: http.ClientResponse; body: AccessControlGrants;  }> {
+    public queryEntityAccessControlGrants (objectId: string, page: number, pageSize: number) : Promise<{ response: http.IncomingMessage; body: AccessControlGrants;  }> {
         const localVarPath = this.basePath + '/1.0.0/entities/{objectId}/accessControls'
             .replace('{' + 'objectId' + '}', String(objectId));
         let queryParameters: any = {};
@@ -9330,7 +9344,7 @@ export class AccessControlsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: AccessControlGrants;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: AccessControlGrants;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -9350,7 +9364,7 @@ export class AccessControlsApi {
      * @param objectId 
      * @param accessControlId 
      */
-    public removeEntityAccessControlGrant (objectId: string, accessControlId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public removeEntityAccessControlGrant (objectId: string, accessControlId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/entities/{objectId}/accessControls/{accessControlId}'
             .replace('{' + 'objectId' + '}', String(objectId))
             .replace('{' + 'accessControlId' + '}', String(accessControlId));
@@ -9391,7 +9405,7 @@ export class AccessControlsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -9412,7 +9426,7 @@ export class AccessControlsApi {
      * @param accessControlId 
      * @param accessControlGrant 
      */
-    public updateEntityAccessControlGrant (objectId: string, accessControlId: string, accessControlGrant: AccessControlGrant) : Promise<{ response: http.ClientResponse; body: AccessControlGrant;  }> {
+    public updateEntityAccessControlGrant (objectId: string, accessControlId: string, accessControlGrant: AccessControlGrant) : Promise<{ response: http.IncomingMessage; body: AccessControlGrant;  }> {
         const localVarPath = this.basePath + '/1.0.0/entities/{objectId}/accessControls/{accessControlId}'
             .replace('{' + 'objectId' + '}', String(objectId))
             .replace('{' + 'accessControlId' + '}', String(accessControlId));
@@ -9459,7 +9473,7 @@ export class AccessControlsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: AccessControlGrant;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: AccessControlGrant;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -9525,7 +9539,7 @@ export class AccessLevelsApi {
      * @summary Get the specified access level.
      * @param accessLevelUrn 
      */
-    public getAccessLevel (accessLevelUrn: string) : Promise<{ response: http.ClientResponse; body: AccessLevel;  }> {
+    public getAccessLevel (accessLevelUrn: string) : Promise<{ response: http.IncomingMessage; body: AccessLevel;  }> {
         const localVarPath = this.basePath + '/1.0.0/accessLevels/{accessLevelUrn}'
             .replace('{' + 'accessLevelUrn' + '}', String(accessLevelUrn));
         let queryParameters: any = {};
@@ -9560,7 +9574,7 @@ export class AccessLevelsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: AccessLevel;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: AccessLevel;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -9583,7 +9597,7 @@ export class AccessLevelsApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryAccessLevels (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: AccessLevels;  }> {
+    public queryAccessLevels (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: AccessLevels;  }> {
         const localVarPath = this.basePath + '/1.0.0/accessLevels';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -9642,7 +9656,7 @@ export class AccessLevelsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: AccessLevels;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: AccessLevels;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -9708,7 +9722,7 @@ export class AdvisoryApi {
      * @summary Create a new advisory definition.
      * @param newAdvisoryDefinition 
      */
-    public createAdvisoryDefinition (newAdvisoryDefinition: AdvisoryDefinition) : Promise<{ response: http.ClientResponse; body: AdvisoryDefinition;  }> {
+    public createAdvisoryDefinition (newAdvisoryDefinition: AdvisoryDefinition) : Promise<{ response: http.IncomingMessage; body: AdvisoryDefinition;  }> {
         const localVarPath = this.basePath + '/1.0.0/definitions/advisories';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -9743,7 +9757,7 @@ export class AdvisoryApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: AdvisoryDefinition;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: AdvisoryDefinition;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -9762,7 +9776,7 @@ export class AdvisoryApi {
      * @summary Delete the advisory with the associated specified id.
      * @param advisoryId advisory URN
      */
-    public deleteAdvisoryDefinition (advisoryId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteAdvisoryDefinition (advisoryId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/definitions/advisories/{advisoryId}'
             .replace('{' + 'advisoryId' + '}', String(advisoryId));
         let queryParameters: any = {};
@@ -9797,7 +9811,7 @@ export class AdvisoryApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -9816,7 +9830,7 @@ export class AdvisoryApi {
      * @summary Get the advisory with the specified id.
      * @param advisoryId advisory URN
      */
-    public getAdvisory (advisoryId: string) : Promise<{ response: http.ClientResponse; body: Advisory;  }> {
+    public getAdvisory (advisoryId: string) : Promise<{ response: http.IncomingMessage; body: Advisory;  }> {
         const localVarPath = this.basePath + '/1.0.0/advisories/{advisoryId}'
             .replace('{' + 'advisoryId' + '}', String(advisoryId));
         let queryParameters: any = {};
@@ -9851,7 +9865,7 @@ export class AdvisoryApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Advisory;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Advisory;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -9870,7 +9884,7 @@ export class AdvisoryApi {
      * @summary Get the advisory definition with the specified id.
      * @param advisoryId advisory URN
      */
-    public getAdvisoryDefinition (advisoryId: string) : Promise<{ response: http.ClientResponse; body: AdvisoryDefinition;  }> {
+    public getAdvisoryDefinition (advisoryId: string) : Promise<{ response: http.IncomingMessage; body: AdvisoryDefinition;  }> {
         const localVarPath = this.basePath + '/1.0.0/definitions/advisories/{advisoryId}'
             .replace('{' + 'advisoryId' + '}', String(advisoryId));
         let queryParameters: any = {};
@@ -9905,7 +9919,7 @@ export class AdvisoryApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: AdvisoryDefinition;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: AdvisoryDefinition;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -9928,7 +9942,7 @@ export class AdvisoryApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryAdvisories (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: Advisories;  }> {
+    public queryAdvisories (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: Advisories;  }> {
         const localVarPath = this.basePath + '/1.0.0/advisories';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -9987,7 +10001,7 @@ export class AdvisoryApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Advisories;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Advisories;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -10010,7 +10024,7 @@ export class AdvisoryApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryAdvisoryDefinitions (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: AdvisoryDefinitions;  }> {
+    public queryAdvisoryDefinitions (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: AdvisoryDefinitions;  }> {
         const localVarPath = this.basePath + '/1.0.0/definitions/advisories';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -10069,7 +10083,7 @@ export class AdvisoryApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: AdvisoryDefinitions;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: AdvisoryDefinitions;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -10089,7 +10103,7 @@ export class AdvisoryApi {
      * @param modifiedAdvisory 
      * @param advisoryId advisory URN
      */
-    public updateAdvisory (modifiedAdvisory: Advisory, advisoryId: string) : Promise<{ response: http.ClientResponse; body: Advisory;  }> {
+    public updateAdvisory (modifiedAdvisory: Advisory, advisoryId: string) : Promise<{ response: http.IncomingMessage; body: Advisory;  }> {
         const localVarPath = this.basePath + '/1.0.0/advisories/{advisoryId}'
             .replace('{' + 'advisoryId' + '}', String(advisoryId));
         let queryParameters: any = {};
@@ -10130,7 +10144,7 @@ export class AdvisoryApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Advisory;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Advisory;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -10196,7 +10210,7 @@ export class ApplicationPortProfileApi {
      * @summary Deletes a specific user-defined Application Port Profile
      * @param applicationPortProfileId 
      */
-    public deleteApplicationPortProfile (applicationPortProfileId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteApplicationPortProfile (applicationPortProfileId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/applicationPortProfiles/{applicationPortProfileId}'
             .replace('{' + 'applicationPortProfileId' + '}', String(applicationPortProfileId));
         let queryParameters: any = {};
@@ -10231,7 +10245,7 @@ export class ApplicationPortProfileApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -10250,7 +10264,7 @@ export class ApplicationPortProfileApi {
      * @summary Retrieves a specific user-defined Application Port Profile
      * @param applicationPortProfileId 
      */
-    public getApplicationPortProfile (applicationPortProfileId: string) : Promise<{ response: http.ClientResponse; body: ApplicationPortProfile;  }> {
+    public getApplicationPortProfile (applicationPortProfileId: string) : Promise<{ response: http.IncomingMessage; body: ApplicationPortProfile;  }> {
         const localVarPath = this.basePath + '/1.0.0/applicationPortProfiles/{applicationPortProfileId}'
             .replace('{' + 'applicationPortProfileId' + '}', String(applicationPortProfileId));
         let queryParameters: any = {};
@@ -10285,7 +10299,7 @@ export class ApplicationPortProfileApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ApplicationPortProfile;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ApplicationPortProfile;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -10305,7 +10319,7 @@ export class ApplicationPortProfileApi {
      * @param applicationPortProfile 
      * @param applicationPortProfileId 
      */
-    public updateApplicationPortProfile (applicationPortProfile: ApplicationPortProfile, applicationPortProfileId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateApplicationPortProfile (applicationPortProfile: ApplicationPortProfile, applicationPortProfileId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/applicationPortProfiles/{applicationPortProfileId}'
             .replace('{' + 'applicationPortProfileId' + '}', String(applicationPortProfileId));
         let queryParameters: any = {};
@@ -10346,7 +10360,7 @@ export class ApplicationPortProfileApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -10412,7 +10426,7 @@ export class ApplicationPortProfilesApi {
      * @summary Create a user-defined application port profile.
      * @param applicationPortProfile 
      */
-    public createApplicationPortProfile (applicationPortProfile: ApplicationPortProfile) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createApplicationPortProfile (applicationPortProfile: ApplicationPortProfile) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/applicationPortProfiles';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -10447,7 +10461,7 @@ export class ApplicationPortProfilesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -10470,7 +10484,7 @@ export class ApplicationPortProfilesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getApplicationPortProfiles (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: ApplicationPortProfiles;  }> {
+    public getApplicationPortProfiles (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: ApplicationPortProfiles;  }> {
         const localVarPath = this.basePath + '/1.0.0/applicationPortProfiles';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -10529,7 +10543,7 @@ export class ApplicationPortProfilesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ApplicationPortProfiles;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ApplicationPortProfiles;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -10548,7 +10562,7 @@ export class ApplicationPortProfilesApi {
      * @summary Sync the application port profiles from the network provider to VCD.
      * @param filter Filter for a query.  FIQL format.
      */
-    public syncApplicationPortProfiles (filter?: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public syncApplicationPortProfiles (filter?: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/applicationPortProfiles/sync';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -10581,7 +10595,7 @@ export class ApplicationPortProfilesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -10651,7 +10665,7 @@ export class AuditTrailApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryAuditTrail (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: AuditTrailEvents;  }> {
+    public queryAuditTrail (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: AuditTrailEvents;  }> {
         const localVarPath = this.basePath + '/1.0.0/auditTrail';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -10710,7 +10724,7 @@ export class AuditTrailApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: AuditTrailEvents;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: AuditTrailEvents;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -10776,7 +10790,7 @@ export class BrandingApi {
      * @summary Create a new custom theme
      * @param newTheme 
      */
-    public createBrandingTheme (newTheme: UiTheme) : Promise<{ response: http.ClientResponse; body: UiTheme;  }> {
+    public createBrandingTheme (newTheme: UiTheme) : Promise<{ response: http.IncomingMessage; body: UiTheme;  }> {
         const localVarPath = this.basePath + '/branding/themes';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -10811,7 +10825,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: UiTheme;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: UiTheme;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -10830,7 +10844,7 @@ export class BrandingApi {
      * @summary Delete an existing custom theme
      * @param name 
      */
-    public deleteBrandingTheme (name: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteBrandingTheme (name: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/branding/themes/{name}'
             .replace('{' + 'name' + '}', String(name));
         let queryParameters: any = {};
@@ -10865,7 +10879,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -10884,7 +10898,7 @@ export class BrandingApi {
      * @summary Delete an existing custom theme's contents
      * @param name 
      */
-    public deleteBrandingThemeContents (name: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteBrandingThemeContents (name: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/branding/themes/{name}/contents'
             .replace('{' + 'name' + '}', String(name));
         let queryParameters: any = {};
@@ -10919,7 +10933,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -10937,7 +10951,7 @@ export class BrandingApi {
      * Delete the system level icon, forcing the get method to return the vCloud Director default icon. 
      * @summary Delete system level icon
      */
-    public deleteSystemIcon () : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteSystemIcon () : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/branding/icon';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -10966,7 +10980,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -10984,7 +10998,7 @@ export class BrandingApi {
      * Delete the system level logo, forcing the get method to return the vCloud Director default logo. 
      * @summary Delete system level logo
      */
-    public deleteSystemLogo () : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteSystemLogo () : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/branding/logo';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -11013,7 +11027,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -11032,7 +11046,7 @@ export class BrandingApi {
      * @summary Delete system level icon
      * @param org Organization for whom branding is being set
      */
-    public deleteTenantIcon (org: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteTenantIcon (org: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/branding/tenant/{org}/icon'
             .replace('{' + 'org' + '}', String(org));
         let queryParameters: any = {};
@@ -11067,7 +11081,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -11086,7 +11100,7 @@ export class BrandingApi {
      * @summary Delete the org-specific logo
      * @param org Organization for whom branding is being set
      */
-    public deleteTenantLogo (org: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteTenantLogo (org: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/branding/tenant/{org}/logo'
             .replace('{' + 'org' + '}', String(org));
         let queryParameters: any = {};
@@ -11121,7 +11135,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -11140,7 +11154,7 @@ export class BrandingApi {
      * @summary Retrieve a specified theme identified by name
      * @param name 
      */
-    public getBrandingTheme (name: string) : Promise<{ response: http.ClientResponse; body: UiTheme;  }> {
+    public getBrandingTheme (name: string) : Promise<{ response: http.IncomingMessage; body: UiTheme;  }> {
         const localVarPath = this.basePath + '/branding/themes/{name}'
             .replace('{' + 'name' + '}', String(name));
         let queryParameters: any = {};
@@ -11175,7 +11189,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: UiTheme;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: UiTheme;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -11194,7 +11208,7 @@ export class BrandingApi {
      * @summary Retrieve the custom CSS for this theme, if any
      * @param name 
      */
-    public getBrandingThemeCss (name: string) : Promise<{ response: http.ClientResponse; body: string;  }> {
+    public getBrandingThemeCss (name: string) : Promise<{ response: http.IncomingMessage; body: string;  }> {
         const localVarPath = this.basePath + '/branding/themes/{name}/css'
             .replace('{' + 'name' + '}', String(name));
         let queryParameters: any = {};
@@ -11229,7 +11243,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: string;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: string;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -11247,7 +11261,7 @@ export class BrandingApi {
      * Get a list of supported themes, uniquely identified by their names.  This can be used to set the theme in \"/branding\". 
      * @summary Get a list of themes
      */
-    public getBrandingThemes () : Promise<{ response: http.ClientResponse; body: Array<UiTheme>;  }> {
+    public getBrandingThemes () : Promise<{ response: http.IncomingMessage; body: Array<UiTheme>;  }> {
         const localVarPath = this.basePath + '/branding/themes';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -11276,7 +11290,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<UiTheme>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<UiTheme>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -11294,7 +11308,7 @@ export class BrandingApi {
      * Get the system level branding information including the portal name, portal color, selected theme and custom URLs. 
      * @summary Gets the system level branding
      */
-    public getSystemBranding () : Promise<{ response: http.ClientResponse; body: UiBranding;  }> {
+    public getSystemBranding () : Promise<{ response: http.IncomingMessage; body: UiBranding;  }> {
         const localVarPath = this.basePath + '/branding';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -11323,7 +11337,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: UiBranding;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: UiBranding;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -11341,7 +11355,7 @@ export class BrandingApi {
      * Get the system level icon as raw image data suitable for use in an image tag's src attribute.  If a custom icon is not set then the vCloud Director default icon is sent. 
      * @summary Gets the system level browser icon
      */
-    public getSystemIcon () : Promise<{ response: http.ClientResponse; body: string;  }> {
+    public getSystemIcon () : Promise<{ response: http.IncomingMessage; body: string;  }> {
         const localVarPath = this.basePath + '/branding/icon';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -11370,7 +11384,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: string;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: string;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -11388,7 +11402,7 @@ export class BrandingApi {
      * Get the system level logo as raw image data suitable for use in an image tag's src attribute.  If a custom logo is not set then the vCloud Director default logo is sent. 
      * @summary Gets the system level logo
      */
-    public getSystemLogo () : Promise<{ response: http.ClientResponse; body: string;  }> {
+    public getSystemLogo () : Promise<{ response: http.IncomingMessage; body: string;  }> {
         const localVarPath = this.basePath + '/branding/logo';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -11417,7 +11431,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: string;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: string;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -11436,7 +11450,7 @@ export class BrandingApi {
      * @summary Gets org-specific branding
      * @param org Organization for whom branding is being set
      */
-    public getTenantBranding (org: string) : Promise<{ response: http.ClientResponse; body: UiBranding;  }> {
+    public getTenantBranding (org: string) : Promise<{ response: http.IncomingMessage; body: UiBranding;  }> {
         const localVarPath = this.basePath + '/branding/tenant/{org}'
             .replace('{' + 'org' + '}', String(org));
         let queryParameters: any = {};
@@ -11471,7 +11485,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: UiBranding;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: UiBranding;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -11490,7 +11504,7 @@ export class BrandingApi {
      * @summary Gets the system level browser icon
      * @param org Organization for whom branding is being set
      */
-    public getTenantIcon (org: string) : Promise<{ response: http.ClientResponse; body: string;  }> {
+    public getTenantIcon (org: string) : Promise<{ response: http.IncomingMessage; body: string;  }> {
         const localVarPath = this.basePath + '/branding/tenant/{org}/icon'
             .replace('{' + 'org' + '}', String(org));
         let queryParameters: any = {};
@@ -11525,7 +11539,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: string;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: string;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -11544,7 +11558,7 @@ export class BrandingApi {
      * @summary Gets the org-specific logo
      * @param org Organization for whom branding is being set
      */
-    public getTenantLogo (org: string) : Promise<{ response: http.ClientResponse; body: string;  }> {
+    public getTenantLogo (org: string) : Promise<{ response: http.IncomingMessage; body: string;  }> {
         const localVarPath = this.basePath + '/branding/tenant/{org}/logo'
             .replace('{' + 'org' + '}', String(org));
         let queryParameters: any = {};
@@ -11579,7 +11593,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: string;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: string;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -11598,7 +11612,7 @@ export class BrandingApi {
      * @summary Sets default branding
      * @param body 
      */
-    public putSystemBranding (body: UiBranding) : Promise<{ response: http.ClientResponse; body: UiBranding;  }> {
+    public putSystemBranding (body: UiBranding) : Promise<{ response: http.IncomingMessage; body: UiBranding;  }> {
         const localVarPath = this.basePath + '/branding';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -11633,7 +11647,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: UiBranding;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: UiBranding;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -11653,7 +11667,7 @@ export class BrandingApi {
      * @param contentType 
      * @param body 
      */
-    public putSystemIcon (contentType: string, body: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public putSystemIcon (contentType: string, body: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/branding/icon';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -11695,7 +11709,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -11715,7 +11729,7 @@ export class BrandingApi {
      * @param contentType 
      * @param body 
      */
-    public putSystemLogo (contentType: string, body: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public putSystemLogo (contentType: string, body: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/branding/logo';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -11757,7 +11771,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -11777,7 +11791,7 @@ export class BrandingApi {
      * @param body 
      * @param org Organization for whom branding is being set
      */
-    public putTenantBranding (body: UiBranding, org: string) : Promise<{ response: http.ClientResponse; body: UiBranding;  }> {
+    public putTenantBranding (body: UiBranding, org: string) : Promise<{ response: http.IncomingMessage; body: UiBranding;  }> {
         const localVarPath = this.basePath + '/branding/tenant/{org}'
             .replace('{' + 'org' + '}', String(org));
         let queryParameters: any = {};
@@ -11818,7 +11832,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: UiBranding;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: UiBranding;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -11839,7 +11853,7 @@ export class BrandingApi {
      * @param body 
      * @param org Organization for whom branding is being set
      */
-    public putTenantIcon (contentType: string, body: string, org: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public putTenantIcon (contentType: string, body: string, org: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/branding/tenant/{org}/icon'
             .replace('{' + 'org' + '}', String(org));
         let queryParameters: any = {};
@@ -11887,7 +11901,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -11908,7 +11922,7 @@ export class BrandingApi {
      * @param body 
      * @param org Organization for whom branding is being set
      */
-    public putTenantLogo (contentType: string, body: string, org: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public putTenantLogo (contentType: string, body: string, org: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/branding/tenant/{org}/logo'
             .replace('{' + 'org' + '}', String(org));
         let queryParameters: any = {};
@@ -11956,7 +11970,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -11975,7 +11989,7 @@ export class BrandingApi {
      * @summary Remove org-specific branding
      * @param org Organization for whom branding is being set
      */
-    public removeTenantBranding (org: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public removeTenantBranding (org: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/branding/tenant/{org}'
             .replace('{' + 'org' + '}', String(org));
         let queryParameters: any = {};
@@ -12010,7 +12024,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -12030,7 +12044,7 @@ export class BrandingApi {
      * @param updatedTheme 
      * @param name 
      */
-    public updateBrandingTheme (updatedTheme: UiTheme, name: string) : Promise<{ response: http.ClientResponse; body: UiTheme;  }> {
+    public updateBrandingTheme (updatedTheme: UiTheme, name: string) : Promise<{ response: http.IncomingMessage; body: UiTheme;  }> {
         const localVarPath = this.basePath + '/branding/themes/{name}'
             .replace('{' + 'name' + '}', String(name));
         let queryParameters: any = {};
@@ -12071,7 +12085,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: UiTheme;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: UiTheme;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -12091,7 +12105,7 @@ export class BrandingApi {
      * @param pluginUploadSpec 
      * @param name 
      */
-    public uploadBrandingThemeContents (pluginUploadSpec: UploadSpec, name: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public uploadBrandingThemeContents (pluginUploadSpec: UploadSpec, name: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/branding/themes/{name}/contents'
             .replace('{' + 'name' + '}', String(name));
         let queryParameters: any = {};
@@ -12132,7 +12146,7 @@ export class BrandingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -12198,7 +12212,7 @@ export class CapabilitiesApi {
      * @summary Retrieves capabilities of a specific organization VDC storage policy.
      * @param id 
      */
-    public getOrgVdcStoragePolicyCapabilities (id: string) : Promise<{ response: http.ClientResponse; body: Capabilities;  }> {
+    public getOrgVdcStoragePolicyCapabilities (id: string) : Promise<{ response: http.IncomingMessage; body: Capabilities;  }> {
         const localVarPath = this.basePath + '/1.0.0/orgVdcStoragePolicies/{id}/capabilities'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -12233,7 +12247,7 @@ export class CapabilitiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Capabilities;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Capabilities;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -12252,7 +12266,7 @@ export class CapabilitiesApi {
      * @summary Retrieves capabilities of a specific provider VDC storage policy.
      * @param id 
      */
-    public getPvdcStoragePolicyCapabilities (id: string) : Promise<{ response: http.ClientResponse; body: Capabilities;  }> {
+    public getPvdcStoragePolicyCapabilities (id: string) : Promise<{ response: http.IncomingMessage; body: Capabilities;  }> {
         const localVarPath = this.basePath + '/1.0.0/pvdcStoragePolicies/{id}/capabilities'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -12287,7 +12301,7 @@ export class CapabilitiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Capabilities;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Capabilities;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -12305,7 +12319,7 @@ export class CapabilitiesApi {
      * 
      * @summary Retrieves capabilities for quotaPolicy feature.
      */
-    public getQuotaPolicyCapabilities () : Promise<{ response: http.ClientResponse; body: Capabilities;  }> {
+    public getQuotaPolicyCapabilities () : Promise<{ response: http.IncomingMessage; body: Capabilities;  }> {
         const localVarPath = this.basePath + '/1.0.0/quotaPolicy/capabilities';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -12334,7 +12348,7 @@ export class CapabilitiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Capabilities;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Capabilities;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -12353,7 +12367,7 @@ export class CapabilitiesApi {
      * @summary Retrieves capabilities for the given Organization vDC.
      * @param orgVdcId 
      */
-    public getVdcCapabilities (orgVdcId: string) : Promise<{ response: http.ClientResponse; body: Capabilities;  }> {
+    public getVdcCapabilities (orgVdcId: string) : Promise<{ response: http.IncomingMessage; body: Capabilities;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcs/{orgVdcId}/capabilities'
             .replace('{' + 'orgVdcId' + '}', String(orgVdcId));
         let queryParameters: any = {};
@@ -12388,7 +12402,7 @@ export class CapabilitiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Capabilities;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Capabilities;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -12407,7 +12421,7 @@ export class CapabilitiesApi {
      * @summary Retrieves the supported capabilities of the specified vDC Group.
      * @param vdcGroupId 
      */
-    public getVdcGroupCapabilities (vdcGroupId: string) : Promise<{ response: http.ClientResponse; body: Capabilities;  }> {
+    public getVdcGroupCapabilities (vdcGroupId: string) : Promise<{ response: http.IncomingMessage; body: Capabilities;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcGroups/{vdcGroupId}/capabilities'
             .replace('{' + 'vdcGroupId' + '}', String(vdcGroupId));
         let queryParameters: any = {};
@@ -12442,7 +12456,7 @@ export class CapabilitiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Capabilities;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Capabilities;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -12508,7 +12522,7 @@ export class CellApi {
      * @summary Deletes a specified cell.
      * @param cellUrn cellUrn
      */
-    public deleteCell (cellUrn: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteCell (cellUrn: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/cells/{cellUrn}'
             .replace('{' + 'cellUrn' + '}', String(cellUrn));
         let queryParameters: any = {};
@@ -12543,7 +12557,7 @@ export class CellApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -12562,7 +12576,7 @@ export class CellApi {
      * @summary Get cell.
      * @param cellUrn cellUrn
      */
-    public getCell (cellUrn: string) : Promise<{ response: http.ClientResponse; body: Cell;  }> {
+    public getCell (cellUrn: string) : Promise<{ response: http.IncomingMessage; body: Cell;  }> {
         const localVarPath = this.basePath + '/1.0.0/cells/{cellUrn}'
             .replace('{' + 'cellUrn' + '}', String(cellUrn));
         let queryParameters: any = {};
@@ -12597,7 +12611,7 @@ export class CellApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Cell;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Cell;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -12620,7 +12634,7 @@ export class CellApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryCells (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: Cells;  }> {
+    public queryCells (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: Cells;  }> {
         const localVarPath = this.basePath + '/1.0.0/cells';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -12679,7 +12693,7 @@ export class CellApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Cells;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Cells;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -12745,7 +12759,7 @@ export class CertificateLibraryApi {
      * @summary Add an item to the certificate library
      * @param newCertificateLibraryItem 
      */
-    public addCertificateLibraryItem (newCertificateLibraryItem: CertificateLibraryItem) : Promise<{ response: http.ClientResponse; body: CertificateLibraryItem;  }> {
+    public addCertificateLibraryItem (newCertificateLibraryItem: CertificateLibraryItem) : Promise<{ response: http.IncomingMessage; body: CertificateLibraryItem;  }> {
         const localVarPath = this.basePath + '/1.0.0/ssl/certificateLibrary';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -12780,7 +12794,7 @@ export class CertificateLibraryApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: CertificateLibraryItem;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: CertificateLibraryItem;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -12800,7 +12814,7 @@ export class CertificateLibraryApi {
      * @param consumerReference 
      * @param certLibraryItemId 
      */
-    public addConsumerRefToCertLibraryItem (consumerReference: EntityReference, certLibraryItemId: string) : Promise<{ response: http.ClientResponse; body: EntityReference;  }> {
+    public addConsumerRefToCertLibraryItem (consumerReference: EntityReference, certLibraryItemId: string) : Promise<{ response: http.IncomingMessage; body: EntityReference;  }> {
         const localVarPath = this.basePath + '/1.0.0/ssl/certificateLibrary/{certLibraryItemId}/consumers'
             .replace('{' + 'certLibraryItemId' + '}', String(certLibraryItemId));
         let queryParameters: any = {};
@@ -12841,7 +12855,7 @@ export class CertificateLibraryApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReference;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReference;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -12856,12 +12870,12 @@ export class CertificateLibraryApi {
         });
     }
     /**
-     * Delete the specified certificate library item. Only items that are not in use can be deleted.
-     * @summary Remove certificate library item
+     * Delete the specified certificate library item. Only items that are not in use can be deleted. Note: This API also supports a former (erroneously spelt) alternate path /cetificateLibrary/{id} as a Deprecated API (deprecated-in and removed after API version 36.0) 
+     * @summary Remove certificate library item.
      * @param id 
      */
-    public deleteCertificateLibraryItem (id: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
-        const localVarPath = this.basePath + '/1.0.0/ssl/cetificateLibrary/{id}'
+    public deleteCertificateLibraryItem (id: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
+        const localVarPath = this.basePath + '/1.0.0/ssl/certificateLibrary/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -12895,7 +12909,7 @@ export class CertificateLibraryApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -12910,12 +12924,12 @@ export class CertificateLibraryApi {
         });
     }
     /**
-     * 
+     * Retrieves the specified certificate library item. Note: This API also supports a former (erroneously spelt) alternate path /cetificateLibrary/{id} as a Deprecated API (deprecated-in and removed after API version 36.0) 
      * @summary Get the specified certificate library item
      * @param id 
      */
-    public getCertificateLibraryItem (id: string) : Promise<{ response: http.ClientResponse; body: CertificateLibraryItem;  }> {
-        const localVarPath = this.basePath + '/1.0.0/ssl/cetificateLibrary/{id}'
+    public getCertificateLibraryItem (id: string) : Promise<{ response: http.IncomingMessage; body: CertificateLibraryItem;  }> {
+        const localVarPath = this.basePath + '/1.0.0/ssl/certificateLibrary/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -12949,7 +12963,7 @@ export class CertificateLibraryApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: CertificateLibraryItem;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: CertificateLibraryItem;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -12973,7 +12987,7 @@ export class CertificateLibraryApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryCertLibraryItemConsumerRefs (page: number, pageSize: number, certLibraryItemId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public queryCertLibraryItemConsumerRefs (page: number, pageSize: number, certLibraryItemId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/ssl/certificateLibrary/{certLibraryItemId}/consumers'
             .replace('{' + 'certLibraryItemId' + '}', String(certLibraryItemId));
         let queryParameters: any = {};
@@ -13038,7 +13052,7 @@ export class CertificateLibraryApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -13061,7 +13075,7 @@ export class CertificateLibraryApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryCertificateLibrary (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: CertificateLibraryItems;  }> {
+    public queryCertificateLibrary (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: CertificateLibraryItems;  }> {
         const localVarPath = this.basePath + '/1.0.0/ssl/certificateLibrary';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -13120,7 +13134,7 @@ export class CertificateLibraryApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: CertificateLibraryItems;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: CertificateLibraryItems;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -13140,7 +13154,7 @@ export class CertificateLibraryApi {
      * @param consumerRefs 
      * @param certLibraryItemId 
      */
-    public replaceCertLibraryItemConsumerRefs (consumerRefs: EntityReferences, certLibraryItemId: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public replaceCertLibraryItemConsumerRefs (consumerRefs: EntityReferences, certLibraryItemId: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/ssl/certificateLibrary/{certLibraryItemId}/consumers'
             .replace('{' + 'certLibraryItemId' + '}', String(certLibraryItemId));
         let queryParameters: any = {};
@@ -13181,7 +13195,7 @@ export class CertificateLibraryApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -13196,13 +13210,13 @@ export class CertificateLibraryApi {
         });
     }
     /**
-     * 
-     * @summary Update the specified certificate library item. Only the alias and description fields may be edited
+     * Updates the specified certificate library item. Only the alias and description fields may be edited Note: This API also supports a former (erroneously spelt) alternate path /cetificateLibrary/{id} as a Deprecated API (deprecated-in and removed after API version 36.0) 
+     * @summary Update the specified certificate library item.
      * @param modifiedCertificatLibraryItem 
      * @param id 
      */
-    public updateCertificateLibraryItem (modifiedCertificatLibraryItem: CertificateLibraryItem, id: string) : Promise<{ response: http.ClientResponse; body: CertificateLibraryItem;  }> {
-        const localVarPath = this.basePath + '/1.0.0/ssl/cetificateLibrary/{id}'
+    public updateCertificateLibraryItem (modifiedCertificatLibraryItem: CertificateLibraryItem, id: string) : Promise<{ response: http.IncomingMessage; body: CertificateLibraryItem;  }> {
+        const localVarPath = this.basePath + '/1.0.0/ssl/certificateLibrary/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -13242,7 +13256,7 @@ export class CertificateLibraryApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: CertificateLibraryItem;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: CertificateLibraryItem;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -13307,7 +13321,7 @@ export class CloudApiBaseApi {
      * Retrieves links to start navigation
      * @summary Get base navigation links
      */
-    public getBaseLinks () : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public getBaseLinks () : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -13336,7 +13350,7 @@ export class CloudApiBaseApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -13401,7 +13415,7 @@ export class CodegenPlaceholderApi {
      * This endpoint will not produce results. It is a placeholder to enforce code generation of Page.
      * @summary This endpoint will not produce results. It is a placeholder to enforce code generation of Page.
      */
-    public getQueryResult () : Promise<{ response: http.ClientResponse; body: Page;  }> {
+    public getQueryResult () : Promise<{ response: http.IncomingMessage; body: Page;  }> {
         const localVarPath = this.basePath + '/query/page';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -13430,7 +13444,7 @@ export class CodegenPlaceholderApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Page;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Page;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -13497,7 +13511,7 @@ export class CrossVdcNetworkApi {
      * @param crossVdcNetworkId 
      * @param force Value \&quot;true\&quot; means to forcefully delete the object that contains other objects even if those objects are in a state that does not allow removal. The default is \&quot;false\&quot;; therefore, objects are not removed if they are not in a state that normally allows removal. Force also implies recursive delete where other contained objects are removed. Errors may be ignored. Invalid value (not true or false) are ignored. 
      */
-    public deleteCrossVdcNetwork (crossVdcNetworkId: string, force?: boolean) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteCrossVdcNetwork (crossVdcNetworkId: string, force?: boolean) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/crossVdcNetworks/{crossVdcNetworkId}'
             .replace('{' + 'crossVdcNetworkId' + '}', String(crossVdcNetworkId));
         let queryParameters: any = {};
@@ -13536,7 +13550,7 @@ export class CrossVdcNetworkApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -13555,7 +13569,7 @@ export class CrossVdcNetworkApi {
      * @summary Retrieves a specific Cross vDC network.
      * @param crossVdcNetworkId 
      */
-    public getCrossVdcNetwork (crossVdcNetworkId: string) : Promise<{ response: http.ClientResponse; body: CrossVdcNetwork;  }> {
+    public getCrossVdcNetwork (crossVdcNetworkId: string) : Promise<{ response: http.IncomingMessage; body: CrossVdcNetwork;  }> {
         const localVarPath = this.basePath + '/1.0.0/crossVdcNetworks/{crossVdcNetworkId}'
             .replace('{' + 'crossVdcNetworkId' + '}', String(crossVdcNetworkId));
         let queryParameters: any = {};
@@ -13590,7 +13604,7 @@ export class CrossVdcNetworkApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: CrossVdcNetwork;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: CrossVdcNetwork;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -13609,7 +13623,7 @@ export class CrossVdcNetworkApi {
      * @summary Sync/repair a specific Cross vDC network.
      * @param crossVdcNetworkId 
      */
-    public syncCrossVdcNetwork (crossVdcNetworkId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public syncCrossVdcNetwork (crossVdcNetworkId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/crossVdcNetworks/{crossVdcNetworkId}/sync'
             .replace('{' + 'crossVdcNetworkId' + '}', String(crossVdcNetworkId));
         let queryParameters: any = {};
@@ -13644,7 +13658,7 @@ export class CrossVdcNetworkApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -13664,7 +13678,7 @@ export class CrossVdcNetworkApi {
      * @param crossVdcNetwork 
      * @param crossVdcNetworkId 
      */
-    public updateCrossVdcNetwork (crossVdcNetwork: CrossVdcNetwork, crossVdcNetworkId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateCrossVdcNetwork (crossVdcNetwork: CrossVdcNetwork, crossVdcNetworkId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/crossVdcNetworks/{crossVdcNetworkId}'
             .replace('{' + 'crossVdcNetworkId' + '}', String(crossVdcNetworkId));
         let queryParameters: any = {};
@@ -13705,7 +13719,7 @@ export class CrossVdcNetworkApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -13771,7 +13785,7 @@ export class CrossVdcNetworksApi {
      * @summary Creates a Cross vDC network.
      * @param crossVdcNetwork 
      */
-    public createCrossVdcNetwork (crossVdcNetwork: CrossVdcNetwork) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createCrossVdcNetwork (crossVdcNetwork: CrossVdcNetwork) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/crossVdcNetworks';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -13806,7 +13820,7 @@ export class CrossVdcNetworksApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -13829,7 +13843,7 @@ export class CrossVdcNetworksApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getAllCrossVdcNetworks (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: CrossVdcNetworks;  }> {
+    public getAllCrossVdcNetworks (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: CrossVdcNetworks;  }> {
         const localVarPath = this.basePath + '/1.0.0/crossVdcNetworks';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -13888,7 +13902,7 @@ export class CrossVdcNetworksApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: CrossVdcNetworks;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: CrossVdcNetworks;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -13912,7 +13926,7 @@ export class CrossVdcNetworksApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getAllCrossVdcNetworksForVdcGroup (page: number, pageSize: number, vdcGroupId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: CrossVdcNetworks;  }> {
+    public getAllCrossVdcNetworksForVdcGroup (page: number, pageSize: number, vdcGroupId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: CrossVdcNetworks;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcGroups/{vdcGroupId}/crossVdcNetworks'
             .replace('{' + 'vdcGroupId' + '}', String(vdcGroupId));
         let queryParameters: any = {};
@@ -13977,7 +13991,7 @@ export class CrossVdcNetworksApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: CrossVdcNetworks;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: CrossVdcNetworks;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -14043,7 +14057,7 @@ export class CustomEntitiesApi {
      * @summary Creates a new custom entity type
      * @param newCustomEntityType 
      */
-    public createCustomEntityType (newCustomEntityType: CustomEntityType) : Promise<{ response: http.ClientResponse; body: CustomEntityType;  }> {
+    public createCustomEntityType (newCustomEntityType: CustomEntityType) : Promise<{ response: http.IncomingMessage; body: CustomEntityType;  }> {
         const localVarPath = this.basePath + '/customEntityTypes';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -14078,7 +14092,7 @@ export class CustomEntitiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: CustomEntityType;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: CustomEntityType;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -14098,7 +14112,7 @@ export class CustomEntitiesApi {
      * @param newCustomEntityTypeAction 
      * @param customEntityTypeId 
      */
-    public createCustomEntityTypeAction (newCustomEntityTypeAction: CreateCustomEntityTypeAction, customEntityTypeId: string) : Promise<{ response: http.ClientResponse; body: CustomEntityTypeAction;  }> {
+    public createCustomEntityTypeAction (newCustomEntityTypeAction: CreateCustomEntityTypeAction, customEntityTypeId: string) : Promise<{ response: http.IncomingMessage; body: CustomEntityTypeAction;  }> {
         const localVarPath = this.basePath + '/customEntityTypes/{customEntityTypeId}/actions'
             .replace('{' + 'customEntityTypeId' + '}', String(customEntityTypeId));
         let queryParameters: any = {};
@@ -14139,7 +14153,7 @@ export class CustomEntitiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: CustomEntityTypeAction;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: CustomEntityTypeAction;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -14159,7 +14173,7 @@ export class CustomEntitiesApi {
      * @param recursive if true, will recursively delete both custom entity type, all its instances and associated actions
      * @param customEntityTypeId 
      */
-    public deleteCustomEntityType (recursive: boolean, customEntityTypeId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteCustomEntityType (recursive: boolean, customEntityTypeId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/customEntityTypes/{customEntityTypeId}'
             .replace('{' + 'customEntityTypeId' + '}', String(customEntityTypeId));
         let queryParameters: any = {};
@@ -14203,7 +14217,7 @@ export class CustomEntitiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -14223,7 +14237,7 @@ export class CustomEntitiesApi {
      * @param customEntityTypeId 
      * @param workflowId 
      */
-    public deleteCustomEntityTypeAction (customEntityTypeId: string, workflowId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteCustomEntityTypeAction (customEntityTypeId: string, workflowId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/customEntityTypes/{customEntityTypeId}/actions/{workflowId}'
             .replace('{' + 'customEntityTypeId' + '}', String(customEntityTypeId))
             .replace('{' + 'workflowId' + '}', String(workflowId));
@@ -14264,7 +14278,7 @@ export class CustomEntitiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -14285,7 +14299,7 @@ export class CustomEntitiesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getCustomEntities (filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: CustomEntities;  }> {
+    public getCustomEntities (filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: CustomEntities;  }> {
         const localVarPath = this.basePath + '/customEntities';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -14326,7 +14340,7 @@ export class CustomEntitiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: CustomEntities;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: CustomEntities;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -14345,7 +14359,7 @@ export class CustomEntitiesApi {
      * @summary Get specified custom entity
      * @param customEntityId 
      */
-    public getCustomEntity (customEntityId: string) : Promise<{ response: http.ClientResponse; body: CustomEntity;  }> {
+    public getCustomEntity (customEntityId: string) : Promise<{ response: http.IncomingMessage; body: CustomEntity;  }> {
         const localVarPath = this.basePath + '/customEntities/{customEntityId}'
             .replace('{' + 'customEntityId' + '}', String(customEntityId));
         let queryParameters: any = {};
@@ -14380,7 +14394,7 @@ export class CustomEntitiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: CustomEntity;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: CustomEntity;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -14399,7 +14413,7 @@ export class CustomEntitiesApi {
      * @summary Get specified custom entity represented as on Sdk-Object
      * @param customEntityId 
      */
-    public getCustomEntityAsSdkObject (customEntityId: string) : Promise<{ response: http.ClientResponse; body: SdkObject;  }> {
+    public getCustomEntityAsSdkObject (customEntityId: string) : Promise<{ response: http.IncomingMessage; body: SdkObject;  }> {
         const localVarPath = this.basePath + '/customEntities/{customEntityId}/sdkObject'
             .replace('{' + 'customEntityId' + '}', String(customEntityId));
         let queryParameters: any = {};
@@ -14434,7 +14448,7 @@ export class CustomEntitiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: SdkObject;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: SdkObject;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -14453,7 +14467,7 @@ export class CustomEntitiesApi {
      * @summary Get specified custom entity type
      * @param customEntityTypeId 
      */
-    public getCustomEntityType (customEntityTypeId: string) : Promise<{ response: http.ClientResponse; body: CustomEntityType;  }> {
+    public getCustomEntityType (customEntityTypeId: string) : Promise<{ response: http.IncomingMessage; body: CustomEntityType;  }> {
         const localVarPath = this.basePath + '/customEntityTypes/{customEntityTypeId}'
             .replace('{' + 'customEntityTypeId' + '}', String(customEntityTypeId));
         let queryParameters: any = {};
@@ -14488,7 +14502,7 @@ export class CustomEntitiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: CustomEntityType;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: CustomEntityType;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -14507,7 +14521,7 @@ export class CustomEntitiesApi {
      * @summary Get all actions associated with this custom entity type
      * @param customEntityTypeId 
      */
-    public getCustomEntityTypeActions (customEntityTypeId: string) : Promise<{ response: http.ClientResponse; body: CustomEntityTypeActions;  }> {
+    public getCustomEntityTypeActions (customEntityTypeId: string) : Promise<{ response: http.IncomingMessage; body: CustomEntityTypeActions;  }> {
         const localVarPath = this.basePath + '/customEntityTypes/{customEntityTypeId}/actions'
             .replace('{' + 'customEntityTypeId' + '}', String(customEntityTypeId));
         let queryParameters: any = {};
@@ -14542,7 +14556,7 @@ export class CustomEntitiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: CustomEntityTypeActions;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: CustomEntityTypeActions;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -14561,7 +14575,7 @@ export class CustomEntitiesApi {
      * @summary Retrieves list of tenants for whom the custom entity type is explicitly published
      * @param customEntityTypeId 
      */
-    public getCustomEntityTypeTenants (customEntityTypeId: string) : Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }> {
+    public getCustomEntityTypeTenants (customEntityTypeId: string) : Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }> {
         const localVarPath = this.basePath + '/customEntityTypes/{customEntityTypeId}/tenants'
             .replace('{' + 'customEntityTypeId' + '}', String(customEntityTypeId));
         let queryParameters: any = {};
@@ -14596,7 +14610,7 @@ export class CustomEntitiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -14616,7 +14630,7 @@ export class CustomEntitiesApi {
      * @param publishTenantsBody 
      * @param customEntityTypeId 
      */
-    public postCustomEntityTypePublish (publishTenantsBody: Array<EntityReference>, customEntityTypeId: string) : Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }> {
+    public postCustomEntityTypePublish (publishTenantsBody: Array<EntityReference>, customEntityTypeId: string) : Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }> {
         const localVarPath = this.basePath + '/customEntityTypes/{customEntityTypeId}/tenants/publish'
             .replace('{' + 'customEntityTypeId' + '}', String(customEntityTypeId));
         let queryParameters: any = {};
@@ -14657,7 +14671,7 @@ export class CustomEntitiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -14676,7 +14690,7 @@ export class CustomEntitiesApi {
      * @summary Publishes the custom entity type to all tenants
      * @param customEntityTypeId 
      */
-    public postCustomEntityTypePublishAll (customEntityTypeId: string) : Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }> {
+    public postCustomEntityTypePublishAll (customEntityTypeId: string) : Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }> {
         const localVarPath = this.basePath + '/customEntityTypes/{customEntityTypeId}/tenants/publishAll'
             .replace('{' + 'customEntityTypeId' + '}', String(customEntityTypeId));
         let queryParameters: any = {};
@@ -14711,7 +14725,7 @@ export class CustomEntitiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -14731,7 +14745,7 @@ export class CustomEntitiesApi {
      * @param unpublishTenantsBody 
      * @param customEntityTypeId 
      */
-    public postCustomEntityTypeUnpublish (unpublishTenantsBody: Array<EntityReference>, customEntityTypeId: string) : Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }> {
+    public postCustomEntityTypeUnpublish (unpublishTenantsBody: Array<EntityReference>, customEntityTypeId: string) : Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }> {
         const localVarPath = this.basePath + '/customEntityTypes/{customEntityTypeId}/tenants/unpublish'
             .replace('{' + 'customEntityTypeId' + '}', String(customEntityTypeId));
         let queryParameters: any = {};
@@ -14772,7 +14786,7 @@ export class CustomEntitiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -14791,7 +14805,7 @@ export class CustomEntitiesApi {
      * @summary Unpublishes the custom entity type from all tenants
      * @param customEntityTypeId 
      */
-    public postCustomEntityTypeUnpublishAll (customEntityTypeId: string) : Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }> {
+    public postCustomEntityTypeUnpublishAll (customEntityTypeId: string) : Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }> {
         const localVarPath = this.basePath + '/customEntityTypes/{customEntityTypeId}/tenants/unpublishAll'
             .replace('{' + 'customEntityTypeId' + '}', String(customEntityTypeId));
         let queryParameters: any = {};
@@ -14826,7 +14840,7 @@ export class CustomEntitiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -14849,7 +14863,7 @@ export class CustomEntitiesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryCustomEntityTypes (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: CustomEntityTypes;  }> {
+    public queryCustomEntityTypes (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: CustomEntityTypes;  }> {
         const localVarPath = this.basePath + '/customEntityTypes';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -14908,7 +14922,7 @@ export class CustomEntitiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: CustomEntityTypes;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: CustomEntityTypes;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -14928,7 +14942,7 @@ export class CustomEntitiesApi {
      * @param publishTenantsBody 
      * @param customEntityTypeId 
      */
-    public setCustomEntityTypeTenants (publishTenantsBody: Array<EntityReference>, customEntityTypeId: string) : Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }> {
+    public setCustomEntityTypeTenants (publishTenantsBody: Array<EntityReference>, customEntityTypeId: string) : Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }> {
         const localVarPath = this.basePath + '/customEntityTypes/{customEntityTypeId}/tenants'
             .replace('{' + 'customEntityTypeId' + '}', String(customEntityTypeId));
         let queryParameters: any = {};
@@ -14969,7 +14983,7 @@ export class CustomEntitiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -14989,7 +15003,7 @@ export class CustomEntitiesApi {
      * @param updatedCustomEntityType 
      * @param customEntityTypeId 
      */
-    public updateCustomEntityType (updatedCustomEntityType: CustomEntityType, customEntityTypeId: string) : Promise<{ response: http.ClientResponse; body: CustomEntityType;  }> {
+    public updateCustomEntityType (updatedCustomEntityType: CustomEntityType, customEntityTypeId: string) : Promise<{ response: http.IncomingMessage; body: CustomEntityType;  }> {
         const localVarPath = this.basePath + '/customEntityTypes/{customEntityTypeId}'
             .replace('{' + 'customEntityTypeId' + '}', String(customEntityTypeId));
         let queryParameters: any = {};
@@ -15030,7 +15044,7 @@ export class CustomEntitiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: CustomEntityType;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: CustomEntityType;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -15097,7 +15111,7 @@ export class DefinedEntityApi {
      * @param entity 
      * @param id 
      */
-    public createDefinedEntity (entity: DefinedEntity, id: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createDefinedEntity (entity: DefinedEntity, id: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/entityTypes/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -15138,7 +15152,7 @@ export class DefinedEntityApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -15157,7 +15171,7 @@ export class DefinedEntityApi {
      * @summary Deletes the defined entity with the unique identifier (URN)
      * @param id 
      */
-    public deleteDefinedEntity (id: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteDefinedEntity (id: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/entities/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -15192,7 +15206,7 @@ export class DefinedEntityApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -15218,7 +15232,7 @@ export class DefinedEntityApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getDefinedEntitiesByEntityType (vendor: string, nss: string, version: string, page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: DefinedEntities;  }> {
+    public getDefinedEntitiesByEntityType (vendor: string, nss: string, version: string, page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: DefinedEntities;  }> {
         const localVarPath = this.basePath + '/1.0.0/entities/types/{vendor}/{nss}/{version}'
             .replace('{' + 'vendor' + '}', String(vendor))
             .replace('{' + 'nss' + '}', String(nss))
@@ -15295,7 +15309,7 @@ export class DefinedEntityApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: DefinedEntities;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: DefinedEntities;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -15321,7 +15335,7 @@ export class DefinedEntityApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getDefinedEntitiesByInterface (vendor: string, nss: string, version: string, page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: DefinedEntities;  }> {
+    public getDefinedEntitiesByInterface (vendor: string, nss: string, version: string, page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: DefinedEntities;  }> {
         const localVarPath = this.basePath + '/1.0.0/entities/interfaces/{vendor}/{nss}/{version}'
             .replace('{' + 'vendor' + '}', String(vendor))
             .replace('{' + 'nss' + '}', String(nss))
@@ -15398,7 +15412,7 @@ export class DefinedEntityApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: DefinedEntities;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: DefinedEntities;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -15417,7 +15431,7 @@ export class DefinedEntityApi {
      * @summary Gets the defined entity with the unique identifier (URN)
      * @param id 
      */
-    public getDefinedEntity (id: string) : Promise<{ response: http.ClientResponse; body: DefinedEntity;  }> {
+    public getDefinedEntity (id: string) : Promise<{ response: http.IncomingMessage; body: DefinedEntity;  }> {
         const localVarPath = this.basePath + '/1.0.0/entities/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -15452,7 +15466,7 @@ export class DefinedEntityApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: DefinedEntity;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: DefinedEntity;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -15471,7 +15485,7 @@ export class DefinedEntityApi {
      * @summary Validates the defined entity against the entity type schema.
      * @param id 
      */
-    public resolveDefinedEntity (id: string) : Promise<{ response: http.ClientResponse; body: EntityState;  }> {
+    public resolveDefinedEntity (id: string) : Promise<{ response: http.IncomingMessage; body: EntityState;  }> {
         const localVarPath = this.basePath + '/1.0.0/entities/{id}/resolve'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -15506,7 +15520,7 @@ export class DefinedEntityApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityState;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityState;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -15526,7 +15540,7 @@ export class DefinedEntityApi {
      * @param entity 
      * @param id 
      */
-    public updateDefinedEntity (entity: DefinedEntity, id: string) : Promise<{ response: http.ClientResponse; body: DefinedEntity;  }> {
+    public updateDefinedEntity (entity: DefinedEntity, id: string) : Promise<{ response: http.IncomingMessage; body: DefinedEntity;  }> {
         const localVarPath = this.basePath + '/1.0.0/entities/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -15567,7 +15581,7 @@ export class DefinedEntityApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: DefinedEntity;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: DefinedEntity;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -15633,7 +15647,7 @@ export class DefinedEntityTypeApi {
      * @summary Creates a defined entity type.
      * @param definition 
      */
-    public createDefinedEntityType (definition: DefinedEntityType) : Promise<{ response: http.ClientResponse; body: DefinedEntityType;  }> {
+    public createDefinedEntityType (definition: DefinedEntityType) : Promise<{ response: http.IncomingMessage; body: DefinedEntityType;  }> {
         const localVarPath = this.basePath + '/1.0.0/entityTypes/';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -15668,7 +15682,7 @@ export class DefinedEntityTypeApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: DefinedEntityType;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: DefinedEntityType;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -15687,7 +15701,7 @@ export class DefinedEntityTypeApi {
      * @summary Deletes the entity type with the unique identifier (URN)
      * @param id 
      */
-    public deleteDefinedEntityType (id: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteDefinedEntityType (id: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/entityTypes/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -15722,7 +15736,7 @@ export class DefinedEntityTypeApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -15741,7 +15755,7 @@ export class DefinedEntityTypeApi {
      * @summary Gets the entity type with the unique identifier (URN)
      * @param id 
      */
-    public getDefinedEntityType (id: string) : Promise<{ response: http.ClientResponse; body: DefinedEntityType;  }> {
+    public getDefinedEntityType (id: string) : Promise<{ response: http.IncomingMessage; body: DefinedEntityType;  }> {
         const localVarPath = this.basePath + '/1.0.0/entityTypes/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -15776,7 +15790,7 @@ export class DefinedEntityTypeApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: DefinedEntityType;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: DefinedEntityType;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -15799,7 +15813,7 @@ export class DefinedEntityTypeApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getDefinedEntityTypes (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: DefinedEntityTypes;  }> {
+    public getDefinedEntityTypes (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: DefinedEntityTypes;  }> {
         const localVarPath = this.basePath + '/1.0.0/entityTypes/';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -15858,7 +15872,7 @@ export class DefinedEntityTypeApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: DefinedEntityTypes;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: DefinedEntityTypes;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -15878,7 +15892,7 @@ export class DefinedEntityTypeApi {
      * @param definition 
      * @param id 
      */
-    public updateDefinedEntityType (definition: DefinedEntityType, id: string) : Promise<{ response: http.ClientResponse; body: DefinedEntityType;  }> {
+    public updateDefinedEntityType (definition: DefinedEntityType, id: string) : Promise<{ response: http.IncomingMessage; body: DefinedEntityType;  }> {
         const localVarPath = this.basePath + '/1.0.0/entityTypes/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -15919,7 +15933,7 @@ export class DefinedEntityTypeApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: DefinedEntityType;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: DefinedEntityType;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -15985,7 +15999,7 @@ export class DefinedInterfaceApi {
      * @summary Creates a defined interface.
      * @param definedInterface 
      */
-    public createInterface (definedInterface: DefinedInterface) : Promise<{ response: http.ClientResponse; body: DefinedInterface;  }> {
+    public createInterface (definedInterface: DefinedInterface) : Promise<{ response: http.IncomingMessage; body: DefinedInterface;  }> {
         const localVarPath = this.basePath + '/1.0.0/interfaces';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -16020,7 +16034,7 @@ export class DefinedInterfaceApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: DefinedInterface;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: DefinedInterface;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -16039,7 +16053,7 @@ export class DefinedInterfaceApi {
      * @summary Deletes the interface with the unique identifier (URN)
      * @param id 
      */
-    public deleteInterface (id: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteInterface (id: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/interfaces/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -16074,7 +16088,7 @@ export class DefinedInterfaceApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -16093,7 +16107,7 @@ export class DefinedInterfaceApi {
      * @summary Gets the interface with the unique identifier (URN)
      * @param id 
      */
-    public getInterface (id: string) : Promise<{ response: http.ClientResponse; body: DefinedInterface;  }> {
+    public getInterface (id: string) : Promise<{ response: http.IncomingMessage; body: DefinedInterface;  }> {
         const localVarPath = this.basePath + '/1.0.0/interfaces/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -16128,7 +16142,7 @@ export class DefinedInterfaceApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: DefinedInterface;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: DefinedInterface;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -16151,7 +16165,7 @@ export class DefinedInterfaceApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryInterfaces (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: DefinedInterfaces;  }> {
+    public queryInterfaces (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: DefinedInterfaces;  }> {
         const localVarPath = this.basePath + '/1.0.0/interfaces';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -16210,7 +16224,7 @@ export class DefinedInterfaceApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: DefinedInterfaces;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: DefinedInterfaces;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -16230,7 +16244,7 @@ export class DefinedInterfaceApi {
      * @param definedInterface 
      * @param id 
      */
-    public updateInterface (definedInterface: DefinedInterface, id: string) : Promise<{ response: http.ClientResponse; body: DefinedInterface;  }> {
+    public updateInterface (definedInterface: DefinedInterface, id: string) : Promise<{ response: http.IncomingMessage; body: DefinedInterface;  }> {
         const localVarPath = this.basePath + '/1.0.0/interfaces/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -16271,7 +16285,7 @@ export class DefinedInterfaceApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: DefinedInterface;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: DefinedInterface;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -16338,7 +16352,7 @@ export class DefinedInterfaceBehaviorsApi {
      * @param definition 
      * @param id 
      */
-    public addDefinedEntityTypeAccess (definition: BehaviorAccess, id: string) : Promise<{ response: http.ClientResponse; body: BehaviorAccess;  }> {
+    public addDefinedEntityTypeAccess (definition: BehaviorAccess, id: string) : Promise<{ response: http.IncomingMessage; body: BehaviorAccess;  }> {
         const localVarPath = this.basePath + '/1.0.0/entityTypes/{id}/behaviorAccessControls'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -16379,7 +16393,7 @@ export class DefinedInterfaceBehaviorsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: BehaviorAccess;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: BehaviorAccess;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -16399,7 +16413,7 @@ export class DefinedInterfaceBehaviorsApi {
      * @param behavior 
      * @param id 
      */
-    public addInterfaceBehavior (behavior: Behavior, id: string) : Promise<{ response: http.ClientResponse; body: Behavior;  }> {
+    public addInterfaceBehavior (behavior: Behavior, id: string) : Promise<{ response: http.IncomingMessage; body: Behavior;  }> {
         const localVarPath = this.basePath + '/1.0.0/interfaces/{id}/behaviors'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -16440,7 +16454,7 @@ export class DefinedInterfaceBehaviorsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Behavior;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Behavior;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -16460,7 +16474,7 @@ export class DefinedInterfaceBehaviorsApi {
      * @param id 
      * @param behaviorId 
      */
-    public deleteInterfaceBehavior (id: string, behaviorId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteInterfaceBehavior (id: string, behaviorId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/interfaces/{id}/behaviors/{behaviorId}'
             .replace('{' + 'id' + '}', String(id))
             .replace('{' + 'behaviorId' + '}', String(behaviorId));
@@ -16501,7 +16515,7 @@ export class DefinedInterfaceBehaviorsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -16522,7 +16536,7 @@ export class DefinedInterfaceBehaviorsApi {
      * @param pageSize Results per page to fetch.
      * @param id 
      */
-    public getDefinedEntityTypeAccess (page: number, pageSize: number, id: string) : Promise<{ response: http.ClientResponse; body: BehaviorAccesses;  }> {
+    public getDefinedEntityTypeAccess (page: number, pageSize: number, id: string) : Promise<{ response: http.IncomingMessage; body: BehaviorAccesses;  }> {
         const localVarPath = this.basePath + '/1.0.0/entityTypes/{id}/behaviorAccessControls'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -16575,7 +16589,7 @@ export class DefinedInterfaceBehaviorsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: BehaviorAccesses;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: BehaviorAccesses;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -16596,7 +16610,7 @@ export class DefinedInterfaceBehaviorsApi {
      * @param pageSize Results per page to fetch.
      * @param id 
      */
-    public getDefinedEntityTypeBehaviors (page: number, pageSize: number, id: string) : Promise<{ response: http.ClientResponse; body: Behaviors;  }> {
+    public getDefinedEntityTypeBehaviors (page: number, pageSize: number, id: string) : Promise<{ response: http.IncomingMessage; body: Behaviors;  }> {
         const localVarPath = this.basePath + '/1.0.0/entityTypes/{id}/behaviors'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -16649,7 +16663,7 @@ export class DefinedInterfaceBehaviorsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Behaviors;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Behaviors;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -16669,7 +16683,7 @@ export class DefinedInterfaceBehaviorsApi {
      * @param id 
      * @param behaviorId 
      */
-    public getInterfaceBehavior (id: string, behaviorId: string) : Promise<{ response: http.ClientResponse; body: Behavior;  }> {
+    public getInterfaceBehavior (id: string, behaviorId: string) : Promise<{ response: http.IncomingMessage; body: Behavior;  }> {
         const localVarPath = this.basePath + '/1.0.0/interfaces/{id}/behaviors/{behaviorId}'
             .replace('{' + 'id' + '}', String(id))
             .replace('{' + 'behaviorId' + '}', String(behaviorId));
@@ -16710,7 +16724,7 @@ export class DefinedInterfaceBehaviorsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Behavior;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Behavior;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -16731,7 +16745,7 @@ export class DefinedInterfaceBehaviorsApi {
      * @param pageSize Results per page to fetch.
      * @param id 
      */
-    public getInterfaceBehaviors (page: number, pageSize: number, id: string) : Promise<{ response: http.ClientResponse; body: Behaviors;  }> {
+    public getInterfaceBehaviors (page: number, pageSize: number, id: string) : Promise<{ response: http.IncomingMessage; body: Behaviors;  }> {
         const localVarPath = this.basePath + '/1.0.0/interfaces/{id}/behaviors'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -16784,7 +16798,7 @@ export class DefinedInterfaceBehaviorsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Behaviors;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Behaviors;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -16804,7 +16818,7 @@ export class DefinedInterfaceBehaviorsApi {
      * @param id 
      * @param behaviorId 
      */
-    public getTypeBehavior (id: string, behaviorId: string) : Promise<{ response: http.ClientResponse; body: Behavior;  }> {
+    public getTypeBehavior (id: string, behaviorId: string) : Promise<{ response: http.IncomingMessage; body: Behavior;  }> {
         const localVarPath = this.basePath + '/1.0.0/entityTypes/{id}/behaviors/{behaviorId}'
             .replace('{' + 'id' + '}', String(id))
             .replace('{' + 'behaviorId' + '}', String(behaviorId));
@@ -16845,7 +16859,7 @@ export class DefinedInterfaceBehaviorsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Behavior;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Behavior;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -16866,7 +16880,7 @@ export class DefinedInterfaceBehaviorsApi {
      * @param behaviorId 
      * @param invocation 
      */
-    public invokeDefinedEntityBehavior (id: string, behaviorId: string, invocation?: BehaviorInvocation) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public invokeDefinedEntityBehavior (id: string, behaviorId: string, invocation?: BehaviorInvocation) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/entities/{id}/behaviors/{behaviorId}/invocations'
             .replace('{' + 'id' + '}', String(id))
             .replace('{' + 'behaviorId' + '}', String(behaviorId));
@@ -16908,7 +16922,7 @@ export class DefinedInterfaceBehaviorsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -16928,7 +16942,7 @@ export class DefinedInterfaceBehaviorsApi {
      * @param id 
      * @param behaviorId 
      */
-    public removeBehaviorOverride (id: string, behaviorId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public removeBehaviorOverride (id: string, behaviorId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/entityTypes/{id}/behaviors/{behaviorId}'
             .replace('{' + 'id' + '}', String(id))
             .replace('{' + 'behaviorId' + '}', String(behaviorId));
@@ -16969,7 +16983,7 @@ export class DefinedInterfaceBehaviorsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -16989,7 +17003,7 @@ export class DefinedInterfaceBehaviorsApi {
      * @param definition 
      * @param id 
      */
-    public setDefinedEntityTypeAccess (definition: BehaviorAccesses, id: string) : Promise<{ response: http.ClientResponse; body: BehaviorAccesses;  }> {
+    public setDefinedEntityTypeAccess (definition: BehaviorAccesses, id: string) : Promise<{ response: http.IncomingMessage; body: BehaviorAccesses;  }> {
         const localVarPath = this.basePath + '/1.0.0/entityTypes/{id}/behaviorAccessControls'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -17030,7 +17044,7 @@ export class DefinedInterfaceBehaviorsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: BehaviorAccesses;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: BehaviorAccesses;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -17051,7 +17065,7 @@ export class DefinedInterfaceBehaviorsApi {
      * @param id 
      * @param behaviorId 
      */
-    public updateInterfaceBehavior (behavior: Behavior, id: string, behaviorId: string) : Promise<{ response: http.ClientResponse; body: Behavior;  }> {
+    public updateInterfaceBehavior (behavior: Behavior, id: string, behaviorId: string) : Promise<{ response: http.IncomingMessage; body: Behavior;  }> {
         const localVarPath = this.basePath + '/1.0.0/interfaces/{id}/behaviors/{behaviorId}'
             .replace('{' + 'id' + '}', String(id))
             .replace('{' + 'behaviorId' + '}', String(behaviorId));
@@ -17098,7 +17112,7 @@ export class DefinedInterfaceBehaviorsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Behavior;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Behavior;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -17118,7 +17132,7 @@ export class DefinedInterfaceBehaviorsApi {
      * @param behaviors 
      * @param id 
      */
-    public updateInterfaceBehaviors (behaviors: Behaviors, id: string) : Promise<{ response: http.ClientResponse; body: Behaviors;  }> {
+    public updateInterfaceBehaviors (behaviors: Behaviors, id: string) : Promise<{ response: http.IncomingMessage; body: Behaviors;  }> {
         const localVarPath = this.basePath + '/1.0.0/interfaces/{id}/behaviors'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -17159,7 +17173,7 @@ export class DefinedInterfaceBehaviorsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Behaviors;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Behaviors;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -17180,7 +17194,7 @@ export class DefinedInterfaceBehaviorsApi {
      * @param id 
      * @param behaviorId 
      */
-    public updateTypeBehavior (behavior: Behavior, id: string, behaviorId: string) : Promise<{ response: http.ClientResponse; body: Behavior;  }> {
+    public updateTypeBehavior (behavior: Behavior, id: string, behaviorId: string) : Promise<{ response: http.IncomingMessage; body: Behavior;  }> {
         const localVarPath = this.basePath + '/1.0.0/entityTypes/{id}/behaviors/{behaviorId}'
             .replace('{' + 'id' + '}', String(id))
             .replace('{' + 'behaviorId' + '}', String(behaviorId));
@@ -17227,7 +17241,7 @@ export class DefinedInterfaceBehaviorsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Behavior;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Behavior;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -17293,7 +17307,7 @@ export class DfwPoliciesApi {
      * @summary Retrieves DFW security policies configuration.
      * @param vdcGroupId 
      */
-    public getDfwPolicies (vdcGroupId: string) : Promise<{ response: http.ClientResponse; body: DfwPolicies;  }> {
+    public getDfwPolicies (vdcGroupId: string) : Promise<{ response: http.IncomingMessage; body: DfwPolicies;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcGroups/{vdcGroupId}/dfwPolicies'
             .replace('{' + 'vdcGroupId' + '}', String(vdcGroupId));
         let queryParameters: any = {};
@@ -17328,7 +17342,7 @@ export class DfwPoliciesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: DfwPolicies;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: DfwPolicies;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -17348,7 +17362,7 @@ export class DfwPoliciesApi {
      * @param dfwPolicies 
      * @param vdcGroupId 
      */
-    public updateDfwPolicies (dfwPolicies: DfwPolicies, vdcGroupId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateDfwPolicies (dfwPolicies: DfwPolicies, vdcGroupId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcGroups/{vdcGroupId}/dfwPolicies'
             .replace('{' + 'vdcGroupId' + '}', String(vdcGroupId));
         let queryParameters: any = {};
@@ -17389,7 +17403,7 @@ export class DfwPoliciesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -17456,7 +17470,7 @@ export class DfwPolicyApi {
      * @param vdcGroupId 
      * @param policyId 
      */
-    public deleteDfwPolicy (vdcGroupId: string, policyId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteDfwPolicy (vdcGroupId: string, policyId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcGroups/{vdcGroupId}/dfwPolicies/{policyId}'
             .replace('{' + 'vdcGroupId' + '}', String(vdcGroupId))
             .replace('{' + 'policyId' + '}', String(policyId));
@@ -17497,7 +17511,7 @@ export class DfwPolicyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -17518,7 +17532,7 @@ export class DfwPolicyApi {
      * @param policyId 
      * @param ruleId 
      */
-    public deleteDfwRule (vdcGroupId: string, policyId: string, ruleId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteDfwRule (vdcGroupId: string, policyId: string, ruleId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcGroups/{vdcGroupId}/dfwPolicies/{policyId}/rules/{ruleId}'
             .replace('{' + 'vdcGroupId' + '}', String(vdcGroupId))
             .replace('{' + 'policyId' + '}', String(policyId))
@@ -17565,7 +17579,7 @@ export class DfwPolicyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -17585,7 +17599,7 @@ export class DfwPolicyApi {
      * @param vdcGroupId 
      * @param policyId 
      */
-    public getDfwPolicy (vdcGroupId: string, policyId: string) : Promise<{ response: http.ClientResponse; body: DfwPolicy;  }> {
+    public getDfwPolicy (vdcGroupId: string, policyId: string) : Promise<{ response: http.IncomingMessage; body: DfwPolicy;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcGroups/{vdcGroupId}/dfwPolicies/{policyId}'
             .replace('{' + 'vdcGroupId' + '}', String(vdcGroupId))
             .replace('{' + 'policyId' + '}', String(policyId));
@@ -17626,7 +17640,7 @@ export class DfwPolicyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: DfwPolicy;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: DfwPolicy;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -17647,7 +17661,7 @@ export class DfwPolicyApi {
      * @param policyId 
      * @param ruleId 
      */
-    public getDfwRule (vdcGroupId: string, policyId: string, ruleId: string) : Promise<{ response: http.ClientResponse; body: DfwRule;  }> {
+    public getDfwRule (vdcGroupId: string, policyId: string, ruleId: string) : Promise<{ response: http.IncomingMessage; body: DfwRule;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcGroups/{vdcGroupId}/dfwPolicies/{policyId}/rules/{ruleId}'
             .replace('{' + 'vdcGroupId' + '}', String(vdcGroupId))
             .replace('{' + 'policyId' + '}', String(policyId))
@@ -17694,7 +17708,7 @@ export class DfwPolicyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: DfwRule;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: DfwRule;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -17714,7 +17728,7 @@ export class DfwPolicyApi {
      * @param vdcGroupId 
      * @param policyId 
      */
-    public getDfwRules (vdcGroupId: string, policyId: string) : Promise<{ response: http.ClientResponse; body: DfwRules;  }> {
+    public getDfwRules (vdcGroupId: string, policyId: string) : Promise<{ response: http.IncomingMessage; body: DfwRules;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcGroups/{vdcGroupId}/dfwPolicies/{policyId}/rules'
             .replace('{' + 'vdcGroupId' + '}', String(vdcGroupId))
             .replace('{' + 'policyId' + '}', String(policyId));
@@ -17755,7 +17769,7 @@ export class DfwPolicyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: DfwRules;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: DfwRules;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -17776,7 +17790,7 @@ export class DfwPolicyApi {
      * @param vdcGroupId 
      * @param policyId 
      */
-    public updateDfwPolicy (dfwPolicy: DfwPolicy, vdcGroupId: string, policyId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateDfwPolicy (dfwPolicy: DfwPolicy, vdcGroupId: string, policyId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcGroups/{vdcGroupId}/dfwPolicies/{policyId}'
             .replace('{' + 'vdcGroupId' + '}', String(vdcGroupId))
             .replace('{' + 'policyId' + '}', String(policyId));
@@ -17823,7 +17837,7 @@ export class DfwPolicyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -17845,7 +17859,7 @@ export class DfwPolicyApi {
      * @param policyId 
      * @param ruleId 
      */
-    public updateDfwRule (dfwRule: DfwRule, vdcGroupId: string, policyId: string, ruleId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateDfwRule (dfwRule: DfwRule, vdcGroupId: string, policyId: string, ruleId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcGroups/{vdcGroupId}/dfwPolicies/{policyId}/rules/{ruleId}'
             .replace('{' + 'vdcGroupId' + '}', String(vdcGroupId))
             .replace('{' + 'policyId' + '}', String(policyId))
@@ -17898,7 +17912,7 @@ export class DfwPolicyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -17919,7 +17933,7 @@ export class DfwPolicyApi {
      * @param vdcGroupId 
      * @param policyId 
      */
-    public updateDfwRules (dfwRules: DfwRules, vdcGroupId: string, policyId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateDfwRules (dfwRules: DfwRules, vdcGroupId: string, policyId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcGroups/{vdcGroupId}/dfwPolicies/{policyId}/rules'
             .replace('{' + 'vdcGroupId' + '}', String(vdcGroupId))
             .replace('{' + 'policyId' + '}', String(policyId));
@@ -17966,7 +17980,7 @@ export class DfwPolicyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -18032,7 +18046,7 @@ export class DvpgPropertiesApi {
      * @summary Returns the DVPG properties, such as promiscuous mode and forged transmit, of a specific Org vDC network. This is a SysAdmin only API.
      * @param vdcNetworkId 
      */
-    public getDvpgProperties (vdcNetworkId: string) : Promise<{ response: http.ClientResponse; body: DvpgProperties;  }> {
+    public getDvpgProperties (vdcNetworkId: string) : Promise<{ response: http.IncomingMessage; body: DvpgProperties;  }> {
         const localVarPath = this.basePath + '/1.0.0/orgVdcNetworks/{vdcNetworkId}/dvpgProperties'
             .replace('{' + 'vdcNetworkId' + '}', String(vdcNetworkId));
         let queryParameters: any = {};
@@ -18067,7 +18081,7 @@ export class DvpgPropertiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: DvpgProperties;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: DvpgProperties;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -18087,7 +18101,7 @@ export class DvpgPropertiesApi {
      * @param dvpgProperties 
      * @param vdcNetworkId 
      */
-    public updateDvpgProperties (dvpgProperties: DvpgProperties, vdcNetworkId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateDvpgProperties (dvpgProperties: DvpgProperties, vdcNetworkId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/orgVdcNetworks/{vdcNetworkId}/dvpgProperties'
             .replace('{' + 'vdcNetworkId' + '}', String(vdcNetworkId));
         let queryParameters: any = {};
@@ -18128,7 +18142,7 @@ export class DvpgPropertiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -18194,7 +18208,7 @@ export class EdgeClusterApi {
      * @summary Deletes a specific Edge Cluster
      * @param edgeClusterId 
      */
-    public deleteEdgeCluster (edgeClusterId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteEdgeCluster (edgeClusterId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeClusters/{edgeClusterId}'
             .replace('{' + 'edgeClusterId' + '}', String(edgeClusterId));
         let queryParameters: any = {};
@@ -18229,7 +18243,7 @@ export class EdgeClusterApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -18248,7 +18262,7 @@ export class EdgeClusterApi {
      * @summary Retrieves a specific Edge Cluster
      * @param edgeClusterId 
      */
-    public getEdgeCluster (edgeClusterId: string) : Promise<{ response: http.ClientResponse; body: EdgeCluster;  }> {
+    public getEdgeCluster (edgeClusterId: string) : Promise<{ response: http.IncomingMessage; body: EdgeCluster;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeClusters/{edgeClusterId}'
             .replace('{' + 'edgeClusterId' + '}', String(edgeClusterId));
         let queryParameters: any = {};
@@ -18283,7 +18297,7 @@ export class EdgeClusterApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeCluster;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeCluster;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -18303,7 +18317,7 @@ export class EdgeClusterApi {
      * @param edgeCluster 
      * @param edgeClusterId 
      */
-    public updateEdgeCluster (edgeCluster: EdgeCluster, edgeClusterId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateEdgeCluster (edgeCluster: EdgeCluster, edgeClusterId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeClusters/{edgeClusterId}'
             .replace('{' + 'edgeClusterId' + '}', String(edgeClusterId));
         let queryParameters: any = {};
@@ -18344,7 +18358,7 @@ export class EdgeClusterApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -18410,7 +18424,7 @@ export class EdgeClustersApi {
      * @summary Create a new Edge Cluster
      * @param edgeCluster 
      */
-    public createEdgeCluster (edgeCluster: EdgeCluster) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createEdgeCluster (edgeCluster: EdgeCluster) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeClusters';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -18445,7 +18459,7 @@ export class EdgeClustersApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -18468,7 +18482,7 @@ export class EdgeClustersApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getEdgeClusters (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: EdgeClusters;  }> {
+    public getEdgeClusters (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: EdgeClusters;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeClusters';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -18527,7 +18541,7 @@ export class EdgeClustersApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeClusters;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeClusters;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -18594,7 +18608,7 @@ export class EdgeGatewayApi {
      * @param gatewayId 
      * @param force Value \&quot;true\&quot; means to forcefully delete the object that contains other objects even if those objects are in a state that does not allow removal. The default is \&quot;false\&quot;; therefore, objects are not removed if they are not in a state that normally allows removal. Force also implies recursive delete where other contained objects are removed. Errors may be ignored. Invalid value (not true or false) are ignored. 
      */
-    public deleteEdgeGateway (gatewayId: string, force?: boolean) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteEdgeGateway (gatewayId: string, force?: boolean) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -18633,7 +18647,7 @@ export class EdgeGatewayApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -18652,7 +18666,7 @@ export class EdgeGatewayApi {
      * @summary Retrieves a specific Edge Gateway
      * @param gatewayId 
      */
-    public getEdgeGateway (gatewayId: string) : Promise<{ response: http.ClientResponse; body: EdgeGateway;  }> {
+    public getEdgeGateway (gatewayId: string) : Promise<{ response: http.IncomingMessage; body: EdgeGateway;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -18687,7 +18701,7 @@ export class EdgeGatewayApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeGateway;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeGateway;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -18711,7 +18725,7 @@ export class EdgeGatewayApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getUsedIpAddresses (page: number, pageSize: number, gatewayId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: GatewayUsedIpAddresses;  }> {
+    public getUsedIpAddresses (page: number, pageSize: number, gatewayId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: GatewayUsedIpAddresses;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/usedIpAddresses'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -18776,7 +18790,7 @@ export class EdgeGatewayApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: GatewayUsedIpAddresses;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: GatewayUsedIpAddresses;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -18796,7 +18810,7 @@ export class EdgeGatewayApi {
      * @param gateway 
      * @param gatewayId 
      */
-    public updateEdgeGateway (gateway: EdgeGateway, gatewayId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateEdgeGateway (gateway: EdgeGateway, gatewayId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -18837,7 +18851,7 @@ export class EdgeGatewayApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -18903,7 +18917,7 @@ export class EdgeGatewayBgpApi {
      * @summary Retrieves the BGP configuration for a given Edge Gateway.
      * @param gatewayId 
      */
-    public getBgpConfig (gatewayId: string) : Promise<{ response: http.ClientResponse; body: EdgeBgpConfig;  }> {
+    public getBgpConfig (gatewayId: string) : Promise<{ response: http.IncomingMessage; body: EdgeBgpConfig;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/routing/bgp'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -18938,7 +18952,7 @@ export class EdgeGatewayBgpApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeBgpConfig;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeBgpConfig;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -18958,7 +18972,7 @@ export class EdgeGatewayBgpApi {
      * @param bgpConfig 
      * @param gatewayId 
      */
-    public updateBgpConfig (bgpConfig: EdgeBgpConfig, gatewayId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateBgpConfig (bgpConfig: EdgeBgpConfig, gatewayId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/routing/bgp'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -18999,7 +19013,7 @@ export class EdgeGatewayBgpApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -19066,7 +19080,7 @@ export class EdgeGatewayBgpNeighborApi {
      * @param gatewayId 
      * @param neighborId 
      */
-    public deleteBgpNeighbor (gatewayId: string, neighborId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteBgpNeighbor (gatewayId: string, neighborId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/routing/bgp/neighbors/{neighborId}'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'neighborId' + '}', String(neighborId));
@@ -19107,7 +19121,7 @@ export class EdgeGatewayBgpNeighborApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -19127,7 +19141,7 @@ export class EdgeGatewayBgpNeighborApi {
      * @param gatewayId 
      * @param neighborId 
      */
-    public getBgpNeighbor (gatewayId: string, neighborId: string) : Promise<{ response: http.ClientResponse; body: EdgeBgpNeighbor;  }> {
+    public getBgpNeighbor (gatewayId: string, neighborId: string) : Promise<{ response: http.IncomingMessage; body: EdgeBgpNeighbor;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/routing/bgp/neighbors/{neighborId}'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'neighborId' + '}', String(neighborId));
@@ -19168,7 +19182,7 @@ export class EdgeGatewayBgpNeighborApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeBgpNeighbor;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeBgpNeighbor;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -19188,7 +19202,7 @@ export class EdgeGatewayBgpNeighborApi {
      * @param gatewayId 
      * @param neighborId 
      */
-    public getBgpNeighborStatus (gatewayId: string, neighborId: string) : Promise<{ response: http.ClientResponse; body: NetworkingObjectStatus;  }> {
+    public getBgpNeighborStatus (gatewayId: string, neighborId: string) : Promise<{ response: http.IncomingMessage; body: NetworkingObjectStatus;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/routing/bgp/neighbors/{neighborId}/status'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'neighborId' + '}', String(neighborId));
@@ -19229,7 +19243,7 @@ export class EdgeGatewayBgpNeighborApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: NetworkingObjectStatus;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: NetworkingObjectStatus;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -19250,7 +19264,7 @@ export class EdgeGatewayBgpNeighborApi {
      * @param gatewayId 
      * @param neighborId 
      */
-    public updateBgpNeighbor (bgpNeighbor: EdgeBgpNeighbor, gatewayId: string, neighborId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateBgpNeighbor (bgpNeighbor: EdgeBgpNeighbor, gatewayId: string, neighborId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/routing/bgp/neighbors/{neighborId}'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'neighborId' + '}', String(neighborId));
@@ -19297,7 +19311,7 @@ export class EdgeGatewayBgpNeighborApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -19364,7 +19378,7 @@ export class EdgeGatewayBgpNeighborsApi {
      * @param bgpNeighbor 
      * @param gatewayId 
      */
-    public createBgpNeighbor (bgpNeighbor: EdgeBgpNeighbor, gatewayId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createBgpNeighbor (bgpNeighbor: EdgeBgpNeighbor, gatewayId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/routing/bgp/neighbors'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -19405,7 +19419,7 @@ export class EdgeGatewayBgpNeighborsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -19424,7 +19438,7 @@ export class EdgeGatewayBgpNeighborsApi {
      * @summary Retrieves all BGP neighbors configured for the edge gateway.
      * @param gatewayId 
      */
-    public getBgpNeighbors (gatewayId: string) : Promise<{ response: http.ClientResponse; body: EdgeBgpNeighbors;  }> {
+    public getBgpNeighbors (gatewayId: string) : Promise<{ response: http.IncomingMessage; body: EdgeBgpNeighbors;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/routing/bgp/neighbors'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -19459,7 +19473,7 @@ export class EdgeGatewayBgpNeighborsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeBgpNeighbors;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeBgpNeighbors;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -19525,7 +19539,7 @@ export class EdgeGatewayDnsApi {
      * @summary Deletes DNS configuration of the edge gateway.
      * @param gatewayId 
      */
-    public deleteEdgeGatewayDns (gatewayId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteEdgeGatewayDns (gatewayId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/dns'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -19560,7 +19574,7 @@ export class EdgeGatewayDnsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -19579,7 +19593,7 @@ export class EdgeGatewayDnsApi {
      * @summary Retrieves DNS configuration of the edge gateway.
      * @param gatewayId 
      */
-    public getEdgeGatewayDns (gatewayId: string) : Promise<{ response: http.ClientResponse; body: EdgeDnsConfig;  }> {
+    public getEdgeGatewayDns (gatewayId: string) : Promise<{ response: http.IncomingMessage; body: EdgeDnsConfig;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/dns'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -19614,7 +19628,7 @@ export class EdgeGatewayDnsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeDnsConfig;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeDnsConfig;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -19634,7 +19648,7 @@ export class EdgeGatewayDnsApi {
      * @param dnsConfig 
      * @param gatewayId 
      */
-    public updateEdgeGatewayDns (dnsConfig: EdgeDnsConfig, gatewayId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateEdgeGatewayDns (dnsConfig: EdgeDnsConfig, gatewayId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/dns'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -19675,7 +19689,7 @@ export class EdgeGatewayDnsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -19742,7 +19756,7 @@ export class EdgeGatewayFirewallRuleApi {
      * @param gatewayId 
      * @param ruleId 
      */
-    public deleteFirewallRule (gatewayId: string, ruleId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteFirewallRule (gatewayId: string, ruleId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/firewall/rules/{ruleId}'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'ruleId' + '}', String(ruleId));
@@ -19783,7 +19797,7 @@ export class EdgeGatewayFirewallRuleApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -19803,7 +19817,7 @@ export class EdgeGatewayFirewallRuleApi {
      * @param gatewayId 
      * @param ruleId 
      */
-    public getFirewallRule (gatewayId: string, ruleId: string) : Promise<{ response: http.ClientResponse; body: EdgeFirewallRule;  }> {
+    public getFirewallRule (gatewayId: string, ruleId: string) : Promise<{ response: http.IncomingMessage; body: EdgeFirewallRule;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/firewall/rules/{ruleId}'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'ruleId' + '}', String(ruleId));
@@ -19844,7 +19858,7 @@ export class EdgeGatewayFirewallRuleApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeFirewallRule;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeFirewallRule;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -19865,7 +19879,7 @@ export class EdgeGatewayFirewallRuleApi {
      * @param gatewayId 
      * @param ruleId 
      */
-    public updateFirewallRule (firewallRule: EdgeFirewallRule, gatewayId: string, ruleId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateFirewallRule (firewallRule: EdgeFirewallRule, gatewayId: string, ruleId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/firewall/rules/{ruleId}'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'ruleId' + '}', String(ruleId));
@@ -19912,7 +19926,7 @@ export class EdgeGatewayFirewallRuleApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -19978,7 +19992,7 @@ export class EdgeGatewayFirewallRulesApi {
      * @summary Deletes all the firewall rules for a given edge gateway.
      * @param gatewayId 
      */
-    public deleteFirewallRules (gatewayId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteFirewallRules (gatewayId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/firewall/rules'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -20013,7 +20027,7 @@ export class EdgeGatewayFirewallRulesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -20032,7 +20046,7 @@ export class EdgeGatewayFirewallRulesApi {
      * @summary Retrieves all firewall rules for a given edge gateway.
      * @param gatewayId 
      */
-    public getFirewallRules (gatewayId: string) : Promise<{ response: http.ClientResponse; body: EdgeFirewallRules;  }> {
+    public getFirewallRules (gatewayId: string) : Promise<{ response: http.IncomingMessage; body: EdgeFirewallRules;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/firewall/rules'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -20067,7 +20081,7 @@ export class EdgeGatewayFirewallRulesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeFirewallRules;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeFirewallRules;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -20087,7 +20101,7 @@ export class EdgeGatewayFirewallRulesApi {
      * @param firewallRules 
      * @param gatewayId 
      */
-    public updateFirewallRules (firewallRules: EdgeFirewallRules, gatewayId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateFirewallRules (firewallRules: EdgeFirewallRules, gatewayId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/firewall/rules'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -20128,7 +20142,7 @@ export class EdgeGatewayFirewallRulesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -20195,7 +20209,7 @@ export class EdgeGatewayIpSecVpnTunnelApi {
      * @param gatewayId 
      * @param tunnelId 
      */
-    public deleteIpSecVpnTunnel (gatewayId: string, tunnelId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteIpSecVpnTunnel (gatewayId: string, tunnelId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/ipsec/tunnels/{tunnelId}'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'tunnelId' + '}', String(tunnelId));
@@ -20236,7 +20250,7 @@ export class EdgeGatewayIpSecVpnTunnelApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -20256,7 +20270,7 @@ export class EdgeGatewayIpSecVpnTunnelApi {
      * @param gatewayId 
      * @param tunnelId 
      */
-    public getIpSecVpnTunnel (gatewayId: string, tunnelId: string) : Promise<{ response: http.ClientResponse; body: EdgeIpSecVpnTunnel;  }> {
+    public getIpSecVpnTunnel (gatewayId: string, tunnelId: string) : Promise<{ response: http.IncomingMessage; body: EdgeIpSecVpnTunnel;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/ipsec/tunnels/{tunnelId}'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'tunnelId' + '}', String(tunnelId));
@@ -20297,7 +20311,7 @@ export class EdgeGatewayIpSecVpnTunnelApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeIpSecVpnTunnel;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeIpSecVpnTunnel;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -20316,7 +20330,7 @@ export class EdgeGatewayIpSecVpnTunnelApi {
      * @summary Retrieves the default connection properties that are used for a given IPSec Tunnel in NSX-T when default is set or no security type is specified.
      * @param gatewayId 
      */
-    public getIpSecVpnTunnelDefaultConnectionProperties (gatewayId: string) : Promise<{ response: http.ClientResponse; body: EdgeIpSecVpnTunnelConnectionProperties;  }> {
+    public getIpSecVpnTunnelDefaultConnectionProperties (gatewayId: string) : Promise<{ response: http.IncomingMessage; body: EdgeIpSecVpnTunnelConnectionProperties;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/ipsec/tunnels/defaultConnectionProperties'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -20351,7 +20365,7 @@ export class EdgeGatewayIpSecVpnTunnelApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeIpSecVpnTunnelConnectionProperties;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeIpSecVpnTunnelConnectionProperties;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -20371,7 +20385,7 @@ export class EdgeGatewayIpSecVpnTunnelApi {
      * @param gatewayId 
      * @param tunnelId 
      */
-    public getIpSecVpnTunnelStatistics (gatewayId: string, tunnelId: string) : Promise<{ response: http.ClientResponse; body: EdgeIpSecVpnTunnelStatistics;  }> {
+    public getIpSecVpnTunnelStatistics (gatewayId: string, tunnelId: string) : Promise<{ response: http.IncomingMessage; body: EdgeIpSecVpnTunnelStatistics;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/ipsec/tunnels/{tunnelId}/statistics'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'tunnelId' + '}', String(tunnelId));
@@ -20412,7 +20426,7 @@ export class EdgeGatewayIpSecVpnTunnelApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeIpSecVpnTunnelStatistics;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeIpSecVpnTunnelStatistics;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -20432,7 +20446,7 @@ export class EdgeGatewayIpSecVpnTunnelApi {
      * @param gatewayId 
      * @param tunnelId 
      */
-    public getIpSecVpnTunnelStatus (gatewayId: string, tunnelId: string) : Promise<{ response: http.ClientResponse; body: EdgeIpSecVpnTunnelStatus;  }> {
+    public getIpSecVpnTunnelStatus (gatewayId: string, tunnelId: string) : Promise<{ response: http.IncomingMessage; body: EdgeIpSecVpnTunnelStatus;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/ipsec/tunnels/{tunnelId}/status'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'tunnelId' + '}', String(tunnelId));
@@ -20473,7 +20487,7 @@ export class EdgeGatewayIpSecVpnTunnelApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeIpSecVpnTunnelStatus;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeIpSecVpnTunnelStatus;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -20494,7 +20508,7 @@ export class EdgeGatewayIpSecVpnTunnelApi {
      * @param gatewayId 
      * @param tunnelId 
      */
-    public updateIpSecVpnTunnel (ipsecVpnTunnel: EdgeIpSecVpnTunnel, gatewayId: string, tunnelId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateIpSecVpnTunnel (ipsecVpnTunnel: EdgeIpSecVpnTunnel, gatewayId: string, tunnelId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/ipsec/tunnels/{tunnelId}'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'tunnelId' + '}', String(tunnelId));
@@ -20541,7 +20555,7 @@ export class EdgeGatewayIpSecVpnTunnelApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -20608,7 +20622,7 @@ export class EdgeGatewayIpSecVpnTunnelConnectionPropertiesApi {
      * @param gatewayId 
      * @param tunnelId 
      */
-    public getIpSecVpnTunnelConnectionProperties (gatewayId: string, tunnelId: string) : Promise<{ response: http.ClientResponse; body: EdgeIpSecVpnTunnelConnectionProperties;  }> {
+    public getIpSecVpnTunnelConnectionProperties (gatewayId: string, tunnelId: string) : Promise<{ response: http.IncomingMessage; body: EdgeIpSecVpnTunnelConnectionProperties;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/ipsec/tunnels/{tunnelId}/connectionProperties'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'tunnelId' + '}', String(tunnelId));
@@ -20649,7 +20663,7 @@ export class EdgeGatewayIpSecVpnTunnelConnectionPropertiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeIpSecVpnTunnelConnectionProperties;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeIpSecVpnTunnelConnectionProperties;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -20670,7 +20684,7 @@ export class EdgeGatewayIpSecVpnTunnelConnectionPropertiesApi {
      * @param gatewayId 
      * @param tunnelId 
      */
-    public updateIpSecVpnTunnelConnectionProperties (ipSecVpnTunnelConnectionProperties: EdgeIpSecVpnTunnelConnectionProperties, gatewayId: string, tunnelId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateIpSecVpnTunnelConnectionProperties (ipSecVpnTunnelConnectionProperties: EdgeIpSecVpnTunnelConnectionProperties, gatewayId: string, tunnelId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/ipsec/tunnels/{tunnelId}/connectionProperties'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'tunnelId' + '}', String(tunnelId));
@@ -20717,7 +20731,7 @@ export class EdgeGatewayIpSecVpnTunnelConnectionPropertiesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -20784,7 +20798,7 @@ export class EdgeGatewayIpSecVpnTunnelsApi {
      * @param ipsecVpnTunnel 
      * @param gatewayId 
      */
-    public createIpSecVpnTunnel (ipsecVpnTunnel: EdgeIpSecVpnTunnel, gatewayId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createIpSecVpnTunnel (ipsecVpnTunnel: EdgeIpSecVpnTunnel, gatewayId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/ipsec/tunnels'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -20825,7 +20839,7 @@ export class EdgeGatewayIpSecVpnTunnelsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -20848,7 +20862,7 @@ export class EdgeGatewayIpSecVpnTunnelsApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getIpSecVpnTunnels (pageSize: number, gatewayId: string, cursor?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: EdgeIpSecVpnTunnels;  }> {
+    public getIpSecVpnTunnels (pageSize: number, gatewayId: string, cursor?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: EdgeIpSecVpnTunnels;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/ipsec/tunnels'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -20904,7 +20918,7 @@ export class EdgeGatewayIpSecVpnTunnelsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeIpSecVpnTunnels;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeIpSecVpnTunnels;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -20971,7 +20985,7 @@ export class EdgeGatewayL2VpnTunnelApi {
      * @param gatewayId 
      * @param tunnelId 
      */
-    public deleteL2VpnTunnel (gatewayId: string, tunnelId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteL2VpnTunnel (gatewayId: string, tunnelId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/l2vpn/tunnels/{tunnelId}'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'tunnelId' + '}', String(tunnelId));
@@ -21012,7 +21026,7 @@ export class EdgeGatewayL2VpnTunnelApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -21032,7 +21046,7 @@ export class EdgeGatewayL2VpnTunnelApi {
      * @param gatewayId 
      * @param tunnelId 
      */
-    public getL2VpnTunnel (gatewayId: string, tunnelId: string) : Promise<{ response: http.ClientResponse; body: EdgeL2VpnTunnel;  }> {
+    public getL2VpnTunnel (gatewayId: string, tunnelId: string) : Promise<{ response: http.IncomingMessage; body: EdgeL2VpnTunnel;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/l2vpn/tunnels/{tunnelId}'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'tunnelId' + '}', String(tunnelId));
@@ -21073,7 +21087,7 @@ export class EdgeGatewayL2VpnTunnelApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeL2VpnTunnel;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeL2VpnTunnel;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -21093,7 +21107,7 @@ export class EdgeGatewayL2VpnTunnelApi {
      * @param gatewayId 
      * @param tunnelId 
      */
-    public getL2VpnTunnelStatistics (gatewayId: string, tunnelId: string) : Promise<{ response: http.ClientResponse; body: EdgeL2VpnTunnelStatistics;  }> {
+    public getL2VpnTunnelStatistics (gatewayId: string, tunnelId: string) : Promise<{ response: http.IncomingMessage; body: EdgeL2VpnTunnelStatistics;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/l2vpn/tunnels/{tunnelId}/metrics'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'tunnelId' + '}', String(tunnelId));
@@ -21134,7 +21148,7 @@ export class EdgeGatewayL2VpnTunnelApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeL2VpnTunnelStatistics;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeL2VpnTunnelStatistics;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -21154,7 +21168,7 @@ export class EdgeGatewayL2VpnTunnelApi {
      * @param gatewayId 
      * @param tunnelId 
      */
-    public getL2VpnTunnelStatus (gatewayId: string, tunnelId: string) : Promise<{ response: http.ClientResponse; body: EdgeL2VpnTunnelStatus;  }> {
+    public getL2VpnTunnelStatus (gatewayId: string, tunnelId: string) : Promise<{ response: http.IncomingMessage; body: EdgeL2VpnTunnelStatus;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/l2vpn/tunnels/{tunnelId}/status'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'tunnelId' + '}', String(tunnelId));
@@ -21195,7 +21209,7 @@ export class EdgeGatewayL2VpnTunnelApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeL2VpnTunnelStatus;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeL2VpnTunnelStatus;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -21216,7 +21230,7 @@ export class EdgeGatewayL2VpnTunnelApi {
      * @param gatewayId 
      * @param tunnelId 
      */
-    public updateL2VpnTunnel (l2VpnTunnel: EdgeL2VpnTunnel, gatewayId: string, tunnelId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateL2VpnTunnel (l2VpnTunnel: EdgeL2VpnTunnel, gatewayId: string, tunnelId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/l2vpn/tunnels/{tunnelId}'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'tunnelId' + '}', String(tunnelId));
@@ -21263,7 +21277,7 @@ export class EdgeGatewayL2VpnTunnelApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -21330,7 +21344,7 @@ export class EdgeGatewayL2VpnTunnelsApi {
      * @param l2VpnTunnel 
      * @param gatewayId 
      */
-    public createL2VpnTunnel (l2VpnTunnel: EdgeL2VpnTunnel, gatewayId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createL2VpnTunnel (l2VpnTunnel: EdgeL2VpnTunnel, gatewayId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/l2vpn/tunnels'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -21371,7 +21385,7 @@ export class EdgeGatewayL2VpnTunnelsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -21392,7 +21406,7 @@ export class EdgeGatewayL2VpnTunnelsApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getL2VpnTunnels (gatewayId: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: EdgeL2VpnTunnels;  }> {
+    public getL2VpnTunnels (gatewayId: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: EdgeL2VpnTunnels;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/l2vpn/tunnels'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -21435,7 +21449,7 @@ export class EdgeGatewayL2VpnTunnelsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeL2VpnTunnels;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeL2VpnTunnels;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -21501,7 +21515,7 @@ export class EdgeGatewayLoadBalancerApi {
      * @summary Retrieves Load Balancer configuration on an Edge Gateway.
      * @param gatewayId 
      */
-    public getLoadBalancerConfig (gatewayId: string) : Promise<{ response: http.ClientResponse; body: EdgeGatewayLoadBalancerConfig;  }> {
+    public getLoadBalancerConfig (gatewayId: string) : Promise<{ response: http.IncomingMessage; body: EdgeGatewayLoadBalancerConfig;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/loadBalancer'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -21536,7 +21550,7 @@ export class EdgeGatewayLoadBalancerApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeGatewayLoadBalancerConfig;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeGatewayLoadBalancerConfig;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -21556,7 +21570,7 @@ export class EdgeGatewayLoadBalancerApi {
      * @param loadBalancerConfig 
      * @param gatewayId 
      */
-    public updateLoadBalancerConfig (loadBalancerConfig: EdgeGatewayLoadBalancerConfig, gatewayId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateLoadBalancerConfig (loadBalancerConfig: EdgeGatewayLoadBalancerConfig, gatewayId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/loadBalancer'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -21597,7 +21611,7 @@ export class EdgeGatewayLoadBalancerApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -21660,10 +21674,10 @@ export class EdgeGatewayLoadBalancerAnalyticsApi {
     }
     /**
      * 
-     * @summary Retrieves analytics for a specific load balancer.  Metrics are specified in the filter query along with time period and series resolution.  Up to 5 metric series can be specified per report.  All reports will span the same time period.  Report filters are encapsulated in a fiql filter query parameter. Sample filter:   <code>filter=(componentId==urn:vcloud:virtualservice:7d38ad7f-cd93-4501-8c40-6f61650ccda0;         metric==l4_server.avg_total_rtt;metric==l7_server.avg_application_response_time;step==500;limit==100)</code> Supported filters are:   <ul>   <li>componentId.  The URN of the virtual service or pool for which metrics will be gathered.  Only one should be specified.   This is required.   <li>metric.  One or more metrics of interest.  <code>filter=(metric==l4_server.avg_total_rtt;metric==l7_server.avg_application_response_time)</code> -   This is required.  Supported metrics can be found at the analytics/supportedMetrics endpoint.   <li>step.  The time resolution of the report, in seconds.   This is required.  Minimum supported resolution is 300 seconds (5 minutes).   <li>limit.  Optional.  The number of data points to be returned.   This is optional.  Defaults to 59 where it can't be calculated.   <li>startTime.  Start time of the series.   This is optional.  Must be in ISO 8601 format (i.e. 2020-07-24T00:00:00).  If not provided, start time is calculated from the step and end time.   <li>endTime.  End period of the series.   This is optional.  Must be in ISO 8601 format (i.e. 2020-07-24T00:00:00). Defaults to the time of latest collected data point.   </ul> 
+     * @summary Retrieves analytics for a specific load balancer.  Metrics are specified in the filter query along with time period and series resolution.  Up to 5 metric series can be specified per report.  All reports will span the same time period.  Report filters are encapsulated in a fiql filter query parameter. Sample filter:   <code>filter=(componentId==urn:vcloud:virtualservice:7d38ad7f-cd93-4501-8c40-6f61650ccda0;         metric==l4_server.avg_total_rtt;metric==l7_server.avg_application_response_time;step==500;limit==100)</code> Supported filters are:   <ul>   <li>componentId.  The URN of the virtual service or pool for which metrics will be gathered.  Only one should be specified.   This is required.   <li>metric.  One or more metrics of interest.  <code>filter=(metric==l4_server.avg_total_rtt;metric==l7_server.avg_application_response_time)</code> -   This is required.  Supported metrics can be found at the analytics/supportedMetrics endpoint.   <li>step.  The time resolution of the report, in seconds.   This is required.  Minimum supported resolution is 300 seconds (5 minutes).   <li>limit.  Optional.  The number of data points to be returned.   This is optional.  Defaults to 59 where it can't be calculated.   <li>startTime.  Start time of the series.   This is optional.  Must be in ISO 8601 format (i.e. 2020-07-24T00:00:00).  If not provided, start time is calculated from the step and end time.   <li>endTime.  End period of the series.   This is optional.  Must be in ISO 8601 format (i.e. 2020-07-24T00:00:00). Defaults to the time of latest collected data point.   </ul> This feature requires additional licensing. 
      * @param filter Filter for a query.  FIQL format.
      */
-    public getLoadBalancerAnalyticReports (filter?: string) : Promise<{ response: http.ClientResponse; body: EdgeLoadBalancerAnalyticReports;  }> {
+    public getLoadBalancerAnalyticReports (filter?: string) : Promise<{ response: http.IncomingMessage; body: EdgeLoadBalancerAnalyticReports;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/analyticReports';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -21696,7 +21710,7 @@ export class EdgeGatewayLoadBalancerAnalyticsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeLoadBalancerAnalyticReports;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeLoadBalancerAnalyticReports;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -21712,14 +21726,19 @@ export class EdgeGatewayLoadBalancerAnalyticsApi {
     }
     /**
      * 
-     * @summary Retrieves all the supported metrics for load balancer analytic reports.  These metrics can be used to create runtime reports of load balancer virtual services and pools. 
+     * @summary Retrieves all the supported metrics for load balancer analytic reports.  These metrics can be used to create runtime reports of load balancer virtual services and pools. Supported filters are: <ul>   <li>componentId.  The URN of the load balancer virtual service or pool for which we want supported metrics. Only one should be specified.   This is required. </ul> This feature requires additional licensing. 
+     * @param filter Filter for a query.  FIQL format.
      */
-    public getLoadBalancerSupportedAnalyticMetrics () : Promise<{ response: http.ClientResponse; body: EdgeLoadBalancerAnalyticMetrics;  }> {
+    public getLoadBalancerSupportedAnalyticMetrics (filter?: string) : Promise<{ response: http.IncomingMessage; body: EdgeLoadBalancerAnalyticMetrics;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/analyticReports/supportedMetrics';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
         let formParams: any = {};
 
+
+        if (filter !== undefined) {
+            queryParameters['filter'] = filter;
+        }
 
         let useFormData = false;
 
@@ -21743,7 +21762,7 @@ export class EdgeGatewayLoadBalancerAnalyticsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeLoadBalancerAnalyticMetrics;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeLoadBalancerAnalyticMetrics;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -21809,7 +21828,7 @@ export class EdgeGatewayLoadBalancerPoolApi {
      * @summary Deletes a specific Load Balancer Pool.
      * @param poolId 
      */
-    public deleteLoadBalancerPool (poolId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteLoadBalancerPool (poolId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/pools/{poolId}'
             .replace('{' + 'poolId' + '}', String(poolId));
         let queryParameters: any = {};
@@ -21844,7 +21863,7 @@ export class EdgeGatewayLoadBalancerPoolApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -21863,7 +21882,7 @@ export class EdgeGatewayLoadBalancerPoolApi {
      * @summary Retrieves a specific Load Balancer Pool.
      * @param poolId 
      */
-    public getLoadBalancerPool (poolId: string) : Promise<{ response: http.ClientResponse; body: EdgeLoadBalancerPool;  }> {
+    public getLoadBalancerPool (poolId: string) : Promise<{ response: http.IncomingMessage; body: EdgeLoadBalancerPool;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/pools/{poolId}'
             .replace('{' + 'poolId' + '}', String(poolId));
         let queryParameters: any = {};
@@ -21898,7 +21917,7 @@ export class EdgeGatewayLoadBalancerPoolApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeLoadBalancerPool;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeLoadBalancerPool;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -21918,7 +21937,7 @@ export class EdgeGatewayLoadBalancerPoolApi {
      * @param loadBalancerPool 
      * @param poolId 
      */
-    public updateLoadBalancerPool (loadBalancerPool: EdgeLoadBalancerPool, poolId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateLoadBalancerPool (loadBalancerPool: EdgeLoadBalancerPool, poolId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/pools/{poolId}'
             .replace('{' + 'poolId' + '}', String(poolId));
         let queryParameters: any = {};
@@ -21959,7 +21978,7 @@ export class EdgeGatewayLoadBalancerPoolApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -22025,7 +22044,7 @@ export class EdgeGatewayLoadBalancerPoolsApi {
      * @summary Creates a Load Balancer Pool.
      * @param loadBalancerPool 
      */
-    public createLoadBalancerPool (loadBalancerPool: EdgeLoadBalancerPool) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createLoadBalancerPool (loadBalancerPool: EdgeLoadBalancerPool) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/pools';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -22060,7 +22079,7 @@ export class EdgeGatewayLoadBalancerPoolsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -22084,7 +22103,7 @@ export class EdgeGatewayLoadBalancerPoolsApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getPoolSummariesForGateway (page: number, pageSize: number, gatewayId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: EdgeLoadBalancerPoolSummaries;  }> {
+    public getPoolSummariesForGateway (page: number, pageSize: number, gatewayId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: EdgeLoadBalancerPoolSummaries;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/loadBalancer/poolSummaries'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -22149,7 +22168,7 @@ export class EdgeGatewayLoadBalancerPoolsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeLoadBalancerPoolSummaries;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeLoadBalancerPoolSummaries;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -22215,7 +22234,7 @@ export class EdgeGatewayLoadBalancerVirtualServiceApi {
      * @summary Delete the specified Virtual Service.
      * @param virtualServiceId 
      */
-    public deleteVirtualService (virtualServiceId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteVirtualService (virtualServiceId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/virtualServices/{virtualServiceId}'
             .replace('{' + 'virtualServiceId' + '}', String(virtualServiceId));
         let queryParameters: any = {};
@@ -22250,7 +22269,7 @@ export class EdgeGatewayLoadBalancerVirtualServiceApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -22269,7 +22288,7 @@ export class EdgeGatewayLoadBalancerVirtualServiceApi {
      * @summary Get Virtual Service.
      * @param virtualServiceId 
      */
-    public getVirtualService (virtualServiceId: string) : Promise<{ response: http.ClientResponse; body: EdgeLoadBalancerVirtualService;  }> {
+    public getVirtualService (virtualServiceId: string) : Promise<{ response: http.IncomingMessage; body: EdgeLoadBalancerVirtualService;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/virtualServices/{virtualServiceId}'
             .replace('{' + 'virtualServiceId' + '}', String(virtualServiceId));
         let queryParameters: any = {};
@@ -22304,7 +22323,7 @@ export class EdgeGatewayLoadBalancerVirtualServiceApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeLoadBalancerVirtualService;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeLoadBalancerVirtualService;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -22324,7 +22343,7 @@ export class EdgeGatewayLoadBalancerVirtualServiceApi {
      * @param virtualServiceConfig 
      * @param virtualServiceId 
      */
-    public updateVirtualService (virtualServiceConfig: EdgeLoadBalancerVirtualService, virtualServiceId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateVirtualService (virtualServiceConfig: EdgeLoadBalancerVirtualService, virtualServiceId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/virtualServices/{virtualServiceId}'
             .replace('{' + 'virtualServiceId' + '}', String(virtualServiceId));
         let queryParameters: any = {};
@@ -22365,7 +22384,7 @@ export class EdgeGatewayLoadBalancerVirtualServiceApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -22431,7 +22450,7 @@ export class EdgeGatewayLoadBalancerVirtualServicesApi {
      * @summary Create a new Virtual Service for a specific Edge Gateway.
      * @param virtualServiceConfig 
      */
-    public createVirtualService (virtualServiceConfig: EdgeLoadBalancerVirtualService) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createVirtualService (virtualServiceConfig: EdgeLoadBalancerVirtualService) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/virtualServices';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -22466,7 +22485,7 @@ export class EdgeGatewayLoadBalancerVirtualServicesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -22490,7 +22509,7 @@ export class EdgeGatewayLoadBalancerVirtualServicesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getVirtualServiceSummariesForGateway (page: number, pageSize: number, gatewayId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: EdgeLoadBalancerVirtualServiceSummaries;  }> {
+    public getVirtualServiceSummariesForGateway (page: number, pageSize: number, gatewayId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: EdgeLoadBalancerVirtualServiceSummaries;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/loadBalancer/virtualServiceSummaries'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -22555,7 +22574,7 @@ export class EdgeGatewayLoadBalancerVirtualServicesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeLoadBalancerVirtualServiceSummaries;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeLoadBalancerVirtualServiceSummaries;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -22622,7 +22641,7 @@ export class EdgeGatewayNatRuleApi {
      * @param gatewayId 
      * @param ruleId 
      */
-    public deleteNatRule (gatewayId: string, ruleId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteNatRule (gatewayId: string, ruleId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/nat/rules/{ruleId}'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'ruleId' + '}', String(ruleId));
@@ -22663,7 +22682,7 @@ export class EdgeGatewayNatRuleApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -22683,7 +22702,7 @@ export class EdgeGatewayNatRuleApi {
      * @param gatewayId 
      * @param ruleId 
      */
-    public getNatRule (gatewayId: string, ruleId: string) : Promise<{ response: http.ClientResponse; body: EdgeNatRule;  }> {
+    public getNatRule (gatewayId: string, ruleId: string) : Promise<{ response: http.IncomingMessage; body: EdgeNatRule;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/nat/rules/{ruleId}'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'ruleId' + '}', String(ruleId));
@@ -22724,7 +22743,7 @@ export class EdgeGatewayNatRuleApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeNatRule;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeNatRule;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -22745,7 +22764,7 @@ export class EdgeGatewayNatRuleApi {
      * @param gatewayId 
      * @param ruleId 
      */
-    public updateNatRule (edgeNatRule: EdgeNatRule, gatewayId: string, ruleId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateNatRule (edgeNatRule: EdgeNatRule, gatewayId: string, ruleId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/nat/rules/{ruleId}'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'ruleId' + '}', String(ruleId));
@@ -22792,7 +22811,7 @@ export class EdgeGatewayNatRuleApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -22859,7 +22878,7 @@ export class EdgeGatewayNatRulesApi {
      * @param edgeNatRule 
      * @param gatewayId 
      */
-    public createNatRule (edgeNatRule: EdgeNatRule, gatewayId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createNatRule (edgeNatRule: EdgeNatRule, gatewayId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/nat/rules'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -22900,7 +22919,7 @@ export class EdgeGatewayNatRulesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -22923,7 +22942,7 @@ export class EdgeGatewayNatRulesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getNatRules (pageSize: number, gatewayId: string, cursor?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: EdgeNatRules;  }> {
+    public getNatRules (pageSize: number, gatewayId: string, cursor?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: EdgeNatRules;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/nat/rules'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -22979,7 +22998,7 @@ export class EdgeGatewayNatRulesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeNatRules;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeNatRules;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -23046,7 +23065,7 @@ export class EdgeGatewayPrefixListApi {
      * @param gatewayId 
      * @param listId 
      */
-    public deletePrefixList (gatewayId: string, listId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deletePrefixList (gatewayId: string, listId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/routing/bgp/prefixLists/{listId}'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'listId' + '}', String(listId));
@@ -23087,7 +23106,7 @@ export class EdgeGatewayPrefixListApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -23107,7 +23126,7 @@ export class EdgeGatewayPrefixListApi {
      * @param gatewayId 
      * @param listId 
      */
-    public getPrefixList (gatewayId: string, listId: string) : Promise<{ response: http.ClientResponse; body: EdgePrefixList;  }> {
+    public getPrefixList (gatewayId: string, listId: string) : Promise<{ response: http.IncomingMessage; body: EdgePrefixList;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/routing/bgp/prefixLists/{listId}'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'listId' + '}', String(listId));
@@ -23148,7 +23167,7 @@ export class EdgeGatewayPrefixListApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgePrefixList;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgePrefixList;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -23169,7 +23188,7 @@ export class EdgeGatewayPrefixListApi {
      * @param gatewayId 
      * @param listId 
      */
-    public updatePrefixList (prefixList: EdgePrefixList, gatewayId: string, listId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updatePrefixList (prefixList: EdgePrefixList, gatewayId: string, listId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/routing/bgp/prefixLists/{listId}'
             .replace('{' + 'gatewayId' + '}', String(gatewayId))
             .replace('{' + 'listId' + '}', String(listId));
@@ -23216,7 +23235,7 @@ export class EdgeGatewayPrefixListApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -23283,7 +23302,7 @@ export class EdgeGatewayPrefixListsApi {
      * @param prefixList 
      * @param gatewayId 
      */
-    public createPrefixList (prefixList: EdgePrefixList, gatewayId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createPrefixList (prefixList: EdgePrefixList, gatewayId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/routing/bgp/prefixLists'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -23324,7 +23343,7 @@ export class EdgeGatewayPrefixListsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -23345,7 +23364,7 @@ export class EdgeGatewayPrefixListsApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getPrefixLists (gatewayId: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: EdgePrefixLists;  }> {
+    public getPrefixLists (gatewayId: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: EdgePrefixLists;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/routing/bgp/prefixLists'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -23388,7 +23407,7 @@ export class EdgeGatewayPrefixListsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgePrefixLists;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgePrefixLists;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -23454,7 +23473,7 @@ export class EdgeGatewayRouteAdvertisementApi {
      * @summary Retrieve the list of subnets that will be advertised so that the Edge Gateway can route out to the connected external network.
      * @param gatewayId 
      */
-    public getRouteAdvertisement (gatewayId: string) : Promise<{ response: http.ClientResponse; body: RouteAdvertisement;  }> {
+    public getRouteAdvertisement (gatewayId: string) : Promise<{ response: http.IncomingMessage; body: RouteAdvertisement;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/routing/advertisement'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -23489,7 +23508,7 @@ export class EdgeGatewayRouteAdvertisementApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: RouteAdvertisement;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: RouteAdvertisement;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -23509,7 +23528,7 @@ export class EdgeGatewayRouteAdvertisementApi {
      * @param routeAdvertisement 
      * @param gatewayId 
      */
-    public updateRouteAdvertisement (routeAdvertisement: RouteAdvertisement, gatewayId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateRouteAdvertisement (routeAdvertisement: RouteAdvertisement, gatewayId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/routing/advertisement'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -23550,7 +23569,7 @@ export class EdgeGatewayRouteAdvertisementApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -23616,7 +23635,7 @@ export class EdgeGatewaySLAACProfileApi {
      * @summary Retrieves the SLAAC profile on the edge gateway. 
      * @param gatewayId 
      */
-    public getSLAACProfile (gatewayId: string) : Promise<{ response: http.ClientResponse; body: SLAACProfile;  }> {
+    public getSLAACProfile (gatewayId: string) : Promise<{ response: http.IncomingMessage; body: SLAACProfile;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/slaacProfile'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -23651,7 +23670,7 @@ export class EdgeGatewaySLAACProfileApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: SLAACProfile;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: SLAACProfile;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -23671,7 +23690,7 @@ export class EdgeGatewaySLAACProfileApi {
      * @param sLAACProfile 
      * @param gatewayId 
      */
-    public updateSLAACProfile (sLAACProfile: SLAACProfile, gatewayId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateSLAACProfile (sLAACProfile: SLAACProfile, gatewayId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways/{gatewayId}/slaacProfile'
             .replace('{' + 'gatewayId' + '}', String(gatewayId));
         let queryParameters: any = {};
@@ -23712,7 +23731,7 @@ export class EdgeGatewaySLAACProfileApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -23778,7 +23797,7 @@ export class EdgeGatewaysApi {
      * @summary Create a new edge gateway
      * @param edgeGateway 
      */
-    public createEdgeGateway (edgeGateway: EdgeGateway) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createEdgeGateway (edgeGateway: EdgeGateway) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -23813,7 +23832,7 @@ export class EdgeGatewaysApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -23836,7 +23855,7 @@ export class EdgeGatewaysApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getAllEdgeGateways (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: EdgeGateways;  }> {
+    public getAllEdgeGateways (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: EdgeGateways;  }> {
         const localVarPath = this.basePath + '/1.0.0/edgeGateways';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -23895,7 +23914,7 @@ export class EdgeGatewaysApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EdgeGateways;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EdgeGateways;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -23963,7 +23982,7 @@ export class EgressPointApi {
      * @param egressPointId 
      * @param force Value \&quot;true\&quot; means to forcefully delete the object that contains other objects even if those objects are in a state that does not allow removal. The default is \&quot;false\&quot;; therefore, objects are not removed if they are not in a state that normally allows removal. Force also implies recursive delete where other contained objects are removed. Errors may be ignored. Invalid value (not true or false) are ignored. 
      */
-    public deleteEgressPoint (universalRouterId: string, egressPointId: string, force?: boolean) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteEgressPoint (universalRouterId: string, egressPointId: string, force?: boolean) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/universalRouters/{universalRouterId}/routing/egressPoints/{egressPointId}'
             .replace('{' + 'universalRouterId' + '}', String(universalRouterId))
             .replace('{' + 'egressPointId' + '}', String(egressPointId));
@@ -24008,7 +24027,7 @@ export class EgressPointApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -24028,7 +24047,7 @@ export class EgressPointApi {
      * @param universalRouterId 
      * @param egressPointId 
      */
-    public getEgressPoint (universalRouterId: string, egressPointId: string) : Promise<{ response: http.ClientResponse; body: EgressPoint;  }> {
+    public getEgressPoint (universalRouterId: string, egressPointId: string) : Promise<{ response: http.IncomingMessage; body: EgressPoint;  }> {
         const localVarPath = this.basePath + '/1.0.0/universalRouters/{universalRouterId}/routing/egressPoints/{egressPointId}'
             .replace('{' + 'universalRouterId' + '}', String(universalRouterId))
             .replace('{' + 'egressPointId' + '}', String(egressPointId));
@@ -24069,7 +24088,7 @@ export class EgressPointApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EgressPoint;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EgressPoint;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -24089,7 +24108,7 @@ export class EgressPointApi {
      * @param universalRouterId 
      * @param egressPointId 
      */
-    public syncEgressPoint (universalRouterId: string, egressPointId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public syncEgressPoint (universalRouterId: string, egressPointId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/universalRouters/{universalRouterId}/routing/egressPoints/{egressPointId}/sync'
             .replace('{' + 'universalRouterId' + '}', String(universalRouterId))
             .replace('{' + 'egressPointId' + '}', String(egressPointId));
@@ -24130,7 +24149,7 @@ export class EgressPointApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -24197,7 +24216,7 @@ export class EgressPointsApi {
      * @param egressPoint 
      * @param universalRouterId 
      */
-    public createEgressPoint (egressPoint: EgressPoint, universalRouterId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createEgressPoint (egressPoint: EgressPoint, universalRouterId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/universalRouters/{universalRouterId}/routing/egressPoints'
             .replace('{' + 'universalRouterId' + '}', String(universalRouterId));
         let queryParameters: any = {};
@@ -24238,7 +24257,7 @@ export class EgressPointsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -24257,7 +24276,7 @@ export class EgressPointsApi {
      * @summary Get a list of Universal Egress Points for a Universal Router.
      * @param universalRouterId 
      */
-    public getEgressPoints (universalRouterId: string) : Promise<{ response: http.ClientResponse; body: EgressPoints;  }> {
+    public getEgressPoints (universalRouterId: string) : Promise<{ response: http.IncomingMessage; body: EgressPoints;  }> {
         const localVarPath = this.basePath + '/1.0.0/universalRouters/{universalRouterId}/routing/egressPoints'
             .replace('{' + 'universalRouterId' + '}', String(universalRouterId));
         let queryParameters: any = {};
@@ -24292,7 +24311,7 @@ export class EgressPointsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EgressPoints;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EgressPoints;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -24358,7 +24377,7 @@ export class EmailSettingsApi {
      * @summary Tests Email Settings and Connection
      * @param testEmailRequest Email Settings and destination email address for Email Test call
      */
-    public testEmailSettings (testEmailRequest: TestEmailRequest) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public testEmailSettings (testEmailRequest: TestEmailRequest) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/smtp/test';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -24393,7 +24412,7 @@ export class EmailSettingsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -24459,7 +24478,7 @@ export class EntityApi {
      * @summary Get specified entity object
      * @param id the URN of the entity to be resolved
      */
-    public resolveEntity (id: string) : Promise<{ response: http.ClientResponse; body: any;  }> {
+    public resolveEntity (id: string) : Promise<{ response: http.IncomingMessage; body: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/entity/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -24494,7 +24513,7 @@ export class EntityApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -24561,7 +24580,7 @@ export class EntityQuotasApi {
      * @param quotas 
      * @param groupUrn 
      */
-    public assignQuotasToGroup (quotas: Quotas, groupUrn: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public assignQuotasToGroup (quotas: Quotas, groupUrn: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/groups/{groupUrn}/quotas'
             .replace('{' + 'groupUrn' + '}', String(groupUrn));
         let queryParameters: any = {};
@@ -24602,7 +24621,7 @@ export class EntityQuotasApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -24622,7 +24641,7 @@ export class EntityQuotasApi {
      * @param quotas 
      * @param orgUrn 
      */
-    public assignQuotasToOrg (quotas: Quotas, orgUrn: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public assignQuotasToOrg (quotas: Quotas, orgUrn: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/orgs/{orgUrn}/quotas'
             .replace('{' + 'orgUrn' + '}', String(orgUrn));
         let queryParameters: any = {};
@@ -24663,7 +24682,7 @@ export class EntityQuotasApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -24683,7 +24702,7 @@ export class EntityQuotasApi {
      * @param quotas 
      * @param userUrn 
      */
-    public assignQuotasToUser (quotas: Quotas, userUrn: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public assignQuotasToUser (quotas: Quotas, userUrn: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/users/{userUrn}/quotas'
             .replace('{' + 'userUrn' + '}', String(userUrn));
         let queryParameters: any = {};
@@ -24724,7 +24743,7 @@ export class EntityQuotasApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -24743,7 +24762,7 @@ export class EntityQuotasApi {
      * @summary Get the effective quotas applicable for the given group.
      * @param groupUrn 
      */
-    public getQuotasForGroup (groupUrn: string) : Promise<{ response: http.ClientResponse; body: Quotas;  }> {
+    public getQuotasForGroup (groupUrn: string) : Promise<{ response: http.IncomingMessage; body: Quotas;  }> {
         const localVarPath = this.basePath + '/1.0.0/groups/{groupUrn}/quotas'
             .replace('{' + 'groupUrn' + '}', String(groupUrn));
         let queryParameters: any = {};
@@ -24778,7 +24797,7 @@ export class EntityQuotasApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Quotas;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Quotas;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -24797,7 +24816,7 @@ export class EntityQuotasApi {
      * @summary Get the effective quotas applicable for the given organization.
      * @param orgUrn 
      */
-    public getQuotasForOrg (orgUrn: string) : Promise<{ response: http.ClientResponse; body: Quotas;  }> {
+    public getQuotasForOrg (orgUrn: string) : Promise<{ response: http.IncomingMessage; body: Quotas;  }> {
         const localVarPath = this.basePath + '/1.0.0/orgs/{orgUrn}/quotas'
             .replace('{' + 'orgUrn' + '}', String(orgUrn));
         let queryParameters: any = {};
@@ -24832,7 +24851,7 @@ export class EntityQuotasApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Quotas;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Quotas;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -24851,7 +24870,7 @@ export class EntityQuotasApi {
      * @summary Get the effective quotas applicable for the given user.
      * @param userUrn 
      */
-    public getQuotasForUser (userUrn: string) : Promise<{ response: http.ClientResponse; body: Quotas;  }> {
+    public getQuotasForUser (userUrn: string) : Promise<{ response: http.IncomingMessage; body: Quotas;  }> {
         const localVarPath = this.basePath + '/1.0.0/users/{userUrn}/quotas'
             .replace('{' + 'userUrn' + '}', String(userUrn));
         let queryParameters: any = {};
@@ -24886,7 +24905,7 @@ export class EntityQuotasApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Quotas;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Quotas;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -24905,7 +24924,7 @@ export class EntityQuotasApi {
      * @summary Get the effective quotas applicable for the given vapp.
      * @param vappUrn 
      */
-    public getQuotasForVApp (vappUrn: string) : Promise<{ response: http.ClientResponse; body: Quotas;  }> {
+    public getQuotasForVApp (vappUrn: string) : Promise<{ response: http.IncomingMessage; body: Quotas;  }> {
         const localVarPath = this.basePath + '/1.0.0/vapps/{vappUrn}/quotas'
             .replace('{' + 'vappUrn' + '}', String(vappUrn));
         let queryParameters: any = {};
@@ -24940,7 +24959,7 @@ export class EntityQuotasApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Quotas;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Quotas;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -25006,7 +25025,7 @@ export class ExternalNetworkApi {
      * @summary Create an external network
      * @param externalNetwork 
      */
-    public createExternalNetwork (externalNetwork: ExternalNetwork) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createExternalNetwork (externalNetwork: ExternalNetwork) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/externalNetworks';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -25041,7 +25060,7 @@ export class ExternalNetworkApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -25061,7 +25080,7 @@ export class ExternalNetworkApi {
      * @param externalNetworkId 
      * @param force Value \&quot;true\&quot; means to forcefully delete the object that contains other objects even if those objects are in a state that does not allow removal. The default is \&quot;false\&quot;; therefore, objects are not removed if they are not in a state that normally allows removal. Force also implies recursive delete where other contained objects are removed. Errors may be ignored. Invalid value (not true or false) are ignored. 
      */
-    public deleteExternalNetwork (externalNetworkId: string, force?: boolean) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteExternalNetwork (externalNetworkId: string, force?: boolean) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/externalNetworks/{externalNetworkId}'
             .replace('{' + 'externalNetworkId' + '}', String(externalNetworkId));
         let queryParameters: any = {};
@@ -25100,7 +25119,7 @@ export class ExternalNetworkApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -25119,7 +25138,7 @@ export class ExternalNetworkApi {
      * @summary Retrieve the list of IP addresses available for use on the network.
      * @param externalNetworkId 
      */
-    public getAvailableIpAddresses (externalNetworkId: string) : Promise<{ response: http.ClientResponse; body: AvailableIpPoolSubnets;  }> {
+    public getAvailableIpAddresses (externalNetworkId: string) : Promise<{ response: http.IncomingMessage; body: AvailableIpPoolSubnets;  }> {
         const localVarPath = this.basePath + '/1.0.0/externalNetworks/{externalNetworkId}/availableIpAddresses'
             .replace('{' + 'externalNetworkId' + '}', String(externalNetworkId));
         let queryParameters: any = {};
@@ -25154,7 +25173,7 @@ export class ExternalNetworkApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: AvailableIpPoolSubnets;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: AvailableIpPoolSubnets;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -25173,7 +25192,7 @@ export class ExternalNetworkApi {
      * @summary Retrieves a specific external network.
      * @param externalNetworkId 
      */
-    public getExternalNetwork (externalNetworkId: string) : Promise<{ response: http.ClientResponse; body: ExternalNetwork;  }> {
+    public getExternalNetwork (externalNetworkId: string) : Promise<{ response: http.IncomingMessage; body: ExternalNetwork;  }> {
         const localVarPath = this.basePath + '/1.0.0/externalNetworks/{externalNetworkId}'
             .replace('{' + 'externalNetworkId' + '}', String(externalNetworkId));
         let queryParameters: any = {};
@@ -25208,7 +25227,7 @@ export class ExternalNetworkApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ExternalNetwork;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ExternalNetwork;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -25232,7 +25251,7 @@ export class ExternalNetworkApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getUsedIpAddresses (page: number, pageSize: number, externalNetworkId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: UsedIpAddresses;  }> {
+    public getUsedIpAddresses (page: number, pageSize: number, externalNetworkId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: UsedIpAddresses;  }> {
         const localVarPath = this.basePath + '/1.0.0/externalNetworks/{externalNetworkId}/usedIpAddresses'
             .replace('{' + 'externalNetworkId' + '}', String(externalNetworkId));
         let queryParameters: any = {};
@@ -25297,7 +25316,7 @@ export class ExternalNetworkApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: UsedIpAddresses;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: UsedIpAddresses;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -25317,7 +25336,7 @@ export class ExternalNetworkApi {
      * @param externalNetwork 
      * @param externalNetworkId 
      */
-    public updateExternalNetwork (externalNetwork: ExternalNetwork, externalNetworkId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateExternalNetwork (externalNetwork: ExternalNetwork, externalNetworkId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/externalNetworks/{externalNetworkId}'
             .replace('{' + 'externalNetworkId' + '}', String(externalNetworkId));
         let queryParameters: any = {};
@@ -25358,7 +25377,7 @@ export class ExternalNetworkApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -25428,7 +25447,7 @@ export class ExternalNetworksApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getAllExternalNetworks (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: ExternalNetworks;  }> {
+    public getAllExternalNetworks (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: ExternalNetworks;  }> {
         const localVarPath = this.basePath + '/1.0.0/externalNetworks';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -25487,7 +25506,7 @@ export class ExternalNetworksApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ExternalNetworks;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ExternalNetworks;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -25553,7 +25572,7 @@ export class ExternalServiceApi {
      * @summary Create external service.
      * @param service 
      */
-    public createExternalService (service: ExternalService) : Promise<{ response: http.ClientResponse; body: ExternalService;  }> {
+    public createExternalService (service: ExternalService) : Promise<{ response: http.IncomingMessage; body: ExternalService;  }> {
         const localVarPath = this.basePath + '/extensions/api';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -25588,7 +25607,7 @@ export class ExternalServiceApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ExternalService;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ExternalService;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -25607,7 +25626,7 @@ export class ExternalServiceApi {
      * @summary Delete an external service.
      * @param id 
      */
-    public deleteExternalService (id: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteExternalService (id: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/extensions/api/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -25642,7 +25661,7 @@ export class ExternalServiceApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -25661,7 +25680,7 @@ export class ExternalServiceApi {
      * @summary Retrieve an external service.
      * @param id 
      */
-    public getExternalService (id: string) : Promise<{ response: http.ClientResponse; body: ExternalService;  }> {
+    public getExternalService (id: string) : Promise<{ response: http.IncomingMessage; body: ExternalService;  }> {
         const localVarPath = this.basePath + '/extensions/api/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -25696,7 +25715,7 @@ export class ExternalServiceApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ExternalService;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ExternalService;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -25719,7 +25738,7 @@ export class ExternalServiceApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getExternalServices (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: ExternalServices;  }> {
+    public getExternalServices (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: ExternalServices;  }> {
         const localVarPath = this.basePath + '/extensions/api';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -25778,7 +25797,7 @@ export class ExternalServiceApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ExternalServices;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ExternalServices;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -25798,7 +25817,7 @@ export class ExternalServiceApi {
      * @param service 
      * @param id 
      */
-    public updateExternalService (service: ExternalService, id: string) : Promise<{ response: http.ClientResponse; body: ExternalService;  }> {
+    public updateExternalService (service: ExternalService, id: string) : Promise<{ response: http.IncomingMessage; body: ExternalService;  }> {
         const localVarPath = this.basePath + '/extensions/api/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -25839,7 +25858,7 @@ export class ExternalServiceApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ExternalService;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ExternalService;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -25905,7 +25924,7 @@ export class FirewallGroupApi {
      * @summary Deletes a Firewall Group.
      * @param firewallGroupId 
      */
-    public deleteFirewallGroup (firewallGroupId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteFirewallGroup (firewallGroupId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/firewallGroups/{firewallGroupId}'
             .replace('{' + 'firewallGroupId' + '}', String(firewallGroupId));
         let queryParameters: any = {};
@@ -25940,7 +25959,7 @@ export class FirewallGroupApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -25959,7 +25978,7 @@ export class FirewallGroupApi {
      * @summary Retrieves a specific firewall group.
      * @param firewallGroupId 
      */
-    public getFirewallGroup (firewallGroupId: string) : Promise<{ response: http.ClientResponse; body: FirewallGroupDetails;  }> {
+    public getFirewallGroup (firewallGroupId: string) : Promise<{ response: http.IncomingMessage; body: FirewallGroupDetails;  }> {
         const localVarPath = this.basePath + '/1.0.0/firewallGroups/{firewallGroupId}'
             .replace('{' + 'firewallGroupId' + '}', String(firewallGroupId));
         let queryParameters: any = {};
@@ -25994,7 +26013,7 @@ export class FirewallGroupApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: FirewallGroupDetails;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: FirewallGroupDetails;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -26018,7 +26037,7 @@ export class FirewallGroupApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getFirewallGroupAssociatedVMs (page: number, pageSize: number, firewallGroupId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: FirewallGroupAssociatedVMs;  }> {
+    public getFirewallGroupAssociatedVMs (page: number, pageSize: number, firewallGroupId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: FirewallGroupAssociatedVMs;  }> {
         const localVarPath = this.basePath + '/1.0.0/firewallGroups/{firewallGroupId}/associatedVMs'
             .replace('{' + 'firewallGroupId' + '}', String(firewallGroupId));
         let queryParameters: any = {};
@@ -26083,7 +26102,7 @@ export class FirewallGroupApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: FirewallGroupAssociatedVMs;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: FirewallGroupAssociatedVMs;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -26103,7 +26122,7 @@ export class FirewallGroupApi {
      * @param firewallGroup 
      * @param firewallGroupId 
      */
-    public updateFirewallGroup (firewallGroup: FirewallGroupDetails, firewallGroupId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateFirewallGroup (firewallGroup: FirewallGroupDetails, firewallGroupId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/firewallGroups/{firewallGroupId}'
             .replace('{' + 'firewallGroupId' + '}', String(firewallGroupId));
         let queryParameters: any = {};
@@ -26144,7 +26163,7 @@ export class FirewallGroupApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -26210,7 +26229,7 @@ export class FirewallGroupsApi {
      * @summary Create a firewall group
      * @param firewallGroup 
      */
-    public createFirewallGroup (firewallGroup: FirewallGroupDetails) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createFirewallGroup (firewallGroup: FirewallGroupDetails) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/firewallGroups';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -26245,7 +26264,7 @@ export class FirewallGroupsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -26268,7 +26287,7 @@ export class FirewallGroupsApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getFirewallGroups (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: FirewallGroups;  }> {
+    public getFirewallGroups (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: FirewallGroups;  }> {
         const localVarPath = this.basePath + '/1.0.0/firewallGroups/summaries';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -26327,7 +26346,7 @@ export class FirewallGroupsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: FirewallGroups;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: FirewallGroups;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -26394,7 +26413,7 @@ export class GlobalRolesApi {
      * @param rightsReferencesBody 
      * @param id 
      */
-    public addRightsToGlobalRole (rightsReferencesBody: EntityReferences, id: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public addRightsToGlobalRole (rightsReferencesBody: EntityReferences, id: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/globalRoles/{id}/rights'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -26435,7 +26454,7 @@ export class GlobalRolesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -26454,7 +26473,7 @@ export class GlobalRolesApi {
      * @summary Creates a new global role
      * @param newGlobalRole 
      */
-    public createGlobalRole (newGlobalRole: GlobalRole) : Promise<{ response: http.ClientResponse; body: GlobalRole;  }> {
+    public createGlobalRole (newGlobalRole: GlobalRole) : Promise<{ response: http.IncomingMessage; body: GlobalRole;  }> {
         const localVarPath = this.basePath + '/1.0.0/globalRoles';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -26489,7 +26508,7 @@ export class GlobalRolesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: GlobalRole;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: GlobalRole;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -26508,7 +26527,7 @@ export class GlobalRolesApi {
      * @summary Delete specified global role
      * @param id 
      */
-    public deleteGlobalRole (id: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteGlobalRole (id: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/globalRoles/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -26543,7 +26562,7 @@ export class GlobalRolesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -26562,7 +26581,7 @@ export class GlobalRolesApi {
      * @summary Get specified global role
      * @param id 
      */
-    public getGlobalRole (id: string) : Promise<{ response: http.ClientResponse; body: GlobalRole;  }> {
+    public getGlobalRole (id: string) : Promise<{ response: http.IncomingMessage; body: GlobalRole;  }> {
         const localVarPath = this.basePath + '/1.0.0/globalRoles/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -26597,7 +26616,7 @@ export class GlobalRolesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: GlobalRole;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: GlobalRole;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -26617,7 +26636,7 @@ export class GlobalRolesApi {
      * @param publishTenantsBody 
      * @param id 
      */
-    public postGlobalRolePublish (publishTenantsBody: EntityReferences, id: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public postGlobalRolePublish (publishTenantsBody: EntityReferences, id: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/globalRoles/{id}/tenants/publish'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -26658,7 +26677,7 @@ export class GlobalRolesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -26677,7 +26696,7 @@ export class GlobalRolesApi {
      * @summary Publishes the global role to all tenants
      * @param id 
      */
-    public postGlobalRolePublishAll (id: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public postGlobalRolePublishAll (id: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/globalRoles/{id}/tenants/publishAll'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -26712,7 +26731,7 @@ export class GlobalRolesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -26732,7 +26751,7 @@ export class GlobalRolesApi {
      * @param unpublishTenantsBody 
      * @param id 
      */
-    public postGlobalRoleUnpublish (unpublishTenantsBody: EntityReferences, id: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public postGlobalRoleUnpublish (unpublishTenantsBody: EntityReferences, id: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/globalRoles/{id}/tenants/unpublish'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -26773,7 +26792,7 @@ export class GlobalRolesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -26792,7 +26811,7 @@ export class GlobalRolesApi {
      * @summary Unpublishes the global role from all tenants
      * @param id 
      */
-    public postGlobalRoleUnpublishAll (id: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public postGlobalRoleUnpublishAll (id: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/globalRoles/{id}/tenants/unpublishAll'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -26827,7 +26846,7 @@ export class GlobalRolesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -26851,7 +26870,7 @@ export class GlobalRolesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryGlobalRoleRights (page: number, pageSize: number, id: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public queryGlobalRoleRights (page: number, pageSize: number, id: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/globalRoles/{id}/rights'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -26916,7 +26935,7 @@ export class GlobalRolesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -26940,7 +26959,7 @@ export class GlobalRolesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryGlobalRoleTenants (page: number, pageSize: number, id: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public queryGlobalRoleTenants (page: number, pageSize: number, id: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/globalRoles/{id}/tenants'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -27005,7 +27024,7 @@ export class GlobalRolesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -27028,7 +27047,7 @@ export class GlobalRolesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryGlobalRoles (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: GlobalRoles;  }> {
+    public queryGlobalRoles (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: GlobalRoles;  }> {
         const localVarPath = this.basePath + '/1.0.0/globalRoles';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -27087,7 +27106,7 @@ export class GlobalRolesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: GlobalRoles;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: GlobalRoles;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -27107,7 +27126,7 @@ export class GlobalRolesApi {
      * @param rightsReferencesBody 
      * @param id 
      */
-    public replaceRightsInGlobalRole (rightsReferencesBody: EntityReferences, id: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public replaceRightsInGlobalRole (rightsReferencesBody: EntityReferences, id: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/globalRoles/{id}/rights'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -27148,7 +27167,7 @@ export class GlobalRolesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -27168,7 +27187,7 @@ export class GlobalRolesApi {
      * @param publishTenantsBody 
      * @param id 
      */
-    public setGlobalRoleTenants (publishTenantsBody: EntityReferences, id: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public setGlobalRoleTenants (publishTenantsBody: EntityReferences, id: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/globalRoles/{id}/tenants'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -27209,7 +27228,7 @@ export class GlobalRolesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -27229,7 +27248,7 @@ export class GlobalRolesApi {
      * @param updatedGlobalRole 
      * @param id 
      */
-    public updateGlobalRole (updatedGlobalRole: GlobalRole, id: string) : Promise<{ response: http.ClientResponse; body: GlobalRole;  }> {
+    public updateGlobalRole (updatedGlobalRole: GlobalRole, id: string) : Promise<{ response: http.IncomingMessage; body: GlobalRole;  }> {
         const localVarPath = this.basePath + '/1.0.0/globalRoles/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -27270,7 +27289,7 @@ export class GlobalRolesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: GlobalRole;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: GlobalRole;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -27336,7 +27355,7 @@ export class GroupApi {
      * @summary Get a specified group.
      * @param groupUrn groupUrn
      */
-    public getGroup (groupUrn: string) : Promise<{ response: http.ClientResponse; body: UserGroup;  }> {
+    public getGroup (groupUrn: string) : Promise<{ response: http.IncomingMessage; body: UserGroup;  }> {
         const localVarPath = this.basePath + '/1.0.0/groups/{groupUrn}'
             .replace('{' + 'groupUrn' + '}', String(groupUrn));
         let queryParameters: any = {};
@@ -27371,7 +27390,7 @@ export class GroupApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: UserGroup;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: UserGroup;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -27395,7 +27414,7 @@ export class GroupApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryGroupUsers (page: number, pageSize: number, groupUrn: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public queryGroupUsers (page: number, pageSize: number, groupUrn: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/groups/{groupUrn}/users'
             .replace('{' + 'groupUrn' + '}', String(groupUrn));
         let queryParameters: any = {};
@@ -27460,7 +27479,7 @@ export class GroupApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -27483,7 +27502,7 @@ export class GroupApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryGroups (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: UserGroups;  }> {
+    public queryGroups (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: UserGroups;  }> {
         const localVarPath = this.basePath + '/1.0.0/groups';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -27542,7 +27561,7 @@ export class GroupApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: UserGroups;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: UserGroups;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -27608,7 +27627,7 @@ export class LDAPApi {
      * @summary Search LDAP Groups
      * @param q String to search for via LDAP
      */
-    public searchLdapGroups (q?: string) : Promise<{ response: http.ClientResponse; body: Array<UserGroup>;  }> {
+    public searchLdapGroups (q?: string) : Promise<{ response: http.IncomingMessage; body: Array<UserGroup>;  }> {
         const localVarPath = this.basePath + '/1.0.0/ldap/search/group';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -27641,7 +27660,7 @@ export class LDAPApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<UserGroup>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<UserGroup>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -27660,7 +27679,7 @@ export class LDAPApi {
      * @summary Search LDAP Users
      * @param q String to search for via LDAP
      */
-    public searchLdapUsers (q?: string) : Promise<{ response: http.ClientResponse; body: Array<User>;  }> {
+    public searchLdapUsers (q?: string) : Promise<{ response: http.IncomingMessage; body: Array<User>;  }> {
         const localVarPath = this.basePath + '/1.0.0/ldap/search/user';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -27693,7 +27712,7 @@ export class LDAPApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<User>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<User>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -27711,7 +27730,7 @@ export class LDAPApi {
      * Begins the LDAP sync task 
      * @summary Synchronize LDAP users/settings
      */
-    public syncLdap () : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public syncLdap () : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/ldap/sync';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -27740,7 +27759,7 @@ export class LDAPApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -27760,7 +27779,7 @@ export class LDAPApi {
      * @param ldapSettings LDAP Settings to use for testing connection
      * @param username Username to use when testing LDAP search
      */
-    public testLdap (ldapSettings: LdapSettings, username?: string) : Promise<{ response: http.ClientResponse; body: LdapTestResult;  }> {
+    public testLdap (ldapSettings: LdapSettings, username?: string) : Promise<{ response: http.IncomingMessage; body: LdapTestResult;  }> {
         const localVarPath = this.basePath + '/1.0.0/ldap/test';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -27799,7 +27818,7 @@ export class LDAPApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: LdapTestResult;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: LdapTestResult;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -27865,7 +27884,7 @@ export class LoadBalancerCloudApi {
      * @summary Get Load Balancer Cloud.
      * @param loadBalancerCloudId 
      */
-    public getLoadBalancerCloud (loadBalancerCloudId: string) : Promise<{ response: http.ClientResponse; body: LoadBalancerCloud;  }> {
+    public getLoadBalancerCloud (loadBalancerCloudId: string) : Promise<{ response: http.IncomingMessage; body: LoadBalancerCloud;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/clouds/{loadBalancerCloudId}'
             .replace('{' + 'loadBalancerCloudId' + '}', String(loadBalancerCloudId));
         let queryParameters: any = {};
@@ -27900,7 +27919,7 @@ export class LoadBalancerCloudApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: LoadBalancerCloud;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: LoadBalancerCloud;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -27919,7 +27938,7 @@ export class LoadBalancerCloudApi {
      * @summary Unregister the specified Load Balancer Cloud.
      * @param loadBalancerCloudId 
      */
-    public unregisterLoadBalancerCloud (loadBalancerCloudId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public unregisterLoadBalancerCloud (loadBalancerCloudId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/clouds/{loadBalancerCloudId}'
             .replace('{' + 'loadBalancerCloudId' + '}', String(loadBalancerCloudId));
         let queryParameters: any = {};
@@ -27954,7 +27973,7 @@ export class LoadBalancerCloudApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -28024,7 +28043,7 @@ export class LoadBalancerCloudsApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getLoadBalancerClouds (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: LoadBalancerClouds;  }> {
+    public getLoadBalancerClouds (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: LoadBalancerClouds;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/clouds';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -28083,7 +28102,7 @@ export class LoadBalancerCloudsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: LoadBalancerClouds;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: LoadBalancerClouds;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -28098,11 +28117,11 @@ export class LoadBalancerCloudsApi {
         });
     }
     /**
-     * Register a new Load Balancer Cloud to be used with vCloud Director. 
+     * Register a new Load Balancer Cloud to be used with vCloud Director. If the Load Balancer Cloud is backed by NSXALB, DHCP on the NSXALB Cloud is required. vCloud Director will enable DHCP on the NSXALB Cloud if needed. 
      * @summary Register a new Load Balancer Cloud.
      * @param loadBalancerCloud 
      */
-    public registerLoadBalancerCloud (loadBalancerCloud: LoadBalancerCloud) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public registerLoadBalancerCloud (loadBalancerCloud: LoadBalancerCloud) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/clouds';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -28137,7 +28156,7 @@ export class LoadBalancerCloudsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -28203,7 +28222,7 @@ export class LoadBalancerControllerApi {
      * @summary Get Load Balancer Controller
      * @param loadBalancerControllerId 
      */
-    public getLoadBalancerController (loadBalancerControllerId: string) : Promise<{ response: http.ClientResponse; body: LoadBalancerController;  }> {
+    public getLoadBalancerController (loadBalancerControllerId: string) : Promise<{ response: http.IncomingMessage; body: LoadBalancerController;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/controllers/{loadBalancerControllerId}'
             .replace('{' + 'loadBalancerControllerId' + '}', String(loadBalancerControllerId));
         let queryParameters: any = {};
@@ -28238,7 +28257,7 @@ export class LoadBalancerControllerApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: LoadBalancerController;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: LoadBalancerController;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -28257,7 +28276,7 @@ export class LoadBalancerControllerApi {
      * @summary Unregister the specified Load Balancer Controller.
      * @param loadBalancerControllerId 
      */
-    public unregisterLoadBalancerController (loadBalancerControllerId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public unregisterLoadBalancerController (loadBalancerControllerId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/controllers/{loadBalancerControllerId}'
             .replace('{' + 'loadBalancerControllerId' + '}', String(loadBalancerControllerId));
         let queryParameters: any = {};
@@ -28292,7 +28311,7 @@ export class LoadBalancerControllerApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -28312,7 +28331,7 @@ export class LoadBalancerControllerApi {
      * @param loadBalancerController 
      * @param loadBalancerControllerId 
      */
-    public updateLoadBalancerController (loadBalancerController: LoadBalancerController, loadBalancerControllerId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateLoadBalancerController (loadBalancerController: LoadBalancerController, loadBalancerControllerId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/controllers/{loadBalancerControllerId}'
             .replace('{' + 'loadBalancerControllerId' + '}', String(loadBalancerControllerId));
         let queryParameters: any = {};
@@ -28353,7 +28372,7 @@ export class LoadBalancerControllerApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -28423,7 +28442,7 @@ export class LoadBalancerControllersApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getLoadBalancerControllers (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: LoadBalancerControllers;  }> {
+    public getLoadBalancerControllers (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: LoadBalancerControllers;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/controllers';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -28482,7 +28501,7 @@ export class LoadBalancerControllersApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: LoadBalancerControllers;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: LoadBalancerControllers;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -28501,7 +28520,7 @@ export class LoadBalancerControllersApi {
      * @summary Register a new Load Balancer Controller
      * @param loadBalancerController 
      */
-    public registerLoadBalancerController (loadBalancerController: LoadBalancerController) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public registerLoadBalancerController (loadBalancerController: LoadBalancerController) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/controllers';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -28536,7 +28555,7 @@ export class LoadBalancerControllersApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -28602,7 +28621,7 @@ export class LoadBalancerServiceEngineGroupApi {
      * @summary Delete the specified Load Balancer Service Engine Group.
      * @param loadBalancerServiceEngineGroupId 
      */
-    public deleteServiceEngineGroup (loadBalancerServiceEngineGroupId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteServiceEngineGroup (loadBalancerServiceEngineGroupId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/serviceEngineGroups/{loadBalancerServiceEngineGroupId}'
             .replace('{' + 'loadBalancerServiceEngineGroupId' + '}', String(loadBalancerServiceEngineGroupId));
         let queryParameters: any = {};
@@ -28637,7 +28656,7 @@ export class LoadBalancerServiceEngineGroupApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -28656,7 +28675,7 @@ export class LoadBalancerServiceEngineGroupApi {
      * @summary Get Load Balancer Service Engine Group.
      * @param loadBalancerServiceEngineGroupId 
      */
-    public getServiceEngineGroup (loadBalancerServiceEngineGroupId: string) : Promise<{ response: http.ClientResponse; body: LoadBalancerServiceEngineGroup;  }> {
+    public getServiceEngineGroup (loadBalancerServiceEngineGroupId: string) : Promise<{ response: http.IncomingMessage; body: LoadBalancerServiceEngineGroup;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/serviceEngineGroups/{loadBalancerServiceEngineGroupId}'
             .replace('{' + 'loadBalancerServiceEngineGroupId' + '}', String(loadBalancerServiceEngineGroupId));
         let queryParameters: any = {};
@@ -28691,7 +28710,7 @@ export class LoadBalancerServiceEngineGroupApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: LoadBalancerServiceEngineGroup;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: LoadBalancerServiceEngineGroup;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -28710,7 +28729,7 @@ export class LoadBalancerServiceEngineGroupApi {
      * @summary Sync Load Balancer Service Engine Group.
      * @param loadBalancerServiceEngineGroupId 
      */
-    public syncServiceEngineGroup (loadBalancerServiceEngineGroupId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public syncServiceEngineGroup (loadBalancerServiceEngineGroupId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/serviceEngineGroups/{loadBalancerServiceEngineGroupId}/sync'
             .replace('{' + 'loadBalancerServiceEngineGroupId' + '}', String(loadBalancerServiceEngineGroupId));
         let queryParameters: any = {};
@@ -28745,7 +28764,7 @@ export class LoadBalancerServiceEngineGroupApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -28765,7 +28784,7 @@ export class LoadBalancerServiceEngineGroupApi {
      * @param loadBalancerServiceEngineGroup 
      * @param loadBalancerServiceEngineGroupId 
      */
-    public updateServiceEngineGroup (loadBalancerServiceEngineGroup: LoadBalancerServiceEngineGroup, loadBalancerServiceEngineGroupId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateServiceEngineGroup (loadBalancerServiceEngineGroup: LoadBalancerServiceEngineGroup, loadBalancerServiceEngineGroupId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/serviceEngineGroups/{loadBalancerServiceEngineGroupId}'
             .replace('{' + 'loadBalancerServiceEngineGroupId' + '}', String(loadBalancerServiceEngineGroupId));
         let queryParameters: any = {};
@@ -28806,7 +28825,7 @@ export class LoadBalancerServiceEngineGroupApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -28872,7 +28891,7 @@ export class LoadBalancerServiceEngineGroupAssignmentApi {
      * @summary Delete the specified Load Balancer Service Engine Group Assignment.
      * @param assignmentId 
      */
-    public deleteServiceEngineGroupAssignment (assignmentId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteServiceEngineGroupAssignment (assignmentId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/serviceEngineGroups/assignments/{assignmentId}'
             .replace('{' + 'assignmentId' + '}', String(assignmentId));
         let queryParameters: any = {};
@@ -28907,7 +28926,7 @@ export class LoadBalancerServiceEngineGroupAssignmentApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -28926,7 +28945,7 @@ export class LoadBalancerServiceEngineGroupAssignmentApi {
      * @summary Get a Load Balancer Service Engine Group Assignment.
      * @param assignmentId 
      */
-    public getServiceEngineGroupAssignment (assignmentId: string) : Promise<{ response: http.ClientResponse; body: LoadBalancerServiceEngineGroupAssignment;  }> {
+    public getServiceEngineGroupAssignment (assignmentId: string) : Promise<{ response: http.IncomingMessage; body: LoadBalancerServiceEngineGroupAssignment;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/serviceEngineGroups/assignments/{assignmentId}'
             .replace('{' + 'assignmentId' + '}', String(assignmentId));
         let queryParameters: any = {};
@@ -28961,7 +28980,7 @@ export class LoadBalancerServiceEngineGroupAssignmentApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: LoadBalancerServiceEngineGroupAssignment;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: LoadBalancerServiceEngineGroupAssignment;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -28981,7 +29000,7 @@ export class LoadBalancerServiceEngineGroupAssignmentApi {
      * @param assignment 
      * @param assignmentId 
      */
-    public updateServiceEngineGroupAssignment (assignment: LoadBalancerServiceEngineGroupAssignment, assignmentId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateServiceEngineGroupAssignment (assignment: LoadBalancerServiceEngineGroupAssignment, assignmentId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/serviceEngineGroups/assignments/{assignmentId}'
             .replace('{' + 'assignmentId' + '}', String(assignmentId));
         let queryParameters: any = {};
@@ -29022,7 +29041,7 @@ export class LoadBalancerServiceEngineGroupAssignmentApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -29088,7 +29107,7 @@ export class LoadBalancerServiceEngineGroupAssignmentsApi {
      * @summary Create a new Load Balancer Service Engine Group Assignment.
      * @param assignment 
      */
-    public createServiceEngineGroupAssignment (assignment: LoadBalancerServiceEngineGroupAssignment) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createServiceEngineGroupAssignment (assignment: LoadBalancerServiceEngineGroupAssignment) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/serviceEngineGroups/assignments';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -29123,7 +29142,7 @@ export class LoadBalancerServiceEngineGroupAssignmentsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -29146,7 +29165,7 @@ export class LoadBalancerServiceEngineGroupAssignmentsApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getServiceEngineGroupAssignments (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: LoadBalancerServiceEngineGroupAssignments;  }> {
+    public getServiceEngineGroupAssignments (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: LoadBalancerServiceEngineGroupAssignments;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/serviceEngineGroups/assignments';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -29205,7 +29224,7 @@ export class LoadBalancerServiceEngineGroupAssignmentsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: LoadBalancerServiceEngineGroupAssignments;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: LoadBalancerServiceEngineGroupAssignments;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -29271,7 +29290,7 @@ export class LoadBalancerServiceEngineGroupsApi {
      * @summary Create a new Load Balancer Service Engine Group.
      * @param loadBalancerServiceEngineGroup 
      */
-    public createServiceEngineGroup (loadBalancerServiceEngineGroup: LoadBalancerServiceEngineGroup) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createServiceEngineGroup (loadBalancerServiceEngineGroup: LoadBalancerServiceEngineGroup) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/serviceEngineGroups';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -29306,7 +29325,7 @@ export class LoadBalancerServiceEngineGroupsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -29329,7 +29348,7 @@ export class LoadBalancerServiceEngineGroupsApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getServiceEngineGroups (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: LoadBalancerServiceEngineGroups;  }> {
+    public getServiceEngineGroups (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: LoadBalancerServiceEngineGroups;  }> {
         const localVarPath = this.basePath + '/1.0.0/loadBalancer/serviceEngineGroups';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -29388,7 +29407,7 @@ export class LoadBalancerServiceEngineGroupsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: LoadBalancerServiceEngineGroups;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: LoadBalancerServiceEngineGroups;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -29455,7 +29474,7 @@ export class LogicalVmGroupsApi {
      * @param namedVmGroupRefs 
      * @param logicalVmGroupId 
      */
-    public addNamedVmGroupsToLogicalVmGroup (namedVmGroupRefs: Array<EntityReference>, logicalVmGroupId: string) : Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }> {
+    public addNamedVmGroupsToLogicalVmGroup (namedVmGroupRefs: Array<EntityReference>, logicalVmGroupId: string) : Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }> {
         const localVarPath = this.basePath + '/1.0.0/logicalVmGroups/{logicalVmGroupId}/namedVmGroups'
             .replace('{' + 'logicalVmGroupId' + '}', String(logicalVmGroupId));
         let queryParameters: any = {};
@@ -29496,7 +29515,7 @@ export class LogicalVmGroupsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -29515,7 +29534,7 @@ export class LogicalVmGroupsApi {
      * @summary Creates a new logical vm group
      * @param newLogicalVmGroupParams 
      */
-    public createLogicalVmGroup (newLogicalVmGroupParams: LogicalVmGroup) : Promise<{ response: http.ClientResponse; body: LogicalVmGroup;  }> {
+    public createLogicalVmGroup (newLogicalVmGroupParams: LogicalVmGroup) : Promise<{ response: http.IncomingMessage; body: LogicalVmGroup;  }> {
         const localVarPath = this.basePath + '/1.0.0/logicalVmGroups';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -29550,7 +29569,7 @@ export class LogicalVmGroupsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: LogicalVmGroup;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: LogicalVmGroup;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -29569,7 +29588,7 @@ export class LogicalVmGroupsApi {
      * @summary Delete specified logical vm group.
      * @param logicalVmGroupId 
      */
-    public deleteLogicalVmGroup (logicalVmGroupId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteLogicalVmGroup (logicalVmGroupId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/logicalVmGroups/{logicalVmGroupId}'
             .replace('{' + 'logicalVmGroupId' + '}', String(logicalVmGroupId));
         let queryParameters: any = {};
@@ -29604,7 +29623,7 @@ export class LogicalVmGroupsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -29623,7 +29642,7 @@ export class LogicalVmGroupsApi {
      * @summary Get specified logical vm group
      * @param logicalVmGroupId 
      */
-    public getLogicalVmGroup (logicalVmGroupId: string) : Promise<{ response: http.ClientResponse; body: LogicalVmGroup;  }> {
+    public getLogicalVmGroup (logicalVmGroupId: string) : Promise<{ response: http.IncomingMessage; body: LogicalVmGroup;  }> {
         const localVarPath = this.basePath + '/1.0.0/logicalVmGroups/{logicalVmGroupId}'
             .replace('{' + 'logicalVmGroupId' + '}', String(logicalVmGroupId));
         let queryParameters: any = {};
@@ -29658,7 +29677,7 @@ export class LogicalVmGroupsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: LogicalVmGroup;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: LogicalVmGroup;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -29681,7 +29700,7 @@ export class LogicalVmGroupsApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getLogicalVmGroupNamedVmGroups (page: number, pageSize: number, logicalVmGroupId: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public getLogicalVmGroupNamedVmGroups (page: number, pageSize: number, logicalVmGroupId: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/logicalVmGroups/{logicalVmGroupId}/namedVmGroups'
             .replace('{' + 'logicalVmGroupId' + '}', String(logicalVmGroupId));
         let queryParameters: any = {};
@@ -29742,7 +29761,7 @@ export class LogicalVmGroupsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -29765,7 +29784,7 @@ export class LogicalVmGroupsApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getPvdcPoliciesForLogicalVmGroup (page: number, pageSize: number, logicalVmGroupId: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public getPvdcPoliciesForLogicalVmGroup (page: number, pageSize: number, logicalVmGroupId: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/logicalVmGroups/{logicalVmGroupId}/pvdcPolicies'
             .replace('{' + 'logicalVmGroupId' + '}', String(logicalVmGroupId));
         let queryParameters: any = {};
@@ -29826,7 +29845,7 @@ export class LogicalVmGroupsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -29849,7 +29868,7 @@ export class LogicalVmGroupsApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryLogicalVmGroups (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: LogicalVmGroups;  }> {
+    public queryLogicalVmGroups (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: LogicalVmGroups;  }> {
         const localVarPath = this.basePath + '/1.0.0/logicalVmGroups';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -29908,7 +29927,7 @@ export class LogicalVmGroupsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: LogicalVmGroups;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: LogicalVmGroups;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -29928,7 +29947,7 @@ export class LogicalVmGroupsApi {
      * @param updateLogicalVmGroupParams 
      * @param logicalVmGroupId 
      */
-    public updateLogicalVmGroup (updateLogicalVmGroupParams: LogicalVmGroup, logicalVmGroupId: string) : Promise<{ response: http.ClientResponse; body: LogicalVmGroup;  }> {
+    public updateLogicalVmGroup (updateLogicalVmGroupParams: LogicalVmGroup, logicalVmGroupId: string) : Promise<{ response: http.IncomingMessage; body: LogicalVmGroup;  }> {
         const localVarPath = this.basePath + '/1.0.0/logicalVmGroups/{logicalVmGroupId}'
             .replace('{' + 'logicalVmGroupId' + '}', String(logicalVmGroupId));
         let queryParameters: any = {};
@@ -29969,7 +29988,7 @@ export class LogicalVmGroupsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: LogicalVmGroup;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: LogicalVmGroup;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -30035,7 +30054,7 @@ export class NetworkContextProfileApi {
      * @summary Deletes a specific network context profile, removing the associated firewall rule and permitting the traffic this profile restricts.
      * @param profileId 
      */
-    public deleteNetworkContextProfile (profileId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteNetworkContextProfile (profileId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/networkContextProfiles/{profileId}'
             .replace('{' + 'profileId' + '}', String(profileId));
         let queryParameters: any = {};
@@ -30070,7 +30089,7 @@ export class NetworkContextProfileApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -30089,7 +30108,7 @@ export class NetworkContextProfileApi {
      * @summary Get a specific network context profile.
      * @param profileId 
      */
-    public getNetworkContextProfile (profileId: string) : Promise<{ response: http.ClientResponse; body: NetworkContextProfile;  }> {
+    public getNetworkContextProfile (profileId: string) : Promise<{ response: http.IncomingMessage; body: NetworkContextProfile;  }> {
         const localVarPath = this.basePath + '/1.0.0/networkContextProfiles/{profileId}'
             .replace('{' + 'profileId' + '}', String(profileId));
         let queryParameters: any = {};
@@ -30124,7 +30143,7 @@ export class NetworkContextProfileApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: NetworkContextProfile;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: NetworkContextProfile;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -30144,7 +30163,7 @@ export class NetworkContextProfileApi {
      * @param networkContextProfile 
      * @param profileId 
      */
-    public updateNetworkContextProfile (networkContextProfile: NetworkContextProfile, profileId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateNetworkContextProfile (networkContextProfile: NetworkContextProfile, profileId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/networkContextProfiles/{profileId}'
             .replace('{' + 'profileId' + '}', String(profileId));
         let queryParameters: any = {};
@@ -30185,7 +30204,7 @@ export class NetworkContextProfileApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -30253,7 +30272,7 @@ export class NetworkContextProfileAttributesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getNetworkContextProfileAttributes (filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: NetworkContextProfileAttributes;  }> {
+    public getNetworkContextProfileAttributes (filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: NetworkContextProfileAttributes;  }> {
         const localVarPath = this.basePath + '/1.0.0/networkContextProfiles/attributes';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -30294,7 +30313,7 @@ export class NetworkContextProfileAttributesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: NetworkContextProfileAttributes;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: NetworkContextProfileAttributes;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -30360,7 +30379,7 @@ export class NetworkContextProfilesApi {
      * @summary Create a user-defined network context profile.
      * @param networkContextProfile 
      */
-    public createNetworkContextProfile (networkContextProfile: NetworkContextProfile) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createNetworkContextProfile (networkContextProfile: NetworkContextProfile) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/networkContextProfiles';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -30395,7 +30414,7 @@ export class NetworkContextProfilesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -30418,7 +30437,7 @@ export class NetworkContextProfilesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getNetworkContextProfiles (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: NetworkContextProfiles;  }> {
+    public getNetworkContextProfiles (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: NetworkContextProfiles;  }> {
         const localVarPath = this.basePath + '/1.0.0/networkContextProfiles';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -30477,7 +30496,7 @@ export class NetworkContextProfilesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: NetworkContextProfiles;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: NetworkContextProfiles;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -30496,7 +30515,7 @@ export class NetworkContextProfilesApi {
      * @summary Sync the network context profiles from the network provider to VCD.
      * @param filter Filter for a query.  FIQL format.
      */
-    public syncNetworkContextProfiles (filter?: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public syncNetworkContextProfiles (filter?: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/networkContextProfiles/sync';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -30529,7 +30548,7 @@ export class NetworkContextProfilesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -30595,7 +30614,7 @@ export class NetworkPoolApi {
      * @summary Deletes a specific network pool.
      * @param networkPoolId 
      */
-    public deleteNetworkPool (networkPoolId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteNetworkPool (networkPoolId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/networkPools/{networkPoolId}'
             .replace('{' + 'networkPoolId' + '}', String(networkPoolId));
         let queryParameters: any = {};
@@ -30630,7 +30649,7 @@ export class NetworkPoolApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -30649,7 +30668,7 @@ export class NetworkPoolApi {
      * @summary Retrieves a specific Network Pool.
      * @param networkPoolId 
      */
-    public getNetworkPool (networkPoolId: string) : Promise<{ response: http.ClientResponse; body: NetworkPool;  }> {
+    public getNetworkPool (networkPoolId: string) : Promise<{ response: http.IncomingMessage; body: NetworkPool;  }> {
         const localVarPath = this.basePath + '/1.0.0/networkPools/{networkPoolId}'
             .replace('{' + 'networkPoolId' + '}', String(networkPoolId));
         let queryParameters: any = {};
@@ -30684,7 +30703,7 @@ export class NetworkPoolApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: NetworkPool;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: NetworkPool;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -30703,7 +30722,7 @@ export class NetworkPoolApi {
      * @summary Synchronize the VXLAN network pool.
      * @param networkPoolId 
      */
-    public syncNetworkPool (networkPoolId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public syncNetworkPool (networkPoolId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/networkPools/{networkPoolId}/sync'
             .replace('{' + 'networkPoolId' + '}', String(networkPoolId));
         let queryParameters: any = {};
@@ -30738,7 +30757,7 @@ export class NetworkPoolApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -30758,7 +30777,7 @@ export class NetworkPoolApi {
      * @param networkPool 
      * @param networkPoolId 
      */
-    public updateNetworkPool (networkPool: NetworkPool, networkPoolId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateNetworkPool (networkPool: NetworkPool, networkPoolId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/networkPools/{networkPoolId}'
             .replace('{' + 'networkPoolId' + '}', String(networkPoolId));
         let queryParameters: any = {};
@@ -30799,7 +30818,7 @@ export class NetworkPoolApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -30865,7 +30884,7 @@ export class NetworkPoolsApi {
      * @summary Create a new network pool.
      * @param networkPool 
      */
-    public createNetworkPool (networkPool: NetworkPool) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createNetworkPool (networkPool: NetworkPool) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/networkPools';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -30900,7 +30919,7 @@ export class NetworkPoolsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -30923,7 +30942,7 @@ export class NetworkPoolsApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getNetworkPoolsSummary (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: NetworkPoolsSummary;  }> {
+    public getNetworkPoolsSummary (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: NetworkPoolsSummary;  }> {
         const localVarPath = this.basePath + '/1.0.0/networkPools/networkPoolSummaries';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -30982,7 +31001,7 @@ export class NetworkPoolsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: NetworkPoolsSummary;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: NetworkPoolsSummary;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -31052,7 +31071,7 @@ export class NsxAlbResourcesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getImportableClouds (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: NsxAlbClouds;  }> {
+    public getImportableClouds (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: NsxAlbClouds;  }> {
         const localVarPath = this.basePath + '/1.0.0/nsxAlbResources/importableClouds';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -31111,7 +31130,7 @@ export class NsxAlbResourcesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: NsxAlbClouds;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: NsxAlbClouds;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -31134,7 +31153,7 @@ export class NsxAlbResourcesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getImportableServiceEngineGroups (pageSize: number, filter?: string, cursor?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: NsxAlbServiceEngineGroups;  }> {
+    public getImportableServiceEngineGroups (pageSize: number, filter?: string, cursor?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: NsxAlbServiceEngineGroups;  }> {
         const localVarPath = this.basePath + '/1.0.0/nsxAlbResources/importableServiceEngineGroups';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -31188,7 +31207,7 @@ export class NsxAlbResourcesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: NsxAlbServiceEngineGroups;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: NsxAlbServiceEngineGroups;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -31258,7 +31277,7 @@ export class NsxTResourcesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getImportableTier0Routers (pageSize: number, filter?: string, cursor?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: Tier0Routers;  }> {
+    public getImportableTier0Routers (pageSize: number, filter?: string, cursor?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: Tier0Routers;  }> {
         const localVarPath = this.basePath + '/1.0.0/nsxTResources/importableTier0Routers';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -31312,7 +31331,7 @@ export class NsxTResourcesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Tier0Routers;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Tier0Routers;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -31335,7 +31354,7 @@ export class NsxTResourcesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getImportableTransportZones (pageSize: number, filter?: string, cursor?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: NsxTTransportZones;  }> {
+    public getImportableTransportZones (pageSize: number, filter?: string, cursor?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: NsxTTransportZones;  }> {
         const localVarPath = this.basePath + '/1.0.0/nsxTResources/importableTransportZones';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -31389,7 +31408,7 @@ export class NsxTResourcesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: NsxTTransportZones;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: NsxTTransportZones;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -31412,7 +31431,7 @@ export class NsxTResourcesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getNsxTEdgeClusters (pageSize: number, filter?: string, cursor?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: NsxTEdgeClusters;  }> {
+    public getNsxTEdgeClusters (pageSize: number, filter?: string, cursor?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: NsxTEdgeClusters;  }> {
         const localVarPath = this.basePath + '/1.0.0/nsxTResources/edgeClusters';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -31466,7 +31485,7 @@ export class NsxTResourcesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: NsxTEdgeClusters;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: NsxTEdgeClusters;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -31532,7 +31551,7 @@ export class NsxVResourcesApi {
      * @summary Get all importable vxlan transport zones that are configured on a vCenter backed by a NSX-V manager.
      * @param filter Filter for a query.  FIQL format.
      */
-    public getImportableTransportZones (filter?: string) : Promise<{ response: http.ClientResponse; body: NsxVTransportZones;  }> {
+    public getImportableTransportZones (filter?: string) : Promise<{ response: http.IncomingMessage; body: NsxVTransportZones;  }> {
         const localVarPath = this.basePath + '/1.0.0/nsxVResources/importableTransportZones';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -31565,7 +31584,7 @@ export class NsxVResourcesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: NsxVTransportZones;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: NsxVTransportZones;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -31628,128 +31647,10 @@ export class OrgApi {
     }
     /**
      * 
-     * @summary Create a new organization
-     * @param newOrg 
-     */
-    public createOrg (newOrg: Org) : Promise<{ response: http.ClientResponse; body: Org;  }> {
-        const localVarPath = this.basePath + '/1.0.0/orgs';
-        let queryParameters: any = {};
-        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let formParams: any = {};
-
-
-        // verify required parameter 'newOrg' is not null or undefined
-        if (newOrg === null || newOrg === undefined) {
-            throw new Error('Required parameter newOrg was null or undefined when calling createOrg.');
-        }
-
-        let useFormData = false;
-
-        let requestOptions: request.Options = {
-            method: 'POST',
-            qs: queryParameters,
-            headers: headerParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: newOrg,
-        };
-
-        this.authentications.ApiKeyAuth.applyToRequest(requestOptions);
-
-        this.authentications.default.applyToRequest(requestOptions);
-
-        if (Object.keys(formParams).length) {
-            if (useFormData) {
-                (<any>requestOptions).formData = formParams;
-            } else {
-                requestOptions.form = formParams;
-            }
-        }
-        return new Promise<{ response: http.ClientResponse; body: Org;  }>((resolve, reject) => {
-            request(requestOptions, (error, response, body) => {
-                if (error) {
-                    reject(error);
-                } else {
-                    if (response.statusCode >= 200 && response.statusCode <= 299) {
-                        resolve({ response: response, body: body });
-                    } else {
-                        reject({ response: response, body: body });
-                    }
-                }
-            });
-        });
-    }
-    /**
-     * 
-     * @summary Delete the specified org.
-     * @param orgUrn orgUrn
-     * @param force Value \&quot;true\&quot; means to forcefully delete the object that contains other objects even if those objects are in a state that does not allow removal. The default is \&quot;false\&quot;; therefore, objects are not removed if they are not in a state that normally allows removal. Force also implies recursive delete where other contained objects are removed. Errors may be ignored. Invalid value (not true or false) are ignored. 
-     * @param recursive Value \&quot;true\&quot; means to remove an object that contains other objects as long as those objects are in a state that normally allows removal. The default is \&quot;false\&quot;, which means that an exception will be thrown if any of those objects are in a state that does not allow removal. Invalid value (not true or false) are ignored. 
-     */
-    public deleteOrg (orgUrn: string, force?: boolean, recursive?: boolean) : Promise<{ response: http.ClientResponse; body?: any;  }> {
-        const localVarPath = this.basePath + '/1.0.0/orgs/{orgUrn}'
-            .replace('{' + 'orgUrn' + '}', String(orgUrn));
-        let queryParameters: any = {};
-        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let formParams: any = {};
-
-
-        // verify required parameter 'orgUrn' is not null or undefined
-        if (orgUrn === null || orgUrn === undefined) {
-            throw new Error('Required parameter orgUrn was null or undefined when calling deleteOrg.');
-        }
-
-        if (force !== undefined) {
-            queryParameters['force'] = force;
-        }
-
-        if (recursive !== undefined) {
-            queryParameters['recursive'] = recursive;
-        }
-
-        let useFormData = false;
-
-        let requestOptions: request.Options = {
-            method: 'DELETE',
-            qs: queryParameters,
-            headers: headerParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-        };
-
-        this.authentications.ApiKeyAuth.applyToRequest(requestOptions);
-
-        this.authentications.default.applyToRequest(requestOptions);
-
-        if (Object.keys(formParams).length) {
-            if (useFormData) {
-                (<any>requestOptions).formData = formParams;
-            } else {
-                requestOptions.form = formParams;
-            }
-        }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
-            request(requestOptions, (error, response, body) => {
-                if (error) {
-                    reject(error);
-                } else {
-                    if (response.statusCode >= 200 && response.statusCode <= 299) {
-                        resolve({ response: response, body: body });
-                    } else {
-                        reject({ response: response, body: body });
-                    }
-                }
-            });
-        });
-    }
-    /**
-     * 
      * @summary Get specified organization.
      * @param orgUrn orgUrn
      */
-    public getOrg (orgUrn: string) : Promise<{ response: http.ClientResponse; body: Org;  }> {
+    public getOrg (orgUrn: string) : Promise<{ response: http.IncomingMessage; body: Org;  }> {
         const localVarPath = this.basePath + '/1.0.0/orgs/{orgUrn}'
             .replace('{' + 'orgUrn' + '}', String(orgUrn));
         let queryParameters: any = {};
@@ -31784,7 +31685,7 @@ export class OrgApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Org;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Org;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -31807,7 +31708,7 @@ export class OrgApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryOrgs (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: Orgs;  }> {
+    public queryOrgs (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: Orgs;  }> {
         const localVarPath = this.basePath + '/1.0.0/orgs';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -31866,68 +31767,7 @@ export class OrgApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Orgs;  }>((resolve, reject) => {
-            request(requestOptions, (error, response, body) => {
-                if (error) {
-                    reject(error);
-                } else {
-                    if (response.statusCode >= 200 && response.statusCode <= 299) {
-                        resolve({ response: response, body: body });
-                    } else {
-                        reject({ response: response, body: body });
-                    }
-                }
-            });
-        });
-    }
-    /**
-     * Updates an organization. 
-     * @summary Updates an organization.
-     * @param modifiedOrg 
-     * @param orgUrn orgUrn
-     */
-    public updateOrg (modifiedOrg: Org, orgUrn: string) : Promise<{ response: http.ClientResponse; body: Org;  }> {
-        const localVarPath = this.basePath + '/1.0.0/orgs/{orgUrn}'
-            .replace('{' + 'orgUrn' + '}', String(orgUrn));
-        let queryParameters: any = {};
-        let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
-        let formParams: any = {};
-
-
-        // verify required parameter 'modifiedOrg' is not null or undefined
-        if (modifiedOrg === null || modifiedOrg === undefined) {
-            throw new Error('Required parameter modifiedOrg was null or undefined when calling updateOrg.');
-        }
-
-        // verify required parameter 'orgUrn' is not null or undefined
-        if (orgUrn === null || orgUrn === undefined) {
-            throw new Error('Required parameter orgUrn was null or undefined when calling updateOrg.');
-        }
-
-        let useFormData = false;
-
-        let requestOptions: request.Options = {
-            method: 'PUT',
-            qs: queryParameters,
-            headers: headerParams,
-            uri: localVarPath,
-            useQuerystring: this._useQuerystring,
-            json: true,
-            body: modifiedOrg,
-        };
-
-        this.authentications.ApiKeyAuth.applyToRequest(requestOptions);
-
-        this.authentications.default.applyToRequest(requestOptions);
-
-        if (Object.keys(formParams).length) {
-            if (useFormData) {
-                (<any>requestOptions).formData = formParams;
-            } else {
-                requestOptions.form = formParams;
-            }
-        }
-        return new Promise<{ response: http.ClientResponse; body: Org;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Orgs;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -31994,7 +31834,7 @@ export class OrgVdcNetworkApi {
      * @param vdcNetworkId 
      * @param force Value \&quot;true\&quot; means to forcefully delete the object that contains other objects even if those objects are in a state that does not allow removal. The default is \&quot;false\&quot;; therefore, objects are not removed if they are not in a state that normally allows removal. Force also implies recursive delete where other contained objects are removed. Errors may be ignored. Invalid value (not true or false) are ignored. 
      */
-    public deleteNetwork (vdcNetworkId: string, force?: boolean) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteNetwork (vdcNetworkId: string, force?: boolean) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/orgVdcNetworks/{vdcNetworkId}'
             .replace('{' + 'vdcNetworkId' + '}', String(vdcNetworkId));
         let queryParameters: any = {};
@@ -32033,7 +31873,7 @@ export class OrgVdcNetworkApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -32057,7 +31897,7 @@ export class OrgVdcNetworkApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getAllocatedIpAddresses (page: number, pageSize: number, vdcNetworkId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: AllocatedIpAddresses;  }> {
+    public getAllocatedIpAddresses (page: number, pageSize: number, vdcNetworkId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: AllocatedIpAddresses;  }> {
         const localVarPath = this.basePath + '/1.0.0/orgVdcNetworks/{vdcNetworkId}/allocatedIpAddresses'
             .replace('{' + 'vdcNetworkId' + '}', String(vdcNetworkId));
         let queryParameters: any = {};
@@ -32122,7 +31962,7 @@ export class OrgVdcNetworkApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: AllocatedIpAddresses;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: AllocatedIpAddresses;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -32141,7 +31981,7 @@ export class OrgVdcNetworkApi {
      * @summary Retrieves a specific Org vDC network.
      * @param vdcNetworkId 
      */
-    public getOrgVdcNetwork (vdcNetworkId: string) : Promise<{ response: http.ClientResponse; body: VdcNetwork;  }> {
+    public getOrgVdcNetwork (vdcNetworkId: string) : Promise<{ response: http.IncomingMessage; body: VdcNetwork;  }> {
         const localVarPath = this.basePath + '/1.0.0/orgVdcNetworks/{vdcNetworkId}'
             .replace('{' + 'vdcNetworkId' + '}', String(vdcNetworkId));
         let queryParameters: any = {};
@@ -32176,7 +32016,7 @@ export class OrgVdcNetworkApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VdcNetwork;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VdcNetwork;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -32195,7 +32035,7 @@ export class OrgVdcNetworkApi {
      * @summary Reset a specific isolated Org vDC network.
      * @param vdcNetworkId 
      */
-    public resetNetwork (vdcNetworkId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public resetNetwork (vdcNetworkId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/orgVdcNetworks/{vdcNetworkId}/reset'
             .replace('{' + 'vdcNetworkId' + '}', String(vdcNetworkId));
         let queryParameters: any = {};
@@ -32230,7 +32070,7 @@ export class OrgVdcNetworkApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -32249,7 +32089,7 @@ export class OrgVdcNetworkApi {
      * @summary Sync/repair a specific Org vDC network.
      * @param vdcNetworkId 
      */
-    public syncOrgVdcNetwork (vdcNetworkId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public syncOrgVdcNetwork (vdcNetworkId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/orgVdcNetworks/{vdcNetworkId}/sync'
             .replace('{' + 'vdcNetworkId' + '}', String(vdcNetworkId));
         let queryParameters: any = {};
@@ -32284,7 +32124,7 @@ export class OrgVdcNetworkApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -32303,7 +32143,7 @@ export class OrgVdcNetworkApi {
      * @summary Synchronize syslog server settings for a Org vDC network.
      * @param vdcNetworkId 
      */
-    public syncSyslogSettingsOfNetwork (vdcNetworkId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public syncSyslogSettingsOfNetwork (vdcNetworkId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/orgVdcNetworks/{vdcNetworkId}/syncSyslog'
             .replace('{' + 'vdcNetworkId' + '}', String(vdcNetworkId));
         let queryParameters: any = {};
@@ -32338,7 +32178,7 @@ export class OrgVdcNetworkApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -32358,7 +32198,7 @@ export class OrgVdcNetworkApi {
      * @param vdcNetwork 
      * @param vdcNetworkId 
      */
-    public updateNetwork (vdcNetwork: VdcNetwork, vdcNetworkId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateNetwork (vdcNetwork: VdcNetwork, vdcNetworkId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/orgVdcNetworks/{vdcNetworkId}'
             .replace('{' + 'vdcNetworkId' + '}', String(vdcNetworkId));
         let queryParameters: any = {};
@@ -32399,7 +32239,7 @@ export class OrgVdcNetworkApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -32465,7 +32305,7 @@ export class OrgVdcNetworkDhcpApi {
      * @summary Removes Dhcp configuration on a specific Org vDC network.
      * @param vdcNetworkId 
      */
-    public deleteNetworkDhcpConfig (vdcNetworkId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteNetworkDhcpConfig (vdcNetworkId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/orgVdcNetworks/{vdcNetworkId}/dhcp'
             .replace('{' + 'vdcNetworkId' + '}', String(vdcNetworkId));
         let queryParameters: any = {};
@@ -32500,7 +32340,7 @@ export class OrgVdcNetworkDhcpApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -32519,7 +32359,7 @@ export class OrgVdcNetworkDhcpApi {
      * @summary Retrieves Dhcp configuration of a specific Org vDC network.
      * @param vdcNetworkId 
      */
-    public getNetworkDhcpConfig (vdcNetworkId: string) : Promise<{ response: http.ClientResponse; body: VdcNetworkDhcpConfig;  }> {
+    public getNetworkDhcpConfig (vdcNetworkId: string) : Promise<{ response: http.IncomingMessage; body: VdcNetworkDhcpConfig;  }> {
         const localVarPath = this.basePath + '/1.0.0/orgVdcNetworks/{vdcNetworkId}/dhcp'
             .replace('{' + 'vdcNetworkId' + '}', String(vdcNetworkId));
         let queryParameters: any = {};
@@ -32554,7 +32394,7 @@ export class OrgVdcNetworkDhcpApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VdcNetworkDhcpConfig;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VdcNetworkDhcpConfig;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -32574,7 +32414,7 @@ export class OrgVdcNetworkDhcpApi {
      * @param dhcpConfig 
      * @param vdcNetworkId 
      */
-    public updateNetworkDhcpConfig (dhcpConfig: VdcNetworkDhcpConfig, vdcNetworkId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateNetworkDhcpConfig (dhcpConfig: VdcNetworkDhcpConfig, vdcNetworkId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/orgVdcNetworks/{vdcNetworkId}/dhcp'
             .replace('{' + 'vdcNetworkId' + '}', String(vdcNetworkId));
         let queryParameters: any = {};
@@ -32615,7 +32455,7 @@ export class OrgVdcNetworkDhcpApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -32681,7 +32521,7 @@ export class OrgVdcNetworksApi {
      * @summary Create an organization vDC network.
      * @param vdcNetwork 
      */
-    public createNetwork (vdcNetwork: VdcNetwork) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createNetwork (vdcNetwork: VdcNetwork) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/orgVdcNetworks';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -32716,7 +32556,7 @@ export class OrgVdcNetworksApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -32739,7 +32579,7 @@ export class OrgVdcNetworksApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getAllVdcNetworks (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: VdcNetworks;  }> {
+    public getAllVdcNetworks (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: VdcNetworks;  }> {
         const localVarPath = this.basePath + '/1.0.0/orgVdcNetworks';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -32798,7 +32638,7 @@ export class OrgVdcNetworksApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VdcNetworks;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VdcNetworks;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -32864,7 +32704,7 @@ export class PreferencesApi {
      * @summary Get specified user preference.
      * @param classifier 
      */
-    public getPreference (classifier: string) : Promise<{ response: http.ClientResponse; body: Preference;  }> {
+    public getPreference (classifier: string) : Promise<{ response: http.IncomingMessage; body: Preference;  }> {
         const localVarPath = this.basePath + '/1.0.0/preferences/{classifier}'
             .replace('{' + 'classifier' + '}', String(classifier));
         let queryParameters: any = {};
@@ -32899,7 +32739,7 @@ export class PreferencesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Preference;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Preference;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -32918,7 +32758,7 @@ export class PreferencesApi {
      * @summary Get specified preference definition.
      * @param preferenceDefinitionId 
      */
-    public getPreferenceDefinition (preferenceDefinitionId: string) : Promise<{ response: http.ClientResponse; body: PreferenceDefinition;  }> {
+    public getPreferenceDefinition (preferenceDefinitionId: string) : Promise<{ response: http.IncomingMessage; body: PreferenceDefinition;  }> {
         const localVarPath = this.basePath + '/1.0.0/definitions/preferences/{preferenceDefinitionId}'
             .replace('{' + 'preferenceDefinitionId' + '}', String(preferenceDefinitionId));
         let queryParameters: any = {};
@@ -32953,7 +32793,7 @@ export class PreferencesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: PreferenceDefinition;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: PreferenceDefinition;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -32976,7 +32816,7 @@ export class PreferencesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryPreferenceDefinitions (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: PreferenceDefinitions;  }> {
+    public queryPreferenceDefinitions (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: PreferenceDefinitions;  }> {
         const localVarPath = this.basePath + '/1.0.0/definitions/preferences';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -33035,7 +32875,7 @@ export class PreferencesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: PreferenceDefinitions;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: PreferenceDefinitions;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -33054,7 +32894,7 @@ export class PreferencesApi {
      * @summary Query user preferences.
      * @param filter Filter for a query.  FIQL format.
      */
-    public queryPreferences (filter?: string) : Promise<{ response: http.ClientResponse; body: Preferences;  }> {
+    public queryPreferences (filter?: string) : Promise<{ response: http.IncomingMessage; body: Preferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/preferences';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -33087,7 +32927,7 @@ export class PreferencesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Preferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Preferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -33107,7 +32947,7 @@ export class PreferencesApi {
      * @param updatePreferenceParams 
      * @param classifier 
      */
-    public updatePreference (updatePreferenceParams: Preference, classifier: string) : Promise<{ response: http.ClientResponse; body: Preference;  }> {
+    public updatePreference (updatePreferenceParams: Preference, classifier: string) : Promise<{ response: http.IncomingMessage; body: Preference;  }> {
         const localVarPath = this.basePath + '/1.0.0/preferences/{classifier}'
             .replace('{' + 'classifier' + '}', String(classifier));
         let queryParameters: any = {};
@@ -33148,7 +32988,7 @@ export class PreferencesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Preference;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Preference;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -33218,7 +33058,7 @@ export class ProviderVdcApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getAllProviderVDCs (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: ProviderVdcs;  }> {
+    public getAllProviderVDCs (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: ProviderVdcs;  }> {
         const localVarPath = this.basePath + '/1.0.0/providerVdcs';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -33277,7 +33117,7 @@ export class ProviderVdcApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ProviderVdcs;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ProviderVdcs;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -33299,7 +33139,7 @@ export class ProviderVdcApi {
      * @param page Page to fetch, zero offset.
      * @param pageSize Results per page to fetch.
      */
-    public getChildResourcePools (pvdcUrn: string, moref: string, page: number, pageSize: number) : Promise<{ response: http.ClientResponse; body: ResourcePools;  }> {
+    public getChildResourcePools (pvdcUrn: string, moref: string, page: number, pageSize: number) : Promise<{ response: http.IncomingMessage; body: ResourcePools;  }> {
         const localVarPath = this.basePath + '/1.0.0/providerVdcs/{pvdcUrn}/infra/resourcePools/browse/{moref}'
             .replace('{' + 'pvdcUrn' + '}', String(pvdcUrn))
             .replace('{' + 'moref' + '}', String(moref));
@@ -33358,7 +33198,7 @@ export class ProviderVdcApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ResourcePools;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ResourcePools;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -33379,7 +33219,7 @@ export class ProviderVdcApi {
      * @param page Page to fetch, zero offset.
      * @param pageSize Results per page to fetch.
      */
-    public getRootResourcePools (pvdcUrn: string, page: number, pageSize: number) : Promise<{ response: http.ClientResponse; body: ResourcePools;  }> {
+    public getRootResourcePools (pvdcUrn: string, page: number, pageSize: number) : Promise<{ response: http.IncomingMessage; body: ResourcePools;  }> {
         const localVarPath = this.basePath + '/1.0.0/providerVdcs/{pvdcUrn}/infra/resourcePools/browse/'
             .replace('{' + 'pvdcUrn' + '}', String(pvdcUrn));
         let queryParameters: any = {};
@@ -33432,7 +33272,7 @@ export class ProviderVdcApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ResourcePools;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ResourcePools;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -33498,7 +33338,7 @@ export class ProxyApi {
      * @summary Creates a proxy.
      * @param proxy The new proxy model.
      */
-    public createProxy (proxy: Proxy) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createProxy (proxy: Proxy) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/proxies';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -33533,7 +33373,7 @@ export class ProxyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -33553,7 +33393,7 @@ export class ProxyApi {
      * @param id Proxy ID URN
      * @param force If true, will delete proxy regardless of proxy state.
      */
-    public deleteProxy (id: string, force?: boolean) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteProxy (id: string, force?: boolean) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/proxies/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -33592,7 +33432,7 @@ export class ProxyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -33615,7 +33455,7 @@ export class ProxyApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getProxies (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: Proxies;  }> {
+    public getProxies (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: Proxies;  }> {
         const localVarPath = this.basePath + '/1.0.0/proxies';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -33674,7 +33514,7 @@ export class ProxyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Proxies;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Proxies;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -33693,7 +33533,7 @@ export class ProxyApi {
      * @summary Gets the tenant-specific .pac file listing proxies accessible to the tenant.
      * @param id identifier for the pac file configured for your organization
      */
-    public getProxiesPacFileForTenant (id: string) : Promise<{ response: http.ClientResponse; body: string;  }> {
+    public getProxiesPacFileForTenant (id: string) : Promise<{ response: http.IncomingMessage; body: string;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcProxiesPac/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -33728,7 +33568,7 @@ export class ProxyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: string;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: string;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -33747,7 +33587,7 @@ export class ProxyApi {
      * @summary Retrieves a specific proxy.
      * @param id Proxy ID URN
      */
-    public getProxy (id: string) : Promise<{ response: http.ClientResponse; body: Proxy;  }> {
+    public getProxy (id: string) : Promise<{ response: http.IncomingMessage; body: Proxy;  }> {
         const localVarPath = this.basePath + '/1.0.0/proxies/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -33782,7 +33622,7 @@ export class ProxyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Proxy;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Proxy;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -33801,7 +33641,7 @@ export class ProxyApi {
      * @summary Retrieve a proxy certificate revocation list in PEM format.
      * @param id 
      */
-    public getProxyCRL (id: string) : Promise<{ response: http.ClientResponse; body: string;  }> {
+    public getProxyCRL (id: string) : Promise<{ response: http.IncomingMessage; body: string;  }> {
         const localVarPath = this.basePath + '/1.0.0/proxies/{id}/crl'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -33836,7 +33676,7 @@ export class ProxyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: string;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: string;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -33855,7 +33695,7 @@ export class ProxyApi {
      * @summary Retrieve a proxy SSL certificate chain in PEM format.
      * @param id Proxy ID URN
      */
-    public getProxyCertificate (id: string) : Promise<{ response: http.ClientResponse; body: string;  }> {
+    public getProxyCertificate (id: string) : Promise<{ response: http.IncomingMessage; body: string;  }> {
         const localVarPath = this.basePath + '/1.0.0/proxies/{id}/cert'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -33890,7 +33730,7 @@ export class ProxyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: string;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: string;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -33909,7 +33749,7 @@ export class ProxyApi {
      * @summary Retrieve a Proxy SSL certificate thumbprint and algorithm used for calculation.
      * @param id Proxy ID URN
      */
-    public getProxyCertificateThumbprint (id: string) : Promise<{ response: http.ClientResponse; body: ThumbprintAndAlgorithm;  }> {
+    public getProxyCertificateThumbprint (id: string) : Promise<{ response: http.IncomingMessage; body: ThumbprintAndAlgorithm;  }> {
         const localVarPath = this.basePath + '/1.0.0/proxies/{id}/thumbprint'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -33944,7 +33784,7 @@ export class ProxyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ThumbprintAndAlgorithm;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ThumbprintAndAlgorithm;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -33964,7 +33804,7 @@ export class ProxyApi {
      * @param updatedProxy The updated proxy model.
      * @param id Proxy ID URN
      */
-    public updateProxy (updatedProxy: Proxy, id: string) : Promise<{ response: http.ClientResponse; body: Proxy;  }> {
+    public updateProxy (updatedProxy: Proxy, id: string) : Promise<{ response: http.IncomingMessage; body: Proxy;  }> {
         const localVarPath = this.basePath + '/1.0.0/proxies/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -34005,7 +33845,7 @@ export class ProxyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Proxy;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Proxy;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -34025,7 +33865,7 @@ export class ProxyApi {
      * @param proxyCRL 
      * @param id 
      */
-    public updateProxyCRL (proxyCRL: string, id: string) : Promise<{ response: http.ClientResponse; body: string;  }> {
+    public updateProxyCRL (proxyCRL: string, id: string) : Promise<{ response: http.IncomingMessage; body: string;  }> {
         const localVarPath = this.basePath + '/1.0.0/proxies/{id}/crl'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -34066,7 +33906,7 @@ export class ProxyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: string;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: string;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -34086,7 +33926,7 @@ export class ProxyApi {
      * @param proxyTrustAnchor The updated proxy certificate chain in PEM format.
      * @param id Proxy ID URN
      */
-    public updateProxyCertificate (proxyTrustAnchor: string, id: string) : Promise<{ response: http.ClientResponse; body: string;  }> {
+    public updateProxyCertificate (proxyTrustAnchor: string, id: string) : Promise<{ response: http.IncomingMessage; body: string;  }> {
         const localVarPath = this.basePath + '/1.0.0/proxies/{id}/cert'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -34127,7 +33967,7 @@ export class ProxyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: string;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: string;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -34193,7 +34033,7 @@ export class ProxyConfigurationApi {
      * @summary Creates a proxy configuration.
      * @param proxyConfiguration The new proxy configuration API model.
      */
-    public createProxyConfiguration (proxyConfiguration: ProxyConfiguration) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createProxyConfiguration (proxyConfiguration: ProxyConfiguration) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/proxyConfigurations';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -34228,7 +34068,7 @@ export class ProxyConfigurationApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -34247,7 +34087,7 @@ export class ProxyConfigurationApi {
      * @summary Delete a specific proxy configuration.
      * @param id Proxy Configuration ID URN
      */
-    public deleteProxyConfiguration (id: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteProxyConfiguration (id: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/proxyConfigurations/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -34282,7 +34122,7 @@ export class ProxyConfigurationApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -34301,7 +34141,7 @@ export class ProxyConfigurationApi {
      * @summary Retrieves a specific proxy configuration.
      * @param id Proxy Configuration ID URN
      */
-    public getProxyConfiguration (id: string) : Promise<{ response: http.ClientResponse; body: ProxyConfiguration;  }> {
+    public getProxyConfiguration (id: string) : Promise<{ response: http.IncomingMessage; body: ProxyConfiguration;  }> {
         const localVarPath = this.basePath + '/1.0.0/proxyConfigurations/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -34336,7 +34176,7 @@ export class ProxyConfigurationApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ProxyConfiguration;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ProxyConfiguration;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -34359,7 +34199,7 @@ export class ProxyConfigurationApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryProxyConfigurations (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: ProxyConfigurations;  }> {
+    public queryProxyConfigurations (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: ProxyConfigurations;  }> {
         const localVarPath = this.basePath + '/1.0.0/proxyConfigurations';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -34418,7 +34258,7 @@ export class ProxyConfigurationApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ProxyConfigurations;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ProxyConfigurations;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -34438,7 +34278,7 @@ export class ProxyConfigurationApi {
      * @param updatedProxyConfiguration The updated proxy configuration API model.
      * @param id Proxy Configuration ID URN
      */
-    public updateProxyConfiguration (updatedProxyConfiguration: ProxyConfiguration, id: string) : Promise<{ response: http.ClientResponse; body: ProxyConfiguration;  }> {
+    public updateProxyConfiguration (updatedProxyConfiguration: ProxyConfiguration, id: string) : Promise<{ response: http.IncomingMessage; body: ProxyConfiguration;  }> {
         const localVarPath = this.basePath + '/1.0.0/proxyConfigurations/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -34479,7 +34319,7 @@ export class ProxyConfigurationApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ProxyConfiguration;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ProxyConfiguration;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -34545,7 +34385,7 @@ export class PvdcComputePoliciesApi {
      * @summary Creates a new provider vDC compute policy
      * @param pvdcComputePolicy 
      */
-    public createPvdcComputePolicy (pvdcComputePolicy: PvdcComputePolicy) : Promise<{ response: http.ClientResponse; body: PvdcComputePolicy;  }> {
+    public createPvdcComputePolicy (pvdcComputePolicy: PvdcComputePolicy) : Promise<{ response: http.IncomingMessage; body: PvdcComputePolicy;  }> {
         const localVarPath = this.basePath + '/1.0.0/pvdcComputePolicies';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -34580,7 +34420,7 @@ export class PvdcComputePoliciesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: PvdcComputePolicy;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: PvdcComputePolicy;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -34599,7 +34439,7 @@ export class PvdcComputePoliciesApi {
      * @summary Delete specified provider vDC compute policy.
      * @param pvdcComputePolicyId ID of provider VDC Compute Policy
      */
-    public deletePvdcComputePolicy (pvdcComputePolicyId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deletePvdcComputePolicy (pvdcComputePolicyId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/pvdcComputePolicies/{pvdcComputePolicyId}'
             .replace('{' + 'pvdcComputePolicyId' + '}', String(pvdcComputePolicyId));
         let queryParameters: any = {};
@@ -34634,7 +34474,7 @@ export class PvdcComputePoliciesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -34653,7 +34493,7 @@ export class PvdcComputePoliciesApi {
      * @summary Get specified provider vDC compute policy
      * @param pvdcComputePolicyId ID of provider VDC Compute Policy
      */
-    public getPvdcComputePolicy (pvdcComputePolicyId: string) : Promise<{ response: http.ClientResponse; body: PvdcComputePolicy;  }> {
+    public getPvdcComputePolicy (pvdcComputePolicyId: string) : Promise<{ response: http.IncomingMessage; body: PvdcComputePolicy;  }> {
         const localVarPath = this.basePath + '/1.0.0/pvdcComputePolicies/{pvdcComputePolicyId}'
             .replace('{' + 'pvdcComputePolicyId' + '}', String(pvdcComputePolicyId));
         let queryParameters: any = {};
@@ -34688,7 +34528,7 @@ export class PvdcComputePoliciesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: PvdcComputePolicy;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: PvdcComputePolicy;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -34711,7 +34551,7 @@ export class PvdcComputePoliciesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getPvdcComputePolicyVms (pvdcComputePolicyId: string, page: number, pageSize: number, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public getPvdcComputePolicyVms (pvdcComputePolicyId: string, page: number, pageSize: number, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/pvdcComputePolicies/{pvdcComputePolicyId}/vms'
             .replace('{' + 'pvdcComputePolicyId' + '}', String(pvdcComputePolicyId));
         let queryParameters: any = {};
@@ -34772,7 +34612,7 @@ export class PvdcComputePoliciesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -34795,7 +34635,7 @@ export class PvdcComputePoliciesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryPvdcComputePolicies (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: PvdcComputePolicies;  }> {
+    public queryPvdcComputePolicies (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: PvdcComputePolicies;  }> {
         const localVarPath = this.basePath + '/1.0.0/pvdcComputePolicies';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -34854,7 +34694,7 @@ export class PvdcComputePoliciesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: PvdcComputePolicies;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: PvdcComputePolicies;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -34874,7 +34714,7 @@ export class PvdcComputePoliciesApi {
      * @param pvdcComputePolicyId ID of provider VDC Compute Policy
      * @param pvdcComputePolicy 
      */
-    public updatePvdcComputePolicy (pvdcComputePolicyId: string, pvdcComputePolicy: PvdcComputePolicy) : Promise<{ response: http.ClientResponse; body: PvdcComputePolicy;  }> {
+    public updatePvdcComputePolicy (pvdcComputePolicyId: string, pvdcComputePolicy: PvdcComputePolicy) : Promise<{ response: http.IncomingMessage; body: PvdcComputePolicy;  }> {
         const localVarPath = this.basePath + '/1.0.0/pvdcComputePolicies/{pvdcComputePolicyId}'
             .replace('{' + 'pvdcComputePolicyId' + '}', String(pvdcComputePolicyId));
         let queryParameters: any = {};
@@ -34915,7 +34755,7 @@ export class PvdcComputePoliciesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: PvdcComputePolicy;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: PvdcComputePolicy;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -34981,7 +34821,7 @@ export class PvdcComputePolicies2Api {
      * @summary Creates a new provider vDC compute policy
      * @param pvdcComputePolicy 
      */
-    public createPvdcComputePolicy (pvdcComputePolicy: PvdcComputePolicy2) : Promise<{ response: http.ClientResponse; body: PvdcComputePolicy2;  }> {
+    public createPvdcComputePolicy (pvdcComputePolicy: PvdcComputePolicy2) : Promise<{ response: http.IncomingMessage; body: PvdcComputePolicy2;  }> {
         const localVarPath = this.basePath + '/2.0.0/pvdcComputePolicies';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -35016,7 +34856,7 @@ export class PvdcComputePolicies2Api {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: PvdcComputePolicy2;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: PvdcComputePolicy2;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -35035,7 +34875,7 @@ export class PvdcComputePolicies2Api {
      * @summary Delete specified provider vDC compute policy.
      * @param pvdcComputePolicyId ID of provider vDC Compute Policy
      */
-    public deletePvdcComputePolicy (pvdcComputePolicyId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deletePvdcComputePolicy (pvdcComputePolicyId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/2.0.0/pvdcComputePolicies/{pvdcComputePolicyId}'
             .replace('{' + 'pvdcComputePolicyId' + '}', String(pvdcComputePolicyId));
         let queryParameters: any = {};
@@ -35070,7 +34910,7 @@ export class PvdcComputePolicies2Api {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -35089,7 +34929,7 @@ export class PvdcComputePolicies2Api {
      * @summary Get specified provider vDC compute policy
      * @param pvdcComputePolicyId ID of provider vDC Compute Policy
      */
-    public getPvdcComputePolicy (pvdcComputePolicyId: string) : Promise<{ response: http.ClientResponse; body: PvdcComputePolicy2;  }> {
+    public getPvdcComputePolicy (pvdcComputePolicyId: string) : Promise<{ response: http.IncomingMessage; body: PvdcComputePolicy2;  }> {
         const localVarPath = this.basePath + '/2.0.0/pvdcComputePolicies/{pvdcComputePolicyId}'
             .replace('{' + 'pvdcComputePolicyId' + '}', String(pvdcComputePolicyId));
         let queryParameters: any = {};
@@ -35124,7 +34964,7 @@ export class PvdcComputePolicies2Api {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: PvdcComputePolicy2;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: PvdcComputePolicy2;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -35147,7 +34987,7 @@ export class PvdcComputePolicies2Api {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryPvdcComputePolicies (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: PvdcComputePolicies2;  }> {
+    public queryPvdcComputePolicies (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: PvdcComputePolicies2;  }> {
         const localVarPath = this.basePath + '/2.0.0/pvdcComputePolicies';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -35206,7 +35046,7 @@ export class PvdcComputePolicies2Api {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: PvdcComputePolicies2;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: PvdcComputePolicies2;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -35230,7 +35070,7 @@ export class PvdcComputePolicies2Api {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryVirtualMachineClasses (page: number, pageSize: number, pvdcComputePolicyId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: VirtualMachineClasses;  }> {
+    public queryVirtualMachineClasses (page: number, pageSize: number, pvdcComputePolicyId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: VirtualMachineClasses;  }> {
         const localVarPath = this.basePath + '/2.0.0/pvdcComputePolicies/{pvdcComputePolicyId}/virtualMachineClasses'
             .replace('{' + 'pvdcComputePolicyId' + '}', String(pvdcComputePolicyId));
         let queryParameters: any = {};
@@ -35295,7 +35135,7 @@ export class PvdcComputePolicies2Api {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VirtualMachineClasses;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VirtualMachineClasses;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -35315,7 +35155,7 @@ export class PvdcComputePolicies2Api {
      * @param pvdcComputePolicyId ID of provider vDC Compute Policy
      * @param pvdcComputePolicy 
      */
-    public updatePvdcComputePolicy (pvdcComputePolicyId: string, pvdcComputePolicy: PvdcComputePolicy2) : Promise<{ response: http.ClientResponse; body: PvdcComputePolicy2;  }> {
+    public updatePvdcComputePolicy (pvdcComputePolicyId: string, pvdcComputePolicy: PvdcComputePolicy2) : Promise<{ response: http.IncomingMessage; body: PvdcComputePolicy2;  }> {
         const localVarPath = this.basePath + '/2.0.0/pvdcComputePolicies/{pvdcComputePolicyId}'
             .replace('{' + 'pvdcComputePolicyId' + '}', String(pvdcComputePolicyId));
         let queryParameters: any = {};
@@ -35356,7 +35196,7 @@ export class PvdcComputePolicies2Api {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: PvdcComputePolicy2;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: PvdcComputePolicy2;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -35422,7 +35262,7 @@ export class PvdcStoragePolicyApi {
      * @summary Retrieves the settings that child Org VDC storage policies of this provider VDC storage policy should inherit. 
      * @param id 
      */
-    public getPvdcStoragePolicyInheritableSettings (id: string) : Promise<{ response: http.ClientResponse; body: StoragePolicySettings;  }> {
+    public getPvdcStoragePolicyInheritableSettings (id: string) : Promise<{ response: http.IncomingMessage; body: StoragePolicySettings;  }> {
         const localVarPath = this.basePath + '/1.0.0/pvdcStoragePolicies/{id}/inheritableSettings'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -35457,7 +35297,7 @@ export class PvdcStoragePolicyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: StoragePolicySettings;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: StoragePolicySettings;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -35477,7 +35317,7 @@ export class PvdcStoragePolicyApi {
      * @param updatedSettings The updated inheritable settings.
      * @param id 
      */
-    public updatePvdcStoragePolicyInheritableSettings (updatedSettings: StoragePolicySettings, id: string) : Promise<{ response: http.ClientResponse; body: StoragePolicySettings;  }> {
+    public updatePvdcStoragePolicyInheritableSettings (updatedSettings: StoragePolicySettings, id: string) : Promise<{ response: http.IncomingMessage; body: StoragePolicySettings;  }> {
         const localVarPath = this.basePath + '/1.0.0/pvdcStoragePolicies/{id}/inheritableSettings'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -35518,7 +35358,7 @@ export class PvdcStoragePolicyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: StoragePolicySettings;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: StoragePolicySettings;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -35584,7 +35424,7 @@ export class QuotaPoliciesApi {
      * @summary Creates a new quota policy
      * @param quotaPolicyParams 
      */
-    public createQuotaPolicy (quotaPolicyParams: QuotaPolicy) : Promise<{ response: http.ClientResponse; body: QuotaPolicy;  }> {
+    public createQuotaPolicy (quotaPolicyParams: QuotaPolicy) : Promise<{ response: http.IncomingMessage; body: QuotaPolicy;  }> {
         const localVarPath = this.basePath + '/1.0.0/quotaPolicies';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -35619,7 +35459,7 @@ export class QuotaPoliciesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: QuotaPolicy;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: QuotaPolicy;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -35638,7 +35478,7 @@ export class QuotaPoliciesApi {
      * @summary Delete the specified quota policy.
      * @param quotaPolicyId 
      */
-    public deleteQuotaPolicy (quotaPolicyId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteQuotaPolicy (quotaPolicyId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/quotaPolicies/{quotaPolicyId}'
             .replace('{' + 'quotaPolicyId' + '}', String(quotaPolicyId));
         let queryParameters: any = {};
@@ -35673,7 +35513,7 @@ export class QuotaPoliciesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -35692,7 +35532,7 @@ export class QuotaPoliciesApi {
      * @summary Get the specified quota policy
      * @param quotaPolicyId 
      */
-    public getQuotaPolicy (quotaPolicyId: string) : Promise<{ response: http.ClientResponse; body: QuotaPolicy;  }> {
+    public getQuotaPolicy (quotaPolicyId: string) : Promise<{ response: http.IncomingMessage; body: QuotaPolicy;  }> {
         const localVarPath = this.basePath + '/1.0.0/quotaPolicies/{quotaPolicyId}'
             .replace('{' + 'quotaPolicyId' + '}', String(quotaPolicyId));
         let queryParameters: any = {};
@@ -35727,7 +35567,7 @@ export class QuotaPoliciesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: QuotaPolicy;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: QuotaPolicy;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -35750,7 +35590,7 @@ export class QuotaPoliciesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryQuotaPolicies (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: QuotaPolicies;  }> {
+    public queryQuotaPolicies (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: QuotaPolicies;  }> {
         const localVarPath = this.basePath + '/1.0.0/quotaPolicies';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -35809,7 +35649,7 @@ export class QuotaPoliciesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: QuotaPolicies;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: QuotaPolicies;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -35829,7 +35669,7 @@ export class QuotaPoliciesApi {
      * @param updateQuotaPolicyParams 
      * @param quotaPolicyId 
      */
-    public updateQuotaPolicy (updateQuotaPolicyParams: QuotaPolicy, quotaPolicyId: string) : Promise<{ response: http.ClientResponse; body: QuotaPolicy;  }> {
+    public updateQuotaPolicy (updateQuotaPolicyParams: QuotaPolicy, quotaPolicyId: string) : Promise<{ response: http.IncomingMessage; body: QuotaPolicy;  }> {
         const localVarPath = this.basePath + '/1.0.0/quotaPolicies/{quotaPolicyId}'
             .replace('{' + 'quotaPolicyId' + '}', String(quotaPolicyId));
         let queryParameters: any = {};
@@ -35870,7 +35710,7 @@ export class QuotaPoliciesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: QuotaPolicy;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: QuotaPolicy;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -35937,7 +35777,7 @@ export class QuotaPolicyAssignmentApi {
      * @param quotaPolicyReference 
      * @param groupUrn 
      */
-    public assignQuotaPolicyToGroup (quotaPolicyReference: AssignedQuotaPolicy, groupUrn: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public assignQuotaPolicyToGroup (quotaPolicyReference: AssignedQuotaPolicy, groupUrn: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/groups/{groupUrn}/quotaPolicy'
             .replace('{' + 'groupUrn' + '}', String(groupUrn));
         let queryParameters: any = {};
@@ -35978,7 +35818,7 @@ export class QuotaPolicyAssignmentApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -35998,7 +35838,7 @@ export class QuotaPolicyAssignmentApi {
      * @param quotaPolicyReference 
      * @param orgUrn 
      */
-    public assignQuotaPolicyToOrg (quotaPolicyReference: AssignedQuotaPolicy, orgUrn: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public assignQuotaPolicyToOrg (quotaPolicyReference: AssignedQuotaPolicy, orgUrn: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/orgs/{orgUrn}/quotaPolicy'
             .replace('{' + 'orgUrn' + '}', String(orgUrn));
         let queryParameters: any = {};
@@ -36039,7 +35879,7 @@ export class QuotaPolicyAssignmentApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -36059,7 +35899,7 @@ export class QuotaPolicyAssignmentApi {
      * @param quotaPolicyReference 
      * @param userUrn 
      */
-    public assignQuotaPolicyToUser (quotaPolicyReference: AssignedQuotaPolicy, userUrn: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public assignQuotaPolicyToUser (quotaPolicyReference: AssignedQuotaPolicy, userUrn: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/users/{userUrn}/quotaPolicy'
             .replace('{' + 'userUrn' + '}', String(userUrn));
         let queryParameters: any = {};
@@ -36100,7 +35940,7 @@ export class QuotaPolicyAssignmentApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -36120,7 +35960,7 @@ export class QuotaPolicyAssignmentApi {
      * @param quotaPolicyReference 
      * @param vappUrn 
      */
-    public assignQuotaPolicyToVApp (quotaPolicyReference: AssignedQuotaPolicy, vappUrn: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public assignQuotaPolicyToVApp (quotaPolicyReference: AssignedQuotaPolicy, vappUrn: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/vapps/{vappUrn}/quotaPolicy'
             .replace('{' + 'vappUrn' + '}', String(vappUrn));
         let queryParameters: any = {};
@@ -36161,7 +36001,7 @@ export class QuotaPolicyAssignmentApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -36180,7 +36020,7 @@ export class QuotaPolicyAssignmentApi {
      * @summary Get the assigned quota policy reference for the given group.
      * @param groupUrn 
      */
-    public getGroupAssignedQuotaPolicy (groupUrn: string) : Promise<{ response: http.ClientResponse; body: AssignedQuotaPolicy;  }> {
+    public getGroupAssignedQuotaPolicy (groupUrn: string) : Promise<{ response: http.IncomingMessage; body: AssignedQuotaPolicy;  }> {
         const localVarPath = this.basePath + '/1.0.0/groups/{groupUrn}/quotaPolicy'
             .replace('{' + 'groupUrn' + '}', String(groupUrn));
         let queryParameters: any = {};
@@ -36215,7 +36055,7 @@ export class QuotaPolicyAssignmentApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: AssignedQuotaPolicy;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: AssignedQuotaPolicy;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -36234,7 +36074,7 @@ export class QuotaPolicyAssignmentApi {
      * @summary Get the assigned quota policy reference for the given organization.
      * @param orgUrn 
      */
-    public getOrgAssignedQuotaPolicy (orgUrn: string) : Promise<{ response: http.ClientResponse; body: AssignedQuotaPolicy;  }> {
+    public getOrgAssignedQuotaPolicy (orgUrn: string) : Promise<{ response: http.IncomingMessage; body: AssignedQuotaPolicy;  }> {
         const localVarPath = this.basePath + '/1.0.0/orgs/{orgUrn}/quotaPolicy'
             .replace('{' + 'orgUrn' + '}', String(orgUrn));
         let queryParameters: any = {};
@@ -36269,7 +36109,7 @@ export class QuotaPolicyAssignmentApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: AssignedQuotaPolicy;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: AssignedQuotaPolicy;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -36288,7 +36128,7 @@ export class QuotaPolicyAssignmentApi {
      * @summary Get the assigned quota policy reference for the given user.
      * @param userUrn 
      */
-    public getUserAssignedQuotaPolicy (userUrn: string) : Promise<{ response: http.ClientResponse; body: AssignedQuotaPolicy;  }> {
+    public getUserAssignedQuotaPolicy (userUrn: string) : Promise<{ response: http.IncomingMessage; body: AssignedQuotaPolicy;  }> {
         const localVarPath = this.basePath + '/1.0.0/users/{userUrn}/quotaPolicy'
             .replace('{' + 'userUrn' + '}', String(userUrn));
         let queryParameters: any = {};
@@ -36323,7 +36163,7 @@ export class QuotaPolicyAssignmentApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: AssignedQuotaPolicy;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: AssignedQuotaPolicy;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -36342,7 +36182,7 @@ export class QuotaPolicyAssignmentApi {
      * @summary Get the assigned quota policy reference for the given vapp.
      * @param vappUrn 
      */
-    public getVAppAssignedQuotaPolicy (vappUrn: string) : Promise<{ response: http.ClientResponse; body: AssignedQuotaPolicy;  }> {
+    public getVAppAssignedQuotaPolicy (vappUrn: string) : Promise<{ response: http.IncomingMessage; body: AssignedQuotaPolicy;  }> {
         const localVarPath = this.basePath + '/1.0.0/vapps/{vappUrn}/quotaPolicy'
             .replace('{' + 'vappUrn' + '}', String(vappUrn));
         let queryParameters: any = {};
@@ -36377,7 +36217,7 @@ export class QuotaPolicyAssignmentApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: AssignedQuotaPolicy;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: AssignedQuotaPolicy;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -36443,7 +36283,7 @@ export class RightsApi {
      * @summary Retrieve an individual right.
      * @param id 
      */
-    public getRight (id: string) : Promise<{ response: http.ClientResponse; body: Right;  }> {
+    public getRight (id: string) : Promise<{ response: http.IncomingMessage; body: Right;  }> {
         const localVarPath = this.basePath + '/1.0.0/rights/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -36478,7 +36318,7 @@ export class RightsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Right;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Right;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -36501,7 +36341,7 @@ export class RightsApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryRights (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: Rights;  }> {
+    public queryRights (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: Rights;  }> {
         const localVarPath = this.basePath + '/1.0.0/rights';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -36560,7 +36400,7 @@ export class RightsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Rights;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Rights;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -36627,7 +36467,7 @@ export class RightsBundlesApi {
      * @param rightsReferencesBody 
      * @param id 
      */
-    public addRightsToRightsBundle (rightsReferencesBody: EntityReferences, id: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public addRightsToRightsBundle (rightsReferencesBody: EntityReferences, id: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/rightsBundles/{id}/rights'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -36668,7 +36508,7 @@ export class RightsBundlesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -36687,7 +36527,7 @@ export class RightsBundlesApi {
      * @summary Creates a new rights bundle
      * @param newRightsBundle 
      */
-    public createRightsBundle (newRightsBundle: RightsBundle) : Promise<{ response: http.ClientResponse; body: RightsBundle;  }> {
+    public createRightsBundle (newRightsBundle: RightsBundle) : Promise<{ response: http.IncomingMessage; body: RightsBundle;  }> {
         const localVarPath = this.basePath + '/1.0.0/rightsBundles';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -36722,7 +36562,7 @@ export class RightsBundlesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: RightsBundle;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: RightsBundle;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -36741,7 +36581,7 @@ export class RightsBundlesApi {
      * @summary Delete specified rights bundle
      * @param id 
      */
-    public deleteRightsBundle (id: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteRightsBundle (id: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/rightsBundles/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -36776,7 +36616,7 @@ export class RightsBundlesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -36795,7 +36635,7 @@ export class RightsBundlesApi {
      * @summary Get specified rights bundle
      * @param id 
      */
-    public getRightsBundle (id: string) : Promise<{ response: http.ClientResponse; body: RightsBundle;  }> {
+    public getRightsBundle (id: string) : Promise<{ response: http.IncomingMessage; body: RightsBundle;  }> {
         const localVarPath = this.basePath + '/1.0.0/rightsBundles/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -36830,7 +36670,7 @@ export class RightsBundlesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: RightsBundle;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: RightsBundle;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -36850,7 +36690,7 @@ export class RightsBundlesApi {
      * @param publishTenantsBody 
      * @param id 
      */
-    public postRightsBundlePublish (publishTenantsBody: EntityReferences, id: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public postRightsBundlePublish (publishTenantsBody: EntityReferences, id: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/rightsBundles/{id}/tenants/publish'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -36891,7 +36731,7 @@ export class RightsBundlesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -36910,7 +36750,7 @@ export class RightsBundlesApi {
      * @summary Publishes the rights bundle to all tenants
      * @param id 
      */
-    public postRightsBundlePublishAll (id: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public postRightsBundlePublishAll (id: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/rightsBundles/{id}/tenants/publishAll'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -36945,7 +36785,7 @@ export class RightsBundlesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -36965,7 +36805,7 @@ export class RightsBundlesApi {
      * @param unpublishTenantsBody 
      * @param id 
      */
-    public postRightsBundleUnpublish (unpublishTenantsBody: EntityReferences, id: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public postRightsBundleUnpublish (unpublishTenantsBody: EntityReferences, id: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/rightsBundles/{id}/tenants/unpublish'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -37006,7 +36846,7 @@ export class RightsBundlesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -37025,7 +36865,7 @@ export class RightsBundlesApi {
      * @summary Unpublishes the rights bundle from all tenants
      * @param id 
      */
-    public postRightsBundleUnpublishAll (id: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public postRightsBundleUnpublishAll (id: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/rightsBundles/{id}/tenants/unpublishAll'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -37060,7 +36900,7 @@ export class RightsBundlesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -37084,7 +36924,7 @@ export class RightsBundlesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryRightsBundleRights (page: number, pageSize: number, id: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public queryRightsBundleRights (page: number, pageSize: number, id: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/rightsBundles/{id}/rights'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -37149,7 +36989,7 @@ export class RightsBundlesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -37173,7 +37013,7 @@ export class RightsBundlesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryRightsBundleTenants (page: number, pageSize: number, id: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public queryRightsBundleTenants (page: number, pageSize: number, id: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/rightsBundles/{id}/tenants'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -37238,7 +37078,7 @@ export class RightsBundlesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -37261,7 +37101,7 @@ export class RightsBundlesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryRightsBundles (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: RightsBundles;  }> {
+    public queryRightsBundles (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: RightsBundles;  }> {
         const localVarPath = this.basePath + '/1.0.0/rightsBundles';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -37320,7 +37160,7 @@ export class RightsBundlesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: RightsBundles;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: RightsBundles;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -37340,7 +37180,7 @@ export class RightsBundlesApi {
      * @param rightsReferencesBody 
      * @param id 
      */
-    public replaceRightsInRightsBundle (rightsReferencesBody: EntityReferences, id: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public replaceRightsInRightsBundle (rightsReferencesBody: EntityReferences, id: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/rightsBundles/{id}/rights'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -37381,7 +37221,7 @@ export class RightsBundlesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -37401,7 +37241,7 @@ export class RightsBundlesApi {
      * @param publishTenantsBody 
      * @param id 
      */
-    public setRightsBundleTenants (publishTenantsBody: EntityReferences, id: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public setRightsBundleTenants (publishTenantsBody: EntityReferences, id: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/rightsBundles/{id}/tenants'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -37442,7 +37282,7 @@ export class RightsBundlesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -37462,7 +37302,7 @@ export class RightsBundlesApi {
      * @param updatedRightsBundle 
      * @param id 
      */
-    public updateRightsBundle (updatedRightsBundle: RightsBundle, id: string) : Promise<{ response: http.ClientResponse; body: RightsBundle;  }> {
+    public updateRightsBundle (updatedRightsBundle: RightsBundle, id: string) : Promise<{ response: http.IncomingMessage; body: RightsBundle;  }> {
         const localVarPath = this.basePath + '/1.0.0/rightsBundles/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -37503,7 +37343,7 @@ export class RightsBundlesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: RightsBundle;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: RightsBundle;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -37569,7 +37409,7 @@ export class RightsCategoriesApi {
      * @summary Retrieve an individual Right category.
      * @param id 
      */
-    public getRightsCategory (id: string) : Promise<{ response: http.ClientResponse; body: RightsCategoryNode;  }> {
+    public getRightsCategory (id: string) : Promise<{ response: http.IncomingMessage; body: RightsCategoryNode;  }> {
         const localVarPath = this.basePath + '/1.0.0/rightsCategories/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -37604,7 +37444,7 @@ export class RightsCategoriesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: RightsCategoryNode;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: RightsCategoryNode;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -37627,7 +37467,7 @@ export class RightsCategoriesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryRightsCategories (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: RightsCategoryNodes;  }> {
+    public queryRightsCategories (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: RightsCategoryNodes;  }> {
         const localVarPath = this.basePath + '/1.0.0/rightsCategories';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -37686,7 +37526,7 @@ export class RightsCategoriesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: RightsCategoryNodes;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: RightsCategoryNodes;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -37753,7 +37593,7 @@ export class RolesApi {
      * @param rightsReferencesBody 
      * @param id 
      */
-    public addRightsToRole (rightsReferencesBody: EntityReferences, id: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public addRightsToRole (rightsReferencesBody: EntityReferences, id: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/roles/{id}/rights'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -37794,7 +37634,7 @@ export class RolesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -37813,7 +37653,7 @@ export class RolesApi {
      * @summary Creates a new role
      * @param newRole 
      */
-    public createRole (newRole: Role) : Promise<{ response: http.ClientResponse; body: Role;  }> {
+    public createRole (newRole: Role) : Promise<{ response: http.IncomingMessage; body: Role;  }> {
         const localVarPath = this.basePath + '/1.0.0/roles';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -37848,7 +37688,7 @@ export class RolesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Role;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Role;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -37867,7 +37707,7 @@ export class RolesApi {
      * @summary Delete specified role
      * @param id 
      */
-    public deleteRole (id: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteRole (id: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/roles/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -37902,7 +37742,7 @@ export class RolesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -37921,7 +37761,7 @@ export class RolesApi {
      * @summary Get specified role
      * @param id 
      */
-    public getRole (id: string) : Promise<{ response: http.ClientResponse; body: Role;  }> {
+    public getRole (id: string) : Promise<{ response: http.IncomingMessage; body: Role;  }> {
         const localVarPath = this.basePath + '/1.0.0/roles/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -37956,7 +37796,7 @@ export class RolesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Role;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Role;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -37980,7 +37820,7 @@ export class RolesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryRoleRights (page: number, pageSize: number, id: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public queryRoleRights (page: number, pageSize: number, id: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/roles/{id}/rights'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -38045,7 +37885,7 @@ export class RolesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -38068,7 +37908,7 @@ export class RolesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryTenantRoles (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: Roles;  }> {
+    public queryTenantRoles (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: Roles;  }> {
         const localVarPath = this.basePath + '/1.0.0/roles';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -38127,7 +37967,7 @@ export class RolesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Roles;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Roles;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -38147,7 +37987,7 @@ export class RolesApi {
      * @param rightsReferencesBody 
      * @param id 
      */
-    public replaceRightsInRole (rightsReferencesBody: EntityReferences, id: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public replaceRightsInRole (rightsReferencesBody: EntityReferences, id: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/roles/{id}/rights'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -38188,7 +38028,7 @@ export class RolesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -38208,7 +38048,7 @@ export class RolesApi {
      * @param updatedRole 
      * @param id 
      */
-    public updateRole (updatedRole: Role, id: string) : Promise<{ response: http.ClientResponse; body: Role;  }> {
+    public updateRole (updatedRole: Role, id: string) : Promise<{ response: http.IncomingMessage; body: Role;  }> {
         const localVarPath = this.basePath + '/1.0.0/roles/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -38249,7 +38089,7 @@ export class RolesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Role;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Role;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -38315,7 +38155,7 @@ export class SddcProxyApi {
      * @summary Creates an SDDC proxy.
      * @param proxy The new SDDC proxy model.
      */
-    public createSddcProxy (proxy: SddcProxy) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createSddcProxy (proxy: SddcProxy) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcProxies';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -38350,7 +38190,7 @@ export class SddcProxyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -38370,7 +38210,7 @@ export class SddcProxyApi {
      * @param id SDDC Proxy ID URN
      * @param force If true, will delete proxy regardless of proxy state.
      */
-    public deleteSddcProxy (id: string, force?: boolean) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteSddcProxy (id: string, force?: boolean) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcProxies/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -38409,7 +38249,7 @@ export class SddcProxyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -38432,7 +38272,7 @@ export class SddcProxyApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getSddcProxies (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: SddcProxies;  }> {
+    public getSddcProxies (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: SddcProxies;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcProxies';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -38491,7 +38331,7 @@ export class SddcProxyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: SddcProxies;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: SddcProxies;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -38509,7 +38349,7 @@ export class SddcProxyApi {
      * Gets the .pac file for the user's accessible proxies. 
      * @summary Gets the .pac file for the user's accessible proxies.
      */
-    public getSddcProxiesPacFile () : Promise<{ response: http.ClientResponse; body: string;  }> {
+    public getSddcProxiesPacFile () : Promise<{ response: http.IncomingMessage; body: string;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcProxiesPac';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -38538,7 +38378,7 @@ export class SddcProxyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: string;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: string;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -38557,7 +38397,7 @@ export class SddcProxyApi {
      * @summary Retrieves a specific SDDC proxy.
      * @param id SDDC Proxy ID URN
      */
-    public getSddcProxy (id: string) : Promise<{ response: http.ClientResponse; body: SddcProxy;  }> {
+    public getSddcProxy (id: string) : Promise<{ response: http.IncomingMessage; body: SddcProxy;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcProxies/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -38592,7 +38432,7 @@ export class SddcProxyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: SddcProxy;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: SddcProxy;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -38611,7 +38451,7 @@ export class SddcProxyApi {
      * @summary Retrieve a SDDC proxy certificate revocation list in PEM format.
      * @param id 
      */
-    public getSddcProxyCRL (id: string) : Promise<{ response: http.ClientResponse; body: string;  }> {
+    public getSddcProxyCRL (id: string) : Promise<{ response: http.IncomingMessage; body: string;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcProxies/{id}/crl'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -38646,7 +38486,7 @@ export class SddcProxyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: string;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: string;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -38665,7 +38505,7 @@ export class SddcProxyApi {
      * @summary Retrieve a SDDC proxy SSL certificate chain in PEM format.
      * @param id SDDC Proxy ID URN
      */
-    public getSddcProxyCertificate (id: string) : Promise<{ response: http.ClientResponse; body: string;  }> {
+    public getSddcProxyCertificate (id: string) : Promise<{ response: http.IncomingMessage; body: string;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcProxies/{id}/cert'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -38700,7 +38540,7 @@ export class SddcProxyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: string;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: string;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -38719,7 +38559,7 @@ export class SddcProxyApi {
      * @summary Retrieve a SDDC Proxy SSL certificate thumbprint. The thumbprint is the SHA-1 hash of the DER encoding of the certificate.
      * @param id SDDC Proxy ID URN
      */
-    public getSddcProxyCertificateThumbprint (id: string) : Promise<{ response: http.ClientResponse; body: string;  }> {
+    public getSddcProxyCertificateThumbprint (id: string) : Promise<{ response: http.IncomingMessage; body: string;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcProxies/{id}/thumbprint'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -38754,7 +38594,7 @@ export class SddcProxyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: string;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: string;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -38774,7 +38614,7 @@ export class SddcProxyApi {
      * @param updatedSddcProxy The updated SDDC proxy model.
      * @param id SDDC Proxy ID URN
      */
-    public updateSddcProxy (updatedSddcProxy: SddcProxy, id: string) : Promise<{ response: http.ClientResponse; body: SddcProxy;  }> {
+    public updateSddcProxy (updatedSddcProxy: SddcProxy, id: string) : Promise<{ response: http.IncomingMessage; body: SddcProxy;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcProxies/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -38815,7 +38655,7 @@ export class SddcProxyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: SddcProxy;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: SddcProxy;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -38835,7 +38675,7 @@ export class SddcProxyApi {
      * @param proxyCRL 
      * @param id 
      */
-    public updateSddcProxyCRL (proxyCRL: string, id: string) : Promise<{ response: http.ClientResponse; body: string;  }> {
+    public updateSddcProxyCRL (proxyCRL: string, id: string) : Promise<{ response: http.IncomingMessage; body: string;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcProxies/{id}/crl'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -38876,7 +38716,7 @@ export class SddcProxyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: string;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: string;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -38896,7 +38736,7 @@ export class SddcProxyApi {
      * @param proxyTrustAnchor The updated SDDC proxy certificate chain in PEM format.
      * @param id SDDC Proxy ID URN
      */
-    public updateSddcProxyCertificate (proxyTrustAnchor: string, id: string) : Promise<{ response: http.ClientResponse; body: string;  }> {
+    public updateSddcProxyCertificate (proxyTrustAnchor: string, id: string) : Promise<{ response: http.IncomingMessage; body: string;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcProxies/{id}/cert'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -38937,7 +38777,7 @@ export class SddcProxyApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: string;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: string;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -39003,7 +38843,7 @@ export class SddcsApi {
      * @summary Create a Software-Defined Datacenter.
      * @param newSddc The new SDDC model.
      */
-    public createSddc (newSddc: Sddc) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createSddc (newSddc: Sddc) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcs';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -39038,7 +38878,7 @@ export class SddcsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -39057,7 +38897,7 @@ export class SddcsApi {
      * @summary Creates an SDDC endpoint.
      * @param endpoint The new SDDC endpoint model.
      */
-    public createSddcEndpoint (endpoint: SddcEndpoint) : Promise<{ response: http.ClientResponse; body: SddcEndpoint;  }> {
+    public createSddcEndpoint (endpoint: SddcEndpoint) : Promise<{ response: http.IncomingMessage; body: SddcEndpoint;  }> {
         const localVarPath = this.basePath + '/1.0.0/endpoints';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -39092,7 +38932,7 @@ export class SddcsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: SddcEndpoint;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: SddcEndpoint;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -39112,7 +38952,7 @@ export class SddcsApi {
      * @param id SDDC ID URN
      * @param force If true, will delete SDDC regardless of the state of the SDDC or any of its proxies. 
      */
-    public deleteSddc (id: string, force?: boolean) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteSddc (id: string, force?: boolean) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcs/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -39151,7 +38991,7 @@ export class SddcsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -39170,7 +39010,7 @@ export class SddcsApi {
      * @summary Delete a specific SDDC endpoint. Will not delete a default endpoint.
      * @param id SDDC Endpoint ID URN
      */
-    public deleteSddcEndpoint (id: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteSddcEndpoint (id: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/endpoints/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -39205,7 +39045,7 @@ export class SddcsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -39228,7 +39068,7 @@ export class SddcsApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getEndpointsForSddc (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: SddcEndpoints;  }> {
+    public getEndpointsForSddc (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: SddcEndpoints;  }> {
         const localVarPath = this.basePath + '/1.0.0/endpoints';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -39287,7 +39127,7 @@ export class SddcsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: SddcEndpoints;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: SddcEndpoints;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -39311,7 +39151,7 @@ export class SddcsApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getProxiesForSddc (page: number, pageSize: number, id: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public getProxiesForSddc (page: number, pageSize: number, id: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcs/{id}/proxies'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -39376,7 +39216,7 @@ export class SddcsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -39395,7 +39235,7 @@ export class SddcsApi {
      * @summary Retrieve a specific Software-Defined Datacenter.
      * @param id SDDC ID URN
      */
-    public getSddc (id: string) : Promise<{ response: http.ClientResponse; body: Sddc;  }> {
+    public getSddc (id: string) : Promise<{ response: http.IncomingMessage; body: Sddc;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcs/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -39430,7 +39270,7 @@ export class SddcsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Sddc;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Sddc;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -39449,7 +39289,7 @@ export class SddcsApi {
      * @summary Retrieves a specific SDDC endpoint.
      * @param id SDDC Endpoint ID URN
      */
-    public getSddcEndpoint (id: string) : Promise<{ response: http.ClientResponse; body: SddcEndpoint;  }> {
+    public getSddcEndpoint (id: string) : Promise<{ response: http.IncomingMessage; body: SddcEndpoint;  }> {
         const localVarPath = this.basePath + '/1.0.0/endpoints/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -39484,7 +39324,7 @@ export class SddcsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: SddcEndpoint;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: SddcEndpoint;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -39503,7 +39343,7 @@ export class SddcsApi {
      * @summary Retrieve the owner of the Software-Defined Datacenter.
      * @param id SDDC ID URN
      */
-    public getSddcOwner (id: string) : Promise<{ response: http.ClientResponse; body: EntityReference;  }> {
+    public getSddcOwner (id: string) : Promise<{ response: http.IncomingMessage; body: EntityReference;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcs/{id}/owner'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -39538,7 +39378,7 @@ export class SddcsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReference;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReference;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -39561,7 +39401,7 @@ export class SddcsApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getSddcs (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: Sddcs;  }> {
+    public getSddcs (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: Sddcs;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcs';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -39620,7 +39460,7 @@ export class SddcsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Sddcs;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Sddcs;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -39644,7 +39484,7 @@ export class SddcsApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public querySddcTenants (page: number, pageSize: number, id: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public querySddcTenants (page: number, pageSize: number, id: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcs/{id}/tenants'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -39709,7 +39549,7 @@ export class SddcsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -39729,7 +39569,7 @@ export class SddcsApi {
      * @param publishTenantsBody The list of tenant EntityReferences that a Software-Defined Datacenter should be published to.
      * @param id SDDC ID URN
      */
-    public sddcPublishToTenants (publishTenantsBody: Array<EntityReference>, id: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public sddcPublishToTenants (publishTenantsBody: Array<EntityReference>, id: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcs/{id}/tenants/publish'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -39770,7 +39610,7 @@ export class SddcsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -39790,7 +39630,7 @@ export class SddcsApi {
      * @param unpublishTenantsBody The list of tenant EntityReferences that a Software-Defined Datacenter should be unpublished from.
      * @param id SDDC ID URN
      */
-    public sddcUnpublishFromTenants (unpublishTenantsBody: Array<EntityReference>, id: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public sddcUnpublishFromTenants (unpublishTenantsBody: Array<EntityReference>, id: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcs/{id}/tenants/unpublish'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -39831,7 +39671,7 @@ export class SddcsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -39851,7 +39691,7 @@ export class SddcsApi {
      * @param newOwner The EntityReference to the owner of the SDDC.
      * @param id SDDC ID URN
      */
-    public setSddcOwner (newOwner: EntityReference, id: string) : Promise<{ response: http.ClientResponse; body: EntityReference;  }> {
+    public setSddcOwner (newOwner: EntityReference, id: string) : Promise<{ response: http.IncomingMessage; body: EntityReference;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcs/{id}/owner'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -39892,7 +39732,7 @@ export class SddcsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReference;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReference;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -39912,7 +39752,7 @@ export class SddcsApi {
      * @param publishTenantsBody The list of tenant EntityReferences that a Software-Defined Datacenter should be published to.
      * @param id SDDC ID URN
      */
-    public setSddcTenants (publishTenantsBody: Array<EntityReference>, id: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public setSddcTenants (publishTenantsBody: Array<EntityReference>, id: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcs/{id}/tenants'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -39953,7 +39793,7 @@ export class SddcsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -39973,7 +39813,7 @@ export class SddcsApi {
      * @param updatedSddc The updated SDDC model.
      * @param id SDDC ID URN
      */
-    public updateSddc (updatedSddc: Sddc, id: string) : Promise<{ response: http.ClientResponse; body: Sddc;  }> {
+    public updateSddc (updatedSddc: Sddc, id: string) : Promise<{ response: http.IncomingMessage; body: Sddc;  }> {
         const localVarPath = this.basePath + '/1.0.0/sddcs/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -40014,7 +39854,7 @@ export class SddcsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Sddc;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Sddc;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -40034,7 +39874,7 @@ export class SddcsApi {
      * @param updatedSddcEndpoint The updated SDDC endpoint model.
      * @param id SDDC Endpoint ID URN
      */
-    public updateSddcEndpoint (updatedSddcEndpoint: SddcEndpoint, id: string) : Promise<{ response: http.ClientResponse; body: SddcEndpoint;  }> {
+    public updateSddcEndpoint (updatedSddcEndpoint: SddcEndpoint, id: string) : Promise<{ response: http.IncomingMessage; body: SddcEndpoint;  }> {
         const localVarPath = this.basePath + '/1.0.0/endpoints/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -40075,7 +39915,7 @@ export class SddcsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: SddcEndpoint;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: SddcEndpoint;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -40141,7 +39981,7 @@ export class ServiceAppApi {
      * @summary Deletes a specific VMware service application.
      * @param serviceAppId 
      */
-    public deleteServiceApp (serviceAppId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteServiceApp (serviceAppId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/serviceApps/{serviceAppId}'
             .replace('{' + 'serviceAppId' + '}', String(serviceAppId));
         let queryParameters: any = {};
@@ -40176,7 +40016,7 @@ export class ServiceAppApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -40195,7 +40035,7 @@ export class ServiceAppApi {
      * @summary Retrieves a specific VMware service application
      * @param serviceAppId 
      */
-    public getServiceApp (serviceAppId: string) : Promise<{ response: http.ClientResponse; body: ServiceApp;  }> {
+    public getServiceApp (serviceAppId: string) : Promise<{ response: http.IncomingMessage; body: ServiceApp;  }> {
         const localVarPath = this.basePath + '/1.0.0/serviceApps/{serviceAppId}'
             .replace('{' + 'serviceAppId' + '}', String(serviceAppId));
         let queryParameters: any = {};
@@ -40230,7 +40070,7 @@ export class ServiceAppApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ServiceApp;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ServiceApp;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -40250,7 +40090,7 @@ export class ServiceAppApi {
      * @param serviceApp 
      * @param serviceAppId 
      */
-    public updateServiceApp (serviceApp: ServiceApp, serviceAppId: string) : Promise<{ response: http.ClientResponse; body: ServiceApp;  }> {
+    public updateServiceApp (serviceApp: ServiceApp, serviceAppId: string) : Promise<{ response: http.IncomingMessage; body: ServiceApp;  }> {
         const localVarPath = this.basePath + '/1.0.0/serviceApps/{serviceAppId}'
             .replace('{' + 'serviceAppId' + '}', String(serviceAppId));
         let queryParameters: any = {};
@@ -40291,7 +40131,7 @@ export class ServiceAppApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ServiceApp;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ServiceApp;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -40357,7 +40197,7 @@ export class ServiceAppsApi {
      * @summary Create a VMware service app
      * @param serviceAppId 
      */
-    public createServiceApp (serviceAppId: ServiceApp) : Promise<{ response: http.ClientResponse; body: ServiceApp;  }> {
+    public createServiceApp (serviceAppId: ServiceApp) : Promise<{ response: http.IncomingMessage; body: ServiceApp;  }> {
         const localVarPath = this.basePath + '/1.0.0/serviceApps';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -40392,7 +40232,7 @@ export class ServiceAppsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ServiceApp;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ServiceApp;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -40415,7 +40255,7 @@ export class ServiceAppsApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryServiceApps (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: ServiceApps;  }> {
+    public queryServiceApps (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: ServiceApps;  }> {
         const localVarPath = this.basePath + '/1.0.0/serviceApps';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -40474,7 +40314,7 @@ export class ServiceAppsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ServiceApps;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ServiceApps;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -40540,7 +40380,7 @@ export class ServicesApi {
      * @summary Creates a new service
      * @param newService 
      */
-    public createService (newService: Service) : Promise<{ response: http.ClientResponse; body: Service;  }> {
+    public createService (newService: Service) : Promise<{ response: http.IncomingMessage; body: Service;  }> {
         const localVarPath = this.basePath + '/serviceLibrary';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -40575,7 +40415,7 @@ export class ServicesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Service;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Service;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -40595,7 +40435,7 @@ export class ServicesApi {
      * @param id 
      * @param recursive If true, the Service and all its service items will be deleted. If false, and there are service items in the service, delete will fail.
      */
-    public deleteService (id: string, recursive?: boolean) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteService (id: string, recursive?: boolean) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/serviceLibrary/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -40634,7 +40474,7 @@ export class ServicesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -40653,7 +40493,7 @@ export class ServicesApi {
      * @summary Deletes specified service item
      * @param id 
      */
-    public deleteServiceItem (id: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteServiceItem (id: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/serviceItem/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -40688,7 +40528,7 @@ export class ServicesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -40707,7 +40547,7 @@ export class ServicesApi {
      * @summary Get specified service
      * @param id 
      */
-    public getService (id: string) : Promise<{ response: http.ClientResponse; body: Service;  }> {
+    public getService (id: string) : Promise<{ response: http.IncomingMessage; body: Service;  }> {
         const localVarPath = this.basePath + '/serviceLibrary/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -40742,7 +40582,7 @@ export class ServicesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Service;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Service;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -40761,7 +40601,7 @@ export class ServicesApi {
      * @summary Get the specified item
      * @param id 
      */
-    public getServiceItem (id: string) : Promise<{ response: http.ClientResponse; body: ServiceItem;  }> {
+    public getServiceItem (id: string) : Promise<{ response: http.IncomingMessage; body: ServiceItem;  }> {
         const localVarPath = this.basePath + '/serviceItem/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -40796,7 +40636,7 @@ export class ServicesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ServiceItem;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ServiceItem;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -40815,7 +40655,7 @@ export class ServicesApi {
      * @summary Retrieves list of tenants for whom the service item is explicitly published
      * @param id 
      */
-    public getServiceItemTenants (id: string) : Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }> {
+    public getServiceItemTenants (id: string) : Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }> {
         const localVarPath = this.basePath + '/serviceItem/{id}/tenants'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -40850,7 +40690,7 @@ export class ServicesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -40869,7 +40709,7 @@ export class ServicesApi {
      * @summary This endpoint will not produce results. It is a placeholder to enforce code generation of VroWorkflowServiceItem
      * @param id 
      */
-    public getWorkflowServiceItems (id: string) : Promise<{ response: http.ClientResponse; body: Array<VroWorkflowServiceItem>;  }> {
+    public getWorkflowServiceItems (id: string) : Promise<{ response: http.IncomingMessage; body: Array<VroWorkflowServiceItem>;  }> {
         const localVarPath = this.basePath + '/serviceLibrary/{id}/workflows'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -40904,7 +40744,7 @@ export class ServicesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<VroWorkflowServiceItem>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<VroWorkflowServiceItem>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -40924,7 +40764,7 @@ export class ServicesApi {
      * @param remoteWorkflows 
      * @param id 
      */
-    public importVroWorkflows (remoteWorkflows: Array<VroRemoteWorkflowItem>, id: string) : Promise<{ response: http.ClientResponse; body: Array<ServiceItem>;  }> {
+    public importVroWorkflows (remoteWorkflows: Array<VroRemoteWorkflowItem>, id: string) : Promise<{ response: http.IncomingMessage; body: Array<ServiceItem>;  }> {
         const localVarPath = this.basePath + '/serviceLibrary/{id}/workflows'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -40965,7 +40805,7 @@ export class ServicesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<ServiceItem>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<ServiceItem>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -40985,7 +40825,7 @@ export class ServicesApi {
      * @param publishTenantsBody 
      * @param id 
      */
-    public postServiceItemPublish (publishTenantsBody: Array<EntityReference>, id: string) : Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }> {
+    public postServiceItemPublish (publishTenantsBody: Array<EntityReference>, id: string) : Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }> {
         const localVarPath = this.basePath + '/serviceItem/{id}/tenants/publish'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -41026,7 +40866,7 @@ export class ServicesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -41045,7 +40885,7 @@ export class ServicesApi {
      * @summary Publishes the service item to all tenants
      * @param id 
      */
-    public postServiceItemPublishAll (id: string) : Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }> {
+    public postServiceItemPublishAll (id: string) : Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }> {
         const localVarPath = this.basePath + '/serviceItem/{id}/tenants/publishAll'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -41080,7 +40920,7 @@ export class ServicesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -41100,7 +40940,7 @@ export class ServicesApi {
      * @param unpublishTenantsBody 
      * @param id 
      */
-    public postServiceItemUnpublish (unpublishTenantsBody: Array<EntityReference>, id: string) : Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }> {
+    public postServiceItemUnpublish (unpublishTenantsBody: Array<EntityReference>, id: string) : Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }> {
         const localVarPath = this.basePath + '/serviceItem/{id}/tenants/unpublish'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -41141,7 +40981,7 @@ export class ServicesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -41160,7 +41000,7 @@ export class ServicesApi {
      * @summary Unpublishes the service item from all tenants
      * @param id 
      */
-    public postServiceItemUnpublishAll (id: string) : Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }> {
+    public postServiceItemUnpublishAll (id: string) : Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }> {
         const localVarPath = this.basePath + '/serviceItem/{id}/tenants/unpublishAll'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -41195,7 +41035,7 @@ export class ServicesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -41219,7 +41059,7 @@ export class ServicesApi {
      * @param sortDesc Field to use for descending sort
      * @param getExternalData Flag indicating whether data stored outside of vCloud Director should be included in results
      */
-    public queryServiceItems (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string, getExternalData?: boolean) : Promise<{ response: http.ClientResponse; body: ServiceItems;  }> {
+    public queryServiceItems (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string, getExternalData?: boolean) : Promise<{ response: http.IncomingMessage; body: ServiceItems;  }> {
         const localVarPath = this.basePath + '/serviceItem';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -41282,7 +41122,7 @@ export class ServicesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ServiceItems;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ServiceItems;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -41305,7 +41145,7 @@ export class ServicesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryServices (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: Services;  }> {
+    public queryServices (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: Services;  }> {
         const localVarPath = this.basePath + '/serviceLibrary';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -41364,7 +41204,7 @@ export class ServicesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Services;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Services;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -41384,7 +41224,7 @@ export class ServicesApi {
      * @param publishTenantsBody 
      * @param id 
      */
-    public setServiceItemTenants (publishTenantsBody: Array<EntityReference>, id: string) : Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }> {
+    public setServiceItemTenants (publishTenantsBody: Array<EntityReference>, id: string) : Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }> {
         const localVarPath = this.basePath + '/serviceItem/{id}/tenants'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -41425,7 +41265,7 @@ export class ServicesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -41445,7 +41285,7 @@ export class ServicesApi {
      * @param updatedService 
      * @param id 
      */
-    public updateService (updatedService: Service, id: string) : Promise<{ response: http.ClientResponse; body: Service;  }> {
+    public updateService (updatedService: Service, id: string) : Promise<{ response: http.IncomingMessage; body: Service;  }> {
         const localVarPath = this.basePath + '/serviceLibrary/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -41486,7 +41326,7 @@ export class ServicesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Service;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Service;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -41506,7 +41346,7 @@ export class ServicesApi {
      * @param updatedService 
      * @param id 
      */
-    public updateServiceItem (updatedService: ServiceItem, id: string) : Promise<{ response: http.ClientResponse; body: ServiceItem;  }> {
+    public updateServiceItem (updatedService: ServiceItem, id: string) : Promise<{ response: http.IncomingMessage; body: ServiceItem;  }> {
         const localVarPath = this.basePath + '/serviceItem/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -41547,7 +41387,7 @@ export class ServicesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ServiceItem;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ServiceItem;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -41614,7 +41454,7 @@ export class SessionsApi {
      * @param page Page to fetch, zero offset.
      * @param pageSize Results per page to fetch.
      */
-    public getAccessibleLocations (page: number, pageSize: number) : Promise<{ response: http.ClientResponse; body: AccessibleLocations;  }> {
+    public getAccessibleLocations (page: number, pageSize: number) : Promise<{ response: http.IncomingMessage; body: AccessibleLocations;  }> {
         const localVarPath = this.basePath + '/1.0.0/sessions/{id:((?!provider|current).)*}/accessibleLocations';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -41661,7 +41501,7 @@ export class SessionsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: AccessibleLocations;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: AccessibleLocations;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -41680,7 +41520,7 @@ export class SessionsApi {
      * @summary Returns the specified session for current user
      * @param id 
      */
-    public getCurrentSession (id: string) : Promise<{ response: http.ClientResponse; body: Session;  }> {
+    public getCurrentSession (id: string) : Promise<{ response: http.IncomingMessage; body: Session;  }> {
         const localVarPath = this.basePath + '/1.0.0/sessions/{id:((?!provider|current).)*}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -41715,7 +41555,7 @@ export class SessionsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Session;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Session;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -41733,7 +41573,7 @@ export class SessionsApi {
      * Returns the specified session for the authorization token 
      * @summary Returns the session associated with the authorization credential
      */
-    public getCurrentSessionForAuthCredential () : Promise<{ response: http.ClientResponse; body: Session;  }> {
+    public getCurrentSessionForAuthCredential () : Promise<{ response: http.IncomingMessage; body: Session;  }> {
         const localVarPath = this.basePath + '/1.0.0/sessions/current';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -41762,7 +41602,7 @@ export class SessionsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Session;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Session;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -41782,7 +41622,7 @@ export class SessionsApi {
      * @param page Page to fetch, zero offset.
      * @param pageSize Results per page to fetch.
      */
-    public getCurrentSessions (page: number, pageSize: number) : Promise<{ response: http.ClientResponse; body: Sessions;  }> {
+    public getCurrentSessions (page: number, pageSize: number) : Promise<{ response: http.IncomingMessage; body: Sessions;  }> {
         const localVarPath = this.basePath + '/1.0.0/sessions';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -41829,7 +41669,7 @@ export class SessionsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Sessions;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Sessions;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -41848,7 +41688,7 @@ export class SessionsApi {
      * @summary Get token associated with this session.
      * @param id 
      */
-    public getToken (id: string) : Promise<{ response: http.ClientResponse; body: Token;  }> {
+    public getToken (id: string) : Promise<{ response: http.IncomingMessage; body: Token;  }> {
         const localVarPath = this.basePath + '/1.0.0/sessions/{id:((?!provider|current).)*}/token'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -41883,7 +41723,7 @@ export class SessionsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Token;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Token;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -41902,7 +41742,7 @@ export class SessionsApi {
      * @summary Logs in a user
      * @param authorization 
      */
-    public login (authorization: string) : Promise<{ response: http.ClientResponse; body: Session;  }> {
+    public login (authorization: string) : Promise<{ response: http.IncomingMessage; body: Session;  }> {
         const localVarPath = this.basePath + '/1.0.0/sessions';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -41938,7 +41778,7 @@ export class SessionsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Session;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Session;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -41957,7 +41797,7 @@ export class SessionsApi {
      * @summary Logs out the current user
      * @param id 
      */
-    public logout (id: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public logout (id: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/sessions/{id:((?!provider|current).)*}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -41992,7 +41832,7 @@ export class SessionsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -42011,7 +41851,7 @@ export class SessionsApi {
      * @summary Logs in a user (Provider only)
      * @param authorization 
      */
-    public providerLogin (authorization: string) : Promise<{ response: http.ClientResponse; body: Session;  }> {
+    public providerLogin (authorization: string) : Promise<{ response: http.IncomingMessage; body: Session;  }> {
         const localVarPath = this.basePath + '/1.0.0/sessions/provider';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -42047,7 +41887,7 @@ export class SessionsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Session;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Session;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -42112,7 +41952,7 @@ export class SslSettingsApi {
      * Get the current VCD SSL settings 
      * @summary Get the SSL settings
      */
-    public getSslSettings () : Promise<{ response: http.ClientResponse; body: SslSettings;  }> {
+    public getSslSettings () : Promise<{ response: http.IncomingMessage; body: SslSettings;  }> {
         const localVarPath = this.basePath + '/1.0.0/ssl/settings';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -42141,7 +41981,7 @@ export class SslSettingsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: SslSettings;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: SslSettings;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -42207,7 +42047,7 @@ export class TestConnectionApi {
      * @summary Test a connection
      * @param connection 
      */
-    public test (connection: Connection) : Promise<{ response: http.ClientResponse; body: TestResult;  }> {
+    public test (connection: Connection) : Promise<{ response: http.IncomingMessage; body: TestResult;  }> {
         const localVarPath = this.basePath + '/1.0.0/testConnection';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -42242,7 +42082,7 @@ export class TestConnectionApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: TestResult;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: TestResult;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -42308,7 +42148,7 @@ export class TokenApi {
      * @summary Creates a new token of the specified type
      * @param tokenParameters 
      */
-    public createToken (tokenParameters?: TokenParameters) : Promise<{ response: http.ClientResponse; body: Token;  }> {
+    public createToken (tokenParameters?: TokenParameters) : Promise<{ response: http.IncomingMessage; body: Token;  }> {
         const localVarPath = this.basePath + '/1.0.0/tokens';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -42338,7 +42178,7 @@ export class TokenApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Token;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Token;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -42357,7 +42197,7 @@ export class TokenApi {
      * @summary Delete a specific token. Use this to revoke the current token in case of a leak. 
      * @param id Token ID URN
      */
-    public deleteToken (id: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteToken (id: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/tokens/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -42392,7 +42232,7 @@ export class TokenApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -42411,7 +42251,7 @@ export class TokenApi {
      * @summary Retrieves a specific token
      * @param id Token ID URN
      */
-    public getToken (id: string) : Promise<{ response: http.ClientResponse; body: Token;  }> {
+    public getToken (id: string) : Promise<{ response: http.IncomingMessage; body: Token;  }> {
         const localVarPath = this.basePath + '/1.0.0/tokens/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -42446,7 +42286,7 @@ export class TokenApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Token;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Token;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -42469,7 +42309,7 @@ export class TokenApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getTokens (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: Tokens;  }> {
+    public getTokens (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: Tokens;  }> {
         const localVarPath = this.basePath + '/1.0.0/tokens';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -42528,7 +42368,7 @@ export class TokenApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Tokens;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Tokens;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -42594,7 +42434,7 @@ export class TrustedCertificatesApi {
      * @summary Revoke trusting specified certificate
      * @param trustedCertificate 
      */
-    public deleteCertificate (trustedCertificate: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteCertificate (trustedCertificate: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/ssl/trustedCertificates/{trustedCertificate}'
             .replace('{' + 'trustedCertificate' + '}', String(trustedCertificate));
         let queryParameters: any = {};
@@ -42629,7 +42469,7 @@ export class TrustedCertificatesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -42648,7 +42488,7 @@ export class TrustedCertificatesApi {
      * @summary Get specified certificate
      * @param trustedCertificate 
      */
-    public getCertificate (trustedCertificate: string) : Promise<{ response: http.ClientResponse; body: TrustedCertificate;  }> {
+    public getCertificate (trustedCertificate: string) : Promise<{ response: http.IncomingMessage; body: TrustedCertificate;  }> {
         const localVarPath = this.basePath + '/1.0.0/ssl/trustedCertificates/{trustedCertificate}'
             .replace('{' + 'trustedCertificate' + '}', String(trustedCertificate));
         let queryParameters: any = {};
@@ -42683,7 +42523,7 @@ export class TrustedCertificatesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: TrustedCertificate;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: TrustedCertificate;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -42706,7 +42546,7 @@ export class TrustedCertificatesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryTrustedCertificates (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: Certificates;  }> {
+    public queryTrustedCertificates (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: Certificates;  }> {
         const localVarPath = this.basePath + '/1.0.0/ssl/trustedCertificates';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -42765,7 +42605,7 @@ export class TrustedCertificatesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Certificates;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Certificates;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -42784,7 +42624,7 @@ export class TrustedCertificatesApi {
      * @summary Add to list of currently trusted certificates
      * @param newCertificate 
      */
-    public trustCertificate (newCertificate: TrustedCertificate) : Promise<{ response: http.ClientResponse; body: TrustedCertificate;  }> {
+    public trustCertificate (newCertificate: TrustedCertificate) : Promise<{ response: http.IncomingMessage; body: TrustedCertificate;  }> {
         const localVarPath = this.basePath + '/1.0.0/ssl/trustedCertificates';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -42819,7 +42659,7 @@ export class TrustedCertificatesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: TrustedCertificate;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: TrustedCertificate;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -42839,7 +42679,7 @@ export class TrustedCertificatesApi {
      * @param modifiedCertificate 
      * @param trustedCertificate 
      */
-    public updateCertificate (modifiedCertificate: TrustedCertificate, trustedCertificate: string) : Promise<{ response: http.ClientResponse; body: TrustedCertificate;  }> {
+    public updateCertificate (modifiedCertificate: TrustedCertificate, trustedCertificate: string) : Promise<{ response: http.IncomingMessage; body: TrustedCertificate;  }> {
         const localVarPath = this.basePath + '/1.0.0/ssl/trustedCertificates/{trustedCertificate}'
             .replace('{' + 'trustedCertificate' + '}', String(trustedCertificate));
         let queryParameters: any = {};
@@ -42880,7 +42720,7 @@ export class TrustedCertificatesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: TrustedCertificate;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: TrustedCertificate;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -42946,7 +42786,7 @@ export class UiPluginApi {
      * @summary Delete system level logo
      * @param id 
      */
-    public deleteUiPlugin (id: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteUiPlugin (id: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/extensions/ui/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -42981,7 +42821,7 @@ export class UiPluginApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -42999,7 +42839,7 @@ export class UiPluginApi {
      * Retrieves a map of extension Points and an ordered list of items registered with that extension point
      * @summary Retrieves a map of extension Points and an ordered list of items registered with that extension point
      */
-    public getExtensionPointSummary () : Promise<{ response: http.ClientResponse; body: ExtensionPointSummary;  }> {
+    public getExtensionPointSummary () : Promise<{ response: http.IncomingMessage; body: ExtensionPointSummary;  }> {
         const localVarPath = this.basePath + '/extensions/ui/extensionPoints';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -43028,7 +42868,7 @@ export class UiPluginApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ExtensionPointSummary;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ExtensionPointSummary;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -43047,7 +42887,7 @@ export class UiPluginApi {
      * @summary Retrieves extension specific plugin metadata
      * @param id 
      */
-    public getUiPlugin (id: string) : Promise<{ response: http.ClientResponse; body: UiPluginMetadataResponse;  }> {
+    public getUiPlugin (id: string) : Promise<{ response: http.IncomingMessage; body: UiPluginMetadataResponse;  }> {
         const localVarPath = this.basePath + '/extensions/ui/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -43082,7 +42922,7 @@ export class UiPluginApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: UiPluginMetadataResponse;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: UiPluginMetadataResponse;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -43101,7 +42941,7 @@ export class UiPluginApi {
      * @summary Customizes the order and enables/disables extension Points
      * @param extensionPointSummaryBody 
      */
-    public putExtensionPointSummary (extensionPointSummaryBody: ExtensionPointSummary) : Promise<{ response: http.ClientResponse; body: ExtensionPointSummary;  }> {
+    public putExtensionPointSummary (extensionPointSummaryBody: ExtensionPointSummary) : Promise<{ response: http.IncomingMessage; body: ExtensionPointSummary;  }> {
         const localVarPath = this.basePath + '/extensions/ui/extensionPoints';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -43136,7 +42976,7 @@ export class UiPluginApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ExtensionPointSummary;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ExtensionPointSummary;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -43156,7 +42996,7 @@ export class UiPluginApi {
      * @param pluginMetadataBody 
      * @param id 
      */
-    public putUiPlugin (pluginMetadataBody: UiPluginMetadata, id: string) : Promise<{ response: http.ClientResponse; body: UiPluginMetadataResponse;  }> {
+    public putUiPlugin (pluginMetadataBody: UiPluginMetadata, id: string) : Promise<{ response: http.IncomingMessage; body: UiPluginMetadataResponse;  }> {
         const localVarPath = this.basePath + '/extensions/ui/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -43197,7 +43037,7 @@ export class UiPluginApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: UiPluginMetadataResponse;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: UiPluginMetadataResponse;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -43263,7 +43103,7 @@ export class UiPluginResourceApi {
      * @summary Delete the plugin for this extension
      * @param id 
      */
-    public deleteUiPluginResource (id: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteUiPluginResource (id: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/extensions/ui/{id}/plugin'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -43298,7 +43138,7 @@ export class UiPluginResourceApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -43318,7 +43158,7 @@ export class UiPluginResourceApi {
      * @param pluginUploadSpec 
      * @param id 
      */
-    public uploadUiPluginResource (pluginUploadSpec: UploadSpec, id: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public uploadUiPluginResource (pluginUploadSpec: UploadSpec, id: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/extensions/ui/{id}/plugin'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -43359,7 +43199,7 @@ export class UiPluginResourceApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -43430,7 +43270,7 @@ export class UiPluginTenantsApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getUiPluginTenants (id: string, page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public getUiPluginTenants (id: string, page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/extensions/ui/{id}/tenants'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -43495,7 +43335,7 @@ export class UiPluginTenantsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -43515,7 +43355,7 @@ export class UiPluginTenantsApi {
      * @param publishTenantsBody 
      * @param id 
      */
-    public postUiPluginPublish (publishTenantsBody: Array<EntityReference>, id: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public postUiPluginPublish (publishTenantsBody: Array<EntityReference>, id: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/extensions/ui/{id}/tenants/publish'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -43556,7 +43396,7 @@ export class UiPluginTenantsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -43575,7 +43415,7 @@ export class UiPluginTenantsApi {
      * @summary Publishes the UI plugin to all tenants
      * @param id 
      */
-    public postUiPluginPublishAll (id: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public postUiPluginPublishAll (id: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/extensions/ui/{id}/tenants/publishAll'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -43610,7 +43450,7 @@ export class UiPluginTenantsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -43630,7 +43470,7 @@ export class UiPluginTenantsApi {
      * @param unpublishTenantsBody 
      * @param id 
      */
-    public postUiPluginUnpublish (unpublishTenantsBody: Array<EntityReference>, id: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public postUiPluginUnpublish (unpublishTenantsBody: Array<EntityReference>, id: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/extensions/ui/{id}/tenants/unpublish'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -43671,7 +43511,7 @@ export class UiPluginTenantsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -43690,7 +43530,7 @@ export class UiPluginTenantsApi {
      * @summary Unpublishes the UI plugin from all tenants
      * @param id 
      */
-    public postUiPluginUnpublishAll (id: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public postUiPluginUnpublishAll (id: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/extensions/ui/{id}/tenants/unpublishAll'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -43725,7 +43565,7 @@ export class UiPluginTenantsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -43791,7 +43631,7 @@ export class UiPluginsApi {
      * @summary Adds plugin metadata for a new UI Extension
      * @param body 
      */
-    public addUiPlugin (body: UiPluginMetadata) : Promise<{ response: http.ClientResponse; body: UiPluginMetadataResponse;  }> {
+    public addUiPlugin (body: UiPluginMetadata) : Promise<{ response: http.IncomingMessage; body: UiPluginMetadataResponse;  }> {
         const localVarPath = this.basePath + '/extensions/ui';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -43826,7 +43666,7 @@ export class UiPluginsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: UiPluginMetadataResponse;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: UiPluginMetadataResponse;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -43844,7 +43684,7 @@ export class UiPluginsApi {
      * 
      * @summary Get a list of all UI Extensions
      */
-    public getUiPlugins () : Promise<{ response: http.ClientResponse; body: Array<UiPluginMetadataResponse>;  }> {
+    public getUiPlugins () : Promise<{ response: http.IncomingMessage; body: Array<UiPluginMetadataResponse>;  }> {
         const localVarPath = this.basePath + '/extensions/ui';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -43873,7 +43713,7 @@ export class UiPluginsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<UiPluginMetadataResponse>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<UiPluginMetadataResponse>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -43940,7 +43780,7 @@ export class UniversalRouterApi {
      * @param universalRouterId 
      * @param force Value \&quot;true\&quot; means to forcefully delete the object that contains other objects even if those objects are in a state that does not allow removal. The default is \&quot;false\&quot;; therefore, objects are not removed if they are not in a state that normally allows removal. Force also implies recursive delete where other contained objects are removed. Errors may be ignored. Invalid value (not true or false) are ignored. 
      */
-    public deleteUniversalRouter (universalRouterId: string, force?: boolean) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteUniversalRouter (universalRouterId: string, force?: boolean) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/universalRouters/{universalRouterId}'
             .replace('{' + 'universalRouterId' + '}', String(universalRouterId));
         let queryParameters: any = {};
@@ -43979,7 +43819,7 @@ export class UniversalRouterApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -43998,7 +43838,7 @@ export class UniversalRouterApi {
      * @summary Retrieves a specific Universal Router
      * @param universalRouterId 
      */
-    public getUniversalRouter (universalRouterId: string) : Promise<{ response: http.ClientResponse; body: UniversalRouter;  }> {
+    public getUniversalRouter (universalRouterId: string) : Promise<{ response: http.IncomingMessage; body: UniversalRouter;  }> {
         const localVarPath = this.basePath + '/1.0.0/universalRouters/{universalRouterId}'
             .replace('{' + 'universalRouterId' + '}', String(universalRouterId));
         let queryParameters: any = {};
@@ -44033,7 +43873,7 @@ export class UniversalRouterApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: UniversalRouter;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: UniversalRouter;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -44052,7 +43892,7 @@ export class UniversalRouterApi {
      * @summary Sync/repair the Universal Router
      * @param universalRouterId 
      */
-    public syncUniversalRouter (universalRouterId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public syncUniversalRouter (universalRouterId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/universalRouters/{universalRouterId}/sync'
             .replace('{' + 'universalRouterId' + '}', String(universalRouterId));
         let queryParameters: any = {};
@@ -44087,7 +43927,7 @@ export class UniversalRouterApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -44107,7 +43947,7 @@ export class UniversalRouterApi {
      * @param router 
      * @param universalRouterId 
      */
-    public updateUniversalRouter (router: UniversalRouter, universalRouterId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateUniversalRouter (router: UniversalRouter, universalRouterId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/universalRouters/{universalRouterId}'
             .replace('{' + 'universalRouterId' + '}', String(universalRouterId));
         let queryParameters: any = {};
@@ -44148,7 +43988,7 @@ export class UniversalRouterApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -44214,7 +44054,7 @@ export class UniversalRouterDhcpApi {
      * @summary Deletes Dhcp configuration of a specific Universal Router
      * @param universalRouterId 
      */
-    public deleteDhcpConfigForUniversalRouter (universalRouterId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteDhcpConfigForUniversalRouter (universalRouterId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/universalRouters/{universalRouterId}/dhcp'
             .replace('{' + 'universalRouterId' + '}', String(universalRouterId));
         let queryParameters: any = {};
@@ -44249,7 +44089,7 @@ export class UniversalRouterDhcpApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -44268,7 +44108,7 @@ export class UniversalRouterDhcpApi {
      * @summary Retrieves Dhcp configuration of a specific Universal Router
      * @param universalRouterId 
      */
-    public getDhcpConfigForUniversalRouter (universalRouterId: string) : Promise<{ response: http.ClientResponse; body: UniversalRouterDhcpConfig;  }> {
+    public getDhcpConfigForUniversalRouter (universalRouterId: string) : Promise<{ response: http.IncomingMessage; body: UniversalRouterDhcpConfig;  }> {
         const localVarPath = this.basePath + '/1.0.0/universalRouters/{universalRouterId}/dhcp'
             .replace('{' + 'universalRouterId' + '}', String(universalRouterId));
         let queryParameters: any = {};
@@ -44303,7 +44143,7 @@ export class UniversalRouterDhcpApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: UniversalRouterDhcpConfig;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: UniversalRouterDhcpConfig;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -44323,7 +44163,7 @@ export class UniversalRouterDhcpApi {
      * @param dhcpConfig 
      * @param universalRouterId 
      */
-    public updateDhcpConfigForUniversalRouter (dhcpConfig: UniversalRouterDhcpConfig, universalRouterId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateDhcpConfigForUniversalRouter (dhcpConfig: UniversalRouterDhcpConfig, universalRouterId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/universalRouters/{universalRouterId}/dhcp'
             .replace('{' + 'universalRouterId' + '}', String(universalRouterId));
         let queryParameters: any = {};
@@ -44364,7 +44204,7 @@ export class UniversalRouterDhcpApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -44430,7 +44270,7 @@ export class UniversalRouterDnsApi {
      * @summary Deletes dns configuration of a universal router
      * @param universalRouterId 
      */
-    public deleteDnsConfigForRouter (universalRouterId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteDnsConfigForRouter (universalRouterId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/universalRouters/{universalRouterId}/dns'
             .replace('{' + 'universalRouterId' + '}', String(universalRouterId));
         let queryParameters: any = {};
@@ -44465,7 +44305,7 @@ export class UniversalRouterDnsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -44484,7 +44324,7 @@ export class UniversalRouterDnsApi {
      * @summary Retrieves dns configuration of a universal router
      * @param universalRouterId 
      */
-    public getDnsConfigForRouter (universalRouterId: string) : Promise<{ response: http.ClientResponse; body: RouterDnsConfig;  }> {
+    public getDnsConfigForRouter (universalRouterId: string) : Promise<{ response: http.IncomingMessage; body: RouterDnsConfig;  }> {
         const localVarPath = this.basePath + '/1.0.0/universalRouters/{universalRouterId}/dns'
             .replace('{' + 'universalRouterId' + '}', String(universalRouterId));
         let queryParameters: any = {};
@@ -44519,7 +44359,7 @@ export class UniversalRouterDnsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: RouterDnsConfig;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: RouterDnsConfig;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -44539,7 +44379,7 @@ export class UniversalRouterDnsApi {
      * @param dnsConfig 
      * @param universalRouterId 
      */
-    public updateDnsConfigForRouter (dnsConfig: RouterDnsConfig, universalRouterId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateDnsConfigForRouter (dnsConfig: RouterDnsConfig, universalRouterId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/universalRouters/{universalRouterId}/dns'
             .replace('{' + 'universalRouterId' + '}', String(universalRouterId));
         let queryParameters: any = {};
@@ -44580,7 +44420,7 @@ export class UniversalRouterDnsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -44646,7 +44486,7 @@ export class UniversalRouterHealthApi {
      * @summary Get Health information of a universal router
      * @param universalRouterId 
      */
-    public getUniversalRouterHealth (universalRouterId: string) : Promise<{ response: http.ClientResponse; body: RouterHealthReport;  }> {
+    public getUniversalRouterHealth (universalRouterId: string) : Promise<{ response: http.IncomingMessage; body: RouterHealthReport;  }> {
         const localVarPath = this.basePath + '/1.0.0/universalRouters/{universalRouterId}/health'
             .replace('{' + 'universalRouterId' + '}', String(universalRouterId));
         let queryParameters: any = {};
@@ -44681,7 +44521,7 @@ export class UniversalRouterHealthApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: RouterHealthReport;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: RouterHealthReport;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -44747,7 +44587,7 @@ export class UniversalRoutersApi {
      * @summary Create a new universal router
      * @param universalRouter 
      */
-    public createUniversalRouter (universalRouter: UniversalRouter) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createUniversalRouter (universalRouter: UniversalRouter) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/universalRouters';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -44782,7 +44622,7 @@ export class UniversalRoutersApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -44801,7 +44641,7 @@ export class UniversalRoutersApi {
      * @summary Get all the universal routers defined for a vDC group
      * @param vdcGroupId 
      */
-    public getAllUniversalRoutersForVdcGroup (vdcGroupId: string) : Promise<{ response: http.ClientResponse; body: UniversalRouters;  }> {
+    public getAllUniversalRoutersForVdcGroup (vdcGroupId: string) : Promise<{ response: http.IncomingMessage; body: UniversalRouters;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcGroups/{vdcGroupId}/universalRouters'
             .replace('{' + 'vdcGroupId' + '}', String(vdcGroupId));
         let queryParameters: any = {};
@@ -44836,7 +44676,7 @@ export class UniversalRoutersApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: UniversalRouters;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: UniversalRouters;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -44902,7 +44742,7 @@ export class UniversalRoutingApi {
      * @summary Retrieves Universal Egress Points and routing configuration for a Universal Router.
      * @param universalRouterId 
      */
-    public getUniversalEgressRouting (universalRouterId: string) : Promise<{ response: http.ClientResponse; body: UniversalEgressRoutes;  }> {
+    public getUniversalEgressRouting (universalRouterId: string) : Promise<{ response: http.IncomingMessage; body: UniversalEgressRoutes;  }> {
         const localVarPath = this.basePath + '/1.0.0/universalRouters/{universalRouterId}/routing'
             .replace('{' + 'universalRouterId' + '}', String(universalRouterId));
         let queryParameters: any = {};
@@ -44937,7 +44777,7 @@ export class UniversalRoutingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: UniversalEgressRoutes;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: UniversalEgressRoutes;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -44956,7 +44796,7 @@ export class UniversalRoutingApi {
      * @summary Retrieves routing configuration for a Universal Router.
      * @param universalRouterId 
      */
-    public getUniversalRoutes (universalRouterId: string) : Promise<{ response: http.ClientResponse; body: UniversalRoutes;  }> {
+    public getUniversalRoutes (universalRouterId: string) : Promise<{ response: http.IncomingMessage; body: UniversalRoutes;  }> {
         const localVarPath = this.basePath + '/1.0.0/universalRouters/{universalRouterId}/routing/routes'
             .replace('{' + 'universalRouterId' + '}', String(universalRouterId));
         let queryParameters: any = {};
@@ -44991,7 +44831,7 @@ export class UniversalRoutingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: UniversalRoutes;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: UniversalRoutes;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -45010,7 +44850,7 @@ export class UniversalRoutingApi {
      * @summary Sync/repair the routing configuration for a Universal Router.
      * @param universalRouterId 
      */
-    public syncUniversalRoutes (universalRouterId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public syncUniversalRoutes (universalRouterId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/universalRouters/{universalRouterId}/routing/routes/sync'
             .replace('{' + 'universalRouterId' + '}', String(universalRouterId));
         let queryParameters: any = {};
@@ -45045,7 +44885,7 @@ export class UniversalRoutingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -45065,7 +44905,7 @@ export class UniversalRoutingApi {
      * @param universalEgressRoutes 
      * @param universalRouterId 
      */
-    public updateUniversalEgressRouting (universalEgressRoutes: UniversalEgressRoutes, universalRouterId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateUniversalEgressRouting (universalEgressRoutes: UniversalEgressRoutes, universalRouterId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/universalRouters/{universalRouterId}/routing'
             .replace('{' + 'universalRouterId' + '}', String(universalRouterId));
         let queryParameters: any = {};
@@ -45106,7 +44946,7 @@ export class UniversalRoutingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -45126,7 +44966,7 @@ export class UniversalRoutingApi {
      * @param routes 
      * @param universalRouterId 
      */
-    public updateUniversalRoutes (routes: UniversalRoutes, universalRouterId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateUniversalRoutes (routes: UniversalRoutes, universalRouterId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/universalRouters/{universalRouterId}/routing/routes'
             .replace('{' + 'universalRouterId' + '}', String(universalRouterId));
         let queryParameters: any = {};
@@ -45167,7 +45007,7 @@ export class UniversalRoutingApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -45233,7 +45073,7 @@ export class UserApi {
      * @summary Create a new user.
      * @param newUser 
      */
-    public createUser (newUser: VcdUser) : Promise<{ response: http.ClientResponse; body: VcdUser;  }> {
+    public createUser (newUser: VcdUser) : Promise<{ response: http.IncomingMessage; body: VcdUser;  }> {
         const localVarPath = this.basePath + '/1.0.0/users';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -45268,7 +45108,7 @@ export class UserApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VcdUser;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VcdUser;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -45287,7 +45127,7 @@ export class UserApi {
      * @summary Delete the specified user.
      * @param userUrn userUrn
      */
-    public deleteUser (userUrn: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteUser (userUrn: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/users/{userUrn}'
             .replace('{' + 'userUrn' + '}', String(userUrn));
         let queryParameters: any = {};
@@ -45322,7 +45162,7 @@ export class UserApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -45341,7 +45181,7 @@ export class UserApi {
      * @summary Get a specified user by id.
      * @param userUrn userUrn
      */
-    public getUser (userUrn: string) : Promise<{ response: http.ClientResponse; body: VcdUser;  }> {
+    public getUser (userUrn: string) : Promise<{ response: http.IncomingMessage; body: VcdUser;  }> {
         const localVarPath = this.basePath + '/1.0.0/users/{userUrn}'
             .replace('{' + 'userUrn' + '}', String(userUrn));
         let queryParameters: any = {};
@@ -45376,7 +45216,7 @@ export class UserApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VcdUser;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VcdUser;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -45400,7 +45240,7 @@ export class UserApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryUserGroups (page: number, pageSize: number, userUrn: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public queryUserGroups (page: number, pageSize: number, userUrn: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/users/{userUrn}/groups'
             .replace('{' + 'userUrn' + '}', String(userUrn));
         let queryParameters: any = {};
@@ -45465,7 +45305,7 @@ export class UserApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -45488,7 +45328,7 @@ export class UserApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryUsers (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: VcdUsers;  }> {
+    public queryUsers (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: VcdUsers;  }> {
         const localVarPath = this.basePath + '/1.0.0/users';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -45547,7 +45387,7 @@ export class UserApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VcdUsers;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VcdUsers;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -45567,7 +45407,7 @@ export class UserApi {
      * @param updatedUser 
      * @param userUrn userUrn
      */
-    public updateUser (updatedUser: VcdUser, userUrn: string) : Promise<{ response: http.ClientResponse; body: VcdUser;  }> {
+    public updateUser (updatedUser: VcdUser, userUrn: string) : Promise<{ response: http.IncomingMessage; body: VcdUser;  }> {
         const localVarPath = this.basePath + '/1.0.0/users/{userUrn}'
             .replace('{' + 'userUrn' + '}', String(userUrn));
         let queryParameters: any = {};
@@ -45608,7 +45448,7 @@ export class UserApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VcdUser;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VcdUser;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -45678,7 +45518,7 @@ export class VCenterResourcesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getDvSwitches (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: DvSwitches;  }> {
+    public getDvSwitches (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: DvSwitches;  }> {
         const localVarPath = this.basePath + '/1.0.0/virtualCenters/resources/dvSwitches';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -45737,7 +45577,7 @@ export class VCenterResourcesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: DvSwitches;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: DvSwitches;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -45760,7 +45600,7 @@ export class VCenterResourcesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getImportableDvpgs (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: DistributedPortGroups;  }> {
+    public getImportableDvpgs (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: DistributedPortGroups;  }> {
         const localVarPath = this.basePath + '/1.0.0/virtualCenters/resources/importableDvpgs';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -45819,7 +45659,7 @@ export class VCenterResourcesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: DistributedPortGroups;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: DistributedPortGroups;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -45842,7 +45682,7 @@ export class VCenterResourcesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getImportablePortgroups (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: PortGroups;  }> {
+    public getImportablePortgroups (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: PortGroups;  }> {
         const localVarPath = this.basePath + '/1.0.0/virtualCenters/resources/importablePortgroups';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -45901,7 +45741,7 @@ export class VCenterResourcesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: PortGroups;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: PortGroups;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -45967,7 +45807,7 @@ export class VRealizeOrchestratorApi {
      * @summary Retrieves service specific metadata for a vRealize Orchestrator
      * @param id 
      */
-    public getRegisteredVRO (id: string) : Promise<{ response: http.ClientResponse; body: VROServiceInfo;  }> {
+    public getRegisteredVRO (id: string) : Promise<{ response: http.IncomingMessage; body: VROServiceInfo;  }> {
         const localVarPath = this.basePath + '/vro/servers/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -46002,7 +45842,7 @@ export class VRealizeOrchestratorApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VROServiceInfo;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VROServiceInfo;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -46022,7 +45862,7 @@ export class VRealizeOrchestratorApi {
      * @param body 
      * @param id 
      */
-    public patchService (body: VROServiceInfo, id: string) : Promise<{ response: http.ClientResponse; body: VROServiceInfo;  }> {
+    public patchService (body: VROServiceInfo, id: string) : Promise<{ response: http.IncomingMessage; body: VROServiceInfo;  }> {
         const localVarPath = this.basePath + '/vro/servers/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -46063,7 +45903,7 @@ export class VRealizeOrchestratorApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VROServiceInfo;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VROServiceInfo;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -46082,7 +45922,7 @@ export class VRealizeOrchestratorApi {
      * @summary Unregisters a vRealize Orchestrator endpoint from vCloud Director
      * @param id 
      */
-    public unregister (id: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public unregister (id: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/vro/servers/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -46117,7 +45957,7 @@ export class VRealizeOrchestratorApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -46137,7 +45977,7 @@ export class VRealizeOrchestratorApi {
      * @param body 
      * @param id 
      */
-    public updateService (body: VROServiceInfo, id: string) : Promise<{ response: http.ClientResponse; body: VROServiceInfo;  }> {
+    public updateService (body: VROServiceInfo, id: string) : Promise<{ response: http.IncomingMessage; body: VROServiceInfo;  }> {
         const localVarPath = this.basePath + '/vro/servers/{id}'
             .replace('{' + 'id' + '}', String(id));
         let queryParameters: any = {};
@@ -46178,7 +46018,7 @@ export class VRealizeOrchestratorApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VROServiceInfo;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VROServiceInfo;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -46244,7 +46084,7 @@ export class VRealizeOrchestratorsApi {
      * @summary Discover vCenter to work with the provided vRealize Orchestrator service
      * @param body 
      */
-    public discoverVroVcenter (body: VROServiceInfo) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public discoverVroVcenter (body: VROServiceInfo) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/vro/servers/discovery';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -46279,7 +46119,7 @@ export class VRealizeOrchestratorsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -46297,7 +46137,7 @@ export class VRealizeOrchestratorsApi {
      * 
      * @summary Get a list of registered vRealize Orchestrator services
      */
-    public getRegisteredVROs () : Promise<{ response: http.ClientResponse; body: Array<VROServiceInfo>;  }> {
+    public getRegisteredVROs () : Promise<{ response: http.IncomingMessage; body: Array<VROServiceInfo>;  }> {
         const localVarPath = this.basePath + '/vro/servers';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -46326,7 +46166,7 @@ export class VRealizeOrchestratorsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<VROServiceInfo>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<VROServiceInfo>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -46345,7 +46185,7 @@ export class VRealizeOrchestratorsApi {
      * @summary Register a vRealize Orchestrator endpoint with vCloud Director
      * @param body 
      */
-    public register (body: VROServiceInfo) : Promise<{ response: http.ClientResponse; body: VROServiceInfo;  }> {
+    public register (body: VROServiceInfo) : Promise<{ response: http.IncomingMessage; body: VROServiceInfo;  }> {
         const localVarPath = this.basePath + '/vro/servers';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -46380,7 +46220,7 @@ export class VRealizeOrchestratorsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VROServiceInfo;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VROServiceInfo;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -46451,7 +46291,7 @@ export class VdcApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getComputePolicies (page: number, pageSize: number, orgVdcId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: VdcComputePolicies;  }> {
+    public getComputePolicies (page: number, pageSize: number, orgVdcId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: VdcComputePolicies;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcs/{orgVdcId}/computePolicies'
             .replace('{' + 'orgVdcId' + '}', String(orgVdcId));
         let queryParameters: any = {};
@@ -46516,7 +46356,7 @@ export class VdcApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VdcComputePolicies;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VdcComputePolicies;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -46535,7 +46375,7 @@ export class VdcApi {
      * @summary Retrieves a specific vDC via URN.
      * @param orgVdcId 
      */
-    public getVdc (orgVdcId: string) : Promise<{ response: http.ClientResponse; body: OrgVdc;  }> {
+    public getVdc (orgVdcId: string) : Promise<{ response: http.IncomingMessage; body: OrgVdc;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcs/{orgVdcId}'
             .replace('{' + 'orgVdcId' + '}', String(orgVdcId));
         let queryParameters: any = {};
@@ -46570,7 +46410,7 @@ export class VdcApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: OrgVdc;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: OrgVdc;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -46589,7 +46429,7 @@ export class VdcApi {
      * @summary Retrieves Max Compute Policy of the vDC.
      * @param orgVdcId 
      */
-    public getVdcMaxComputePolicy (orgVdcId: string) : Promise<{ response: http.ClientResponse; body: VdcComputePolicy;  }> {
+    public getVdcMaxComputePolicy (orgVdcId: string) : Promise<{ response: http.IncomingMessage; body: VdcComputePolicy;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcs/{orgVdcId}/maxComputePolicy'
             .replace('{' + 'orgVdcId' + '}', String(orgVdcId));
         let queryParameters: any = {};
@@ -46624,7 +46464,7 @@ export class VdcApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VdcComputePolicy;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VdcComputePolicy;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -46647,7 +46487,7 @@ export class VdcApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryVdcs (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: OrgVdcs;  }> {
+    public queryVdcs (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: OrgVdcs;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcs';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -46706,7 +46546,7 @@ export class VdcApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: OrgVdcs;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: OrgVdcs;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -46726,7 +46566,7 @@ export class VdcApi {
      * @param newVdcComputePolicyParams 
      * @param orgVdcId 
      */
-    public updateVdcMaxComputePolicy (newVdcComputePolicyParams: VdcComputePolicy, orgVdcId: string) : Promise<{ response: http.ClientResponse; body: VdcComputePolicy;  }> {
+    public updateVdcMaxComputePolicy (newVdcComputePolicyParams: VdcComputePolicy, orgVdcId: string) : Promise<{ response: http.IncomingMessage; body: VdcComputePolicy;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcs/{orgVdcId}/maxComputePolicy'
             .replace('{' + 'orgVdcId' + '}', String(orgVdcId));
         let queryParameters: any = {};
@@ -46767,7 +46607,7 @@ export class VdcApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VdcComputePolicy;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VdcComputePolicy;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -46838,7 +46678,7 @@ export class Vdc2Api {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getComputePolicies (page: number, pageSize: number, orgVdcId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: VdcComputePolicies2;  }> {
+    public getComputePolicies (page: number, pageSize: number, orgVdcId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: VdcComputePolicies2;  }> {
         const localVarPath = this.basePath + '/2.0.0/vdcs/{orgVdcId}/computePolicies'
             .replace('{' + 'orgVdcId' + '}', String(orgVdcId));
         let queryParameters: any = {};
@@ -46903,7 +46743,7 @@ export class Vdc2Api {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VdcComputePolicies2;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VdcComputePolicies2;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -46922,7 +46762,7 @@ export class Vdc2Api {
      * @summary Retrieves Max Compute Policy of the vDC.
      * @param orgVdcId 
      */
-    public getVdcMaxComputePolicy (orgVdcId: string) : Promise<{ response: http.ClientResponse; body: VdcComputePolicy2;  }> {
+    public getVdcMaxComputePolicy (orgVdcId: string) : Promise<{ response: http.IncomingMessage; body: VdcComputePolicy2;  }> {
         const localVarPath = this.basePath + '/2.0.0/vdcs/{orgVdcId}/maxComputePolicy'
             .replace('{' + 'orgVdcId' + '}', String(orgVdcId));
         let queryParameters: any = {};
@@ -46957,7 +46797,7 @@ export class Vdc2Api {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VdcComputePolicy2;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VdcComputePolicy2;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -46977,7 +46817,7 @@ export class Vdc2Api {
      * @param newVdcComputePolicy2Params 
      * @param orgVdcId 
      */
-    public updateVdcMaxComputePolicy (newVdcComputePolicy2Params: VdcComputePolicy2, orgVdcId: string) : Promise<{ response: http.ClientResponse; body: VdcComputePolicy2;  }> {
+    public updateVdcMaxComputePolicy (newVdcComputePolicy2Params: VdcComputePolicy2, orgVdcId: string) : Promise<{ response: http.IncomingMessage; body: VdcComputePolicy2;  }> {
         const localVarPath = this.basePath + '/2.0.0/vdcs/{orgVdcId}/maxComputePolicy'
             .replace('{' + 'orgVdcId' + '}', String(orgVdcId));
         let queryParameters: any = {};
@@ -47018,7 +46858,7 @@ export class Vdc2Api {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VdcComputePolicy2;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VdcComputePolicy2;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -47085,7 +46925,7 @@ export class VdcComputePoliciesApi {
      * @param vdcRefs 
      * @param vdcComputePolicyId 
      */
-    public addVdcComputePolicyToVdcs (vdcRefs: Array<EntityReference>, vdcComputePolicyId: string) : Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }> {
+    public addVdcComputePolicyToVdcs (vdcRefs: Array<EntityReference>, vdcComputePolicyId: string) : Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcComputePolicies/{vdcComputePolicyId}/vdcs'
             .replace('{' + 'vdcComputePolicyId' + '}', String(vdcComputePolicyId));
         let queryParameters: any = {};
@@ -47126,7 +46966,7 @@ export class VdcComputePoliciesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -47145,7 +46985,7 @@ export class VdcComputePoliciesApi {
      * @summary Creates a new organization vDC compute policy
      * @param newVdcComputePolicyParams 
      */
-    public createVdcComputePolicy (newVdcComputePolicyParams: VdcComputePolicy) : Promise<{ response: http.ClientResponse; body: VdcComputePolicy;  }> {
+    public createVdcComputePolicy (newVdcComputePolicyParams: VdcComputePolicy) : Promise<{ response: http.IncomingMessage; body: VdcComputePolicy;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcComputePolicies';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -47180,7 +47020,7 @@ export class VdcComputePoliciesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VdcComputePolicy;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VdcComputePolicy;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -47199,7 +47039,7 @@ export class VdcComputePoliciesApi {
      * @summary Delete specified organization vDC compute policy.
      * @param vdcComputePolicyId 
      */
-    public deleteVdcComputePolicy (vdcComputePolicyId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteVdcComputePolicy (vdcComputePolicyId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcComputePolicies/{vdcComputePolicyId}'
             .replace('{' + 'vdcComputePolicyId' + '}', String(vdcComputePolicyId));
         let queryParameters: any = {};
@@ -47234,7 +47074,7 @@ export class VdcComputePoliciesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -47253,7 +47093,7 @@ export class VdcComputePoliciesApi {
      * @summary Get specified organization vDC compute policy
      * @param vdcComputePolicyId 
      */
-    public getVdcComputePolicy (vdcComputePolicyId: string) : Promise<{ response: http.ClientResponse; body: VdcComputePolicy;  }> {
+    public getVdcComputePolicy (vdcComputePolicyId: string) : Promise<{ response: http.IncomingMessage; body: VdcComputePolicy;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcComputePolicies/{vdcComputePolicyId}'
             .replace('{' + 'vdcComputePolicyId' + '}', String(vdcComputePolicyId));
         let queryParameters: any = {};
@@ -47288,7 +47128,7 @@ export class VdcComputePoliciesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VdcComputePolicy;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VdcComputePolicy;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -47307,7 +47147,7 @@ export class VdcComputePoliciesApi {
      * @summary Get organization vDCs associated with this vDC compute policy
      * @param vdcComputePolicyId 
      */
-    public getVdcComputePolicyVdcs (vdcComputePolicyId: string) : Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }> {
+    public getVdcComputePolicyVdcs (vdcComputePolicyId: string) : Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcComputePolicies/{vdcComputePolicyId}/vdcs'
             .replace('{' + 'vdcComputePolicyId' + '}', String(vdcComputePolicyId));
         let queryParameters: any = {};
@@ -47342,7 +47182,7 @@ export class VdcComputePoliciesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -47365,7 +47205,7 @@ export class VdcComputePoliciesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getVdcComputePolicyVms (vdcComputePolicyId: string, page: number, pageSize: number, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: EntityReferences;  }> {
+    public getVdcComputePolicyVms (vdcComputePolicyId: string, page: number, pageSize: number, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: EntityReferences;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcComputePolicies/{vdcComputePolicyId}/vms'
             .replace('{' + 'vdcComputePolicyId' + '}', String(vdcComputePolicyId));
         let queryParameters: any = {};
@@ -47426,7 +47266,7 @@ export class VdcComputePoliciesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: EntityReferences;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: EntityReferences;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -47449,7 +47289,7 @@ export class VdcComputePoliciesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryVdcComputePolicies (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: VdcComputePolicies;  }> {
+    public queryVdcComputePolicies (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: VdcComputePolicies;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcComputePolicies';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -47508,7 +47348,7 @@ export class VdcComputePoliciesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VdcComputePolicies;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VdcComputePolicies;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -47528,7 +47368,7 @@ export class VdcComputePoliciesApi {
      * @param updateVdcComputePolicyParams 
      * @param vdcComputePolicyId 
      */
-    public updateVdcComputePolicy (updateVdcComputePolicyParams: VdcComputePolicy, vdcComputePolicyId: string) : Promise<{ response: http.ClientResponse; body: VdcComputePolicy;  }> {
+    public updateVdcComputePolicy (updateVdcComputePolicyParams: VdcComputePolicy, vdcComputePolicyId: string) : Promise<{ response: http.IncomingMessage; body: VdcComputePolicy;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcComputePolicies/{vdcComputePolicyId}'
             .replace('{' + 'vdcComputePolicyId' + '}', String(vdcComputePolicyId));
         let queryParameters: any = {};
@@ -47569,7 +47409,7 @@ export class VdcComputePoliciesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VdcComputePolicy;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VdcComputePolicy;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -47636,7 +47476,7 @@ export class VdcComputePolicies2Api {
      * @param vdcRefs 
      * @param vdcComputePolicyId 
      */
-    public addVdcComputePolicyToVdcs (vdcRefs: Array<EntityReference>, vdcComputePolicyId: string) : Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }> {
+    public addVdcComputePolicyToVdcs (vdcRefs: Array<EntityReference>, vdcComputePolicyId: string) : Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }> {
         const localVarPath = this.basePath + '/2.0.0/vdcComputePolicies/{vdcComputePolicyId}/vdcs'
             .replace('{' + 'vdcComputePolicyId' + '}', String(vdcComputePolicyId));
         let queryParameters: any = {};
@@ -47677,7 +47517,7 @@ export class VdcComputePolicies2Api {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -47696,7 +47536,7 @@ export class VdcComputePolicies2Api {
      * @summary Creates a new organization VDC compute policy
      * @param newVdcComputePolicyParams 
      */
-    public createVdcComputePolicy (newVdcComputePolicyParams: VdcComputePolicy2) : Promise<{ response: http.ClientResponse; body: VdcComputePolicy2;  }> {
+    public createVdcComputePolicy (newVdcComputePolicyParams: VdcComputePolicy2) : Promise<{ response: http.IncomingMessage; body: VdcComputePolicy2;  }> {
         const localVarPath = this.basePath + '/2.0.0/vdcComputePolicies';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -47731,7 +47571,7 @@ export class VdcComputePolicies2Api {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VdcComputePolicy2;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VdcComputePolicy2;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -47750,7 +47590,7 @@ export class VdcComputePolicies2Api {
      * @summary Delete specified organization VDC compute policy.
      * @param vdcComputePolicyId 
      */
-    public deleteVdcComputePolicy (vdcComputePolicyId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteVdcComputePolicy (vdcComputePolicyId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/2.0.0/vdcComputePolicies/{vdcComputePolicyId}'
             .replace('{' + 'vdcComputePolicyId' + '}', String(vdcComputePolicyId));
         let queryParameters: any = {};
@@ -47785,7 +47625,7 @@ export class VdcComputePolicies2Api {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -47804,7 +47644,7 @@ export class VdcComputePolicies2Api {
      * @summary Get specified organization VDC compute policy
      * @param vdcComputePolicyId 
      */
-    public getVdcComputePolicy (vdcComputePolicyId: string) : Promise<{ response: http.ClientResponse; body: VdcComputePolicy2;  }> {
+    public getVdcComputePolicy (vdcComputePolicyId: string) : Promise<{ response: http.IncomingMessage; body: VdcComputePolicy2;  }> {
         const localVarPath = this.basePath + '/2.0.0/vdcComputePolicies/{vdcComputePolicyId}'
             .replace('{' + 'vdcComputePolicyId' + '}', String(vdcComputePolicyId));
         let queryParameters: any = {};
@@ -47839,7 +47679,7 @@ export class VdcComputePolicies2Api {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VdcComputePolicy2;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VdcComputePolicy2;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -47858,7 +47698,7 @@ export class VdcComputePolicies2Api {
      * @summary Get specified organization VDC compute policy metrics.
      * @param vdcComputePolicyId 
      */
-    public getVdcComputePolicyMetrics (vdcComputePolicyId: string) : Promise<{ response: http.ClientResponse; body: VdcComputePolicyMetrics;  }> {
+    public getVdcComputePolicyMetrics (vdcComputePolicyId: string) : Promise<{ response: http.IncomingMessage; body: VdcComputePolicyMetrics;  }> {
         const localVarPath = this.basePath + '/2.0.0/vdcComputePolicies/{vdcComputePolicyId}/metrics'
             .replace('{' + 'vdcComputePolicyId' + '}', String(vdcComputePolicyId));
         let queryParameters: any = {};
@@ -47893,7 +47733,7 @@ export class VdcComputePolicies2Api {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VdcComputePolicyMetrics;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VdcComputePolicyMetrics;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -47912,7 +47752,7 @@ export class VdcComputePolicies2Api {
      * @summary Get orgatization VDCs this VDC compute policy has been assigned/published to
      * @param vdcComputePolicyId 
      */
-    public getVdcComputePolicyVdcs (vdcComputePolicyId: string) : Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }> {
+    public getVdcComputePolicyVdcs (vdcComputePolicyId: string) : Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }> {
         const localVarPath = this.basePath + '/2.0.0/vdcComputePolicies/{vdcComputePolicyId}/vdcs'
             .replace('{' + 'vdcComputePolicyId' + '}', String(vdcComputePolicyId));
         let queryParameters: any = {};
@@ -47947,7 +47787,7 @@ export class VdcComputePolicies2Api {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Array<EntityReference>;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Array<EntityReference>;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -47970,7 +47810,7 @@ export class VdcComputePolicies2Api {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryVdcComputePolicies (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: VdcComputePolicies2;  }> {
+    public queryVdcComputePolicies (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: VdcComputePolicies2;  }> {
         const localVarPath = this.basePath + '/2.0.0/vdcComputePolicies';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -48029,7 +47869,7 @@ export class VdcComputePolicies2Api {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VdcComputePolicies2;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VdcComputePolicies2;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -48053,7 +47893,7 @@ export class VdcComputePolicies2Api {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryVirtualMachineClasses (page: number, pageSize: number, vdcComputePolicyId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: VirtualMachineClasses;  }> {
+    public queryVirtualMachineClasses (page: number, pageSize: number, vdcComputePolicyId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: VirtualMachineClasses;  }> {
         const localVarPath = this.basePath + '/2.0.0/vdcComputePolicies/{vdcComputePolicyId}/virtualMachineClasses'
             .replace('{' + 'vdcComputePolicyId' + '}', String(vdcComputePolicyId));
         let queryParameters: any = {};
@@ -48118,7 +47958,7 @@ export class VdcComputePolicies2Api {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VirtualMachineClasses;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VirtualMachineClasses;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -48138,7 +47978,7 @@ export class VdcComputePolicies2Api {
      * @param updateVdcComputePolicyParams 
      * @param vdcComputePolicyId 
      */
-    public updateVdcComputePolicy (updateVdcComputePolicyParams: VdcComputePolicy2, vdcComputePolicyId: string) : Promise<{ response: http.ClientResponse; body: VdcComputePolicy2;  }> {
+    public updateVdcComputePolicy (updateVdcComputePolicyParams: VdcComputePolicy2, vdcComputePolicyId: string) : Promise<{ response: http.IncomingMessage; body: VdcComputePolicy2;  }> {
         const localVarPath = this.basePath + '/2.0.0/vdcComputePolicies/{vdcComputePolicyId}'
             .replace('{' + 'vdcComputePolicyId' + '}', String(vdcComputePolicyId));
         let queryParameters: any = {};
@@ -48179,7 +48019,7 @@ export class VdcComputePolicies2Api {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VdcComputePolicy2;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VdcComputePolicy2;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -48246,7 +48086,7 @@ export class VdcGroupApi {
      * @param vdcGroupId 
      * @param force Value \&quot;true\&quot; means to forcefully delete the object that contains other objects even if those objects are in a state that does not allow removal. The default is \&quot;false\&quot;; therefore, objects are not removed if they are not in a state that normally allows removal. Force also implies recursive delete where other contained objects are removed. Errors may be ignored. Invalid value (not true or false) are ignored. 
      */
-    public deleteVdcGroup (vdcGroupId: string, force?: boolean) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteVdcGroup (vdcGroupId: string, force?: boolean) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcGroups/{vdcGroupId}'
             .replace('{' + 'vdcGroupId' + '}', String(vdcGroupId));
         let queryParameters: any = {};
@@ -48285,7 +48125,7 @@ export class VdcGroupApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -48304,7 +48144,7 @@ export class VdcGroupApi {
      * @summary Retrieves a specific vDC Group.
      * @param vdcGroupId 
      */
-    public getVdcGroup (vdcGroupId: string) : Promise<{ response: http.ClientResponse; body: VdcGroup;  }> {
+    public getVdcGroup (vdcGroupId: string) : Promise<{ response: http.IncomingMessage; body: VdcGroup;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcGroups/{vdcGroupId}'
             .replace('{' + 'vdcGroupId' + '}', String(vdcGroupId));
         let queryParameters: any = {};
@@ -48339,7 +48179,7 @@ export class VdcGroupApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VdcGroup;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VdcGroup;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -48358,7 +48198,7 @@ export class VdcGroupApi {
      * @summary Sync/repair the vDC group. An example usage is to detect if a vDC still exists/is valid. If an Organization vDC referenced by the VDC group is deleted or if it is not participating in universal networking, it's status will be updated to OBJECT_NOT_FOUND and the vdc group will be marked as NOT_REALIZED. This will also initiate a sync of associated router, if any. The router entities like egress points and universal routes will also be marked as NOT_REALIZED if they reference the removed Organization vDC. 
      * @param vdcGroupId 
      */
-    public syncVdcGroup (vdcGroupId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public syncVdcGroup (vdcGroupId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcGroups/{vdcGroupId}/sync'
             .replace('{' + 'vdcGroupId' + '}', String(vdcGroupId));
         let queryParameters: any = {};
@@ -48393,7 +48233,7 @@ export class VdcGroupApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -48413,7 +48253,7 @@ export class VdcGroupApi {
      * @param vdcGroup 
      * @param vdcGroupId 
      */
-    public updateVdcGroup (vdcGroup: VdcGroup, vdcGroupId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateVdcGroup (vdcGroup: VdcGroup, vdcGroupId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcGroups/{vdcGroupId}'
             .replace('{' + 'vdcGroupId' + '}', String(vdcGroupId));
         let queryParameters: any = {};
@@ -48454,7 +48294,7 @@ export class VdcGroupApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -48524,7 +48364,7 @@ export class VdcGroupCandidatesApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getNetworkingVdcGroupCandidates (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: NetworkingCandidateVdcs;  }> {
+    public getNetworkingVdcGroupCandidates (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: NetworkingCandidateVdcs;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcGroups/networkingCandidateVdcs';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -48583,7 +48423,7 @@ export class VdcGroupCandidatesApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: NetworkingCandidateVdcs;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: NetworkingCandidateVdcs;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -48649,7 +48489,7 @@ export class VdcGroupsApi {
      * @summary Creates a vDC Group. A universal router will also be created if universalNetworkingEnabled is set to true.
      * @param vdcGroup 
      */
-    public createVdcGroup (vdcGroup: VdcGroup) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public createVdcGroup (vdcGroup: VdcGroup) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcGroups';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -48684,7 +48524,7 @@ export class VdcGroupsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -48707,7 +48547,7 @@ export class VdcGroupsApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getVdcGroups (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: VdcGroups;  }> {
+    public getVdcGroups (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: VdcGroups;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcGroups';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -48766,7 +48606,7 @@ export class VdcGroupsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VdcGroups;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VdcGroups;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -48831,7 +48671,7 @@ export class VdcGroupsSettingsApi {
      * 
      * @summary Retrieves the global vDC groups settings. These settings apply to all vDC Groups in the system and can only be retrieved by the provider.
      */
-    public getVdcGroupSettings () : Promise<{ response: http.ClientResponse; body: VdcGroupSettings;  }> {
+    public getVdcGroupSettings () : Promise<{ response: http.IncomingMessage; body: VdcGroupSettings;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcGroups/settings';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -48860,7 +48700,7 @@ export class VdcGroupsSettingsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VdcGroupSettings;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VdcGroupSettings;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -48879,7 +48719,7 @@ export class VdcGroupsSettingsApi {
      * @summary Updates the global vDC groups settings. These settings apply to all vDC Groups in the system and can only be updated by the provider.
      * @param vdcGroupSettings 
      */
-    public updateVdcGroupSettings (vdcGroupSettings: VdcGroupSettings) : Promise<{ response: http.ClientResponse; body: VdcGroupSettings;  }> {
+    public updateVdcGroupSettings (vdcGroupSettings: VdcGroupSettings) : Promise<{ response: http.IncomingMessage; body: VdcGroupSettings;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcGroups/settings';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -48914,7 +48754,7 @@ export class VdcGroupsSettingsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VdcGroupSettings;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VdcGroupSettings;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -48980,7 +48820,7 @@ export class VdcNetworkProfileApi {
      * @summary Deletes/Reset a vDC Network Profile.
      * @param orgVdcId 
      */
-    public deleteVdcNetworkProfile (orgVdcId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteVdcNetworkProfile (orgVdcId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcs/{orgVdcId}/networkProfile'
             .replace('{' + 'orgVdcId' + '}', String(orgVdcId));
         let queryParameters: any = {};
@@ -49015,7 +48855,7 @@ export class VdcNetworkProfileApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -49034,7 +48874,7 @@ export class VdcNetworkProfileApi {
      * @summary Retrieves the vDC Network Profile.
      * @param orgVdcId 
      */
-    public getVdcNetworkProfile (orgVdcId: string) : Promise<{ response: http.ClientResponse; body: VdcNetworkProfile;  }> {
+    public getVdcNetworkProfile (orgVdcId: string) : Promise<{ response: http.IncomingMessage; body: VdcNetworkProfile;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcs/{orgVdcId}/networkProfile'
             .replace('{' + 'orgVdcId' + '}', String(orgVdcId));
         let queryParameters: any = {};
@@ -49069,7 +48909,7 @@ export class VdcNetworkProfileApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VdcNetworkProfile;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VdcNetworkProfile;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -49089,7 +48929,7 @@ export class VdcNetworkProfileApi {
      * @param vdcNetworkProfile 
      * @param orgVdcId 
      */
-    public updateVdcNetworkProfile (vdcNetworkProfile: VdcNetworkProfile, orgVdcId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateVdcNetworkProfile (vdcNetworkProfile: VdcNetworkProfile, orgVdcId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/vdcs/{orgVdcId}/networkProfile'
             .replace('{' + 'orgVdcId' + '}', String(orgVdcId));
         let queryParameters: any = {};
@@ -49130,7 +48970,7 @@ export class VdcNetworkProfileApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -49196,7 +49036,7 @@ export class VirtualCenterApi {
      * @summary Attach a Virtual Center server
      * @param vimserver 
      */
-    public attachVirtualCenter (vimserver: VCenterServer) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public attachVirtualCenter (vimserver: VCenterServer) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/virtualCenters';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -49231,7 +49071,7 @@ export class VirtualCenterApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -49250,7 +49090,7 @@ export class VirtualCenterApi {
      * @summary Detach the specified Virtual Center server
      * @param vcUrn 
      */
-    public deleteVirtualCenter (vcUrn: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteVirtualCenter (vcUrn: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/virtualCenters/{vcUrn}'
             .replace('{' + 'vcUrn' + '}', String(vcUrn));
         let queryParameters: any = {};
@@ -49285,7 +49125,7 @@ export class VirtualCenterApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -49307,7 +49147,7 @@ export class VirtualCenterApi {
      * @param page Page to fetch, zero offset.
      * @param pageSize Results per page to fetch.
      */
-    public getChildResourcePools (vcUrn: string, moref: string, page: number, pageSize: number) : Promise<{ response: http.ClientResponse; body: ResourcePools;  }> {
+    public getChildResourcePools (vcUrn: string, moref: string, page: number, pageSize: number) : Promise<{ response: http.IncomingMessage; body: ResourcePools;  }> {
         const localVarPath = this.basePath + '/1.0.0/virtualCenters/{vcUrn}/resourcePools/browse/{moref}'
             .replace('{' + 'vcUrn' + '}', String(vcUrn))
             .replace('{' + 'moref' + '}', String(moref));
@@ -49366,7 +49206,7 @@ export class VirtualCenterApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ResourcePools;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ResourcePools;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -49385,7 +49225,7 @@ export class VirtualCenterApi {
      * @summary Get Virtual Center server network settings
      * @param vcUrn 
      */
-    public getNsxVManagerSettings (vcUrn: string) : Promise<{ response: http.ClientResponse; body: NsxVManagerSettings;  }> {
+    public getNsxVManagerSettings (vcUrn: string) : Promise<{ response: http.IncomingMessage; body: NsxVManagerSettings;  }> {
         const localVarPath = this.basePath + '/1.0.0/virtualCenters/{vcUrn}/nsxVSettings'
             .replace('{' + 'vcUrn' + '}', String(vcUrn));
         let queryParameters: any = {};
@@ -49420,7 +49260,7 @@ export class VirtualCenterApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: NsxVManagerSettings;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: NsxVManagerSettings;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -49440,7 +49280,7 @@ export class VirtualCenterApi {
      * @param vcUrn 
      * @param moref 
      */
-    public getResourcePoolKubernetesConfig (vcUrn: string, moref: string) : Promise<{ response: http.ClientResponse; body: ResourcePoolKubernetesConfig;  }> {
+    public getResourcePoolKubernetesConfig (vcUrn: string, moref: string) : Promise<{ response: http.IncomingMessage; body: ResourcePoolKubernetesConfig;  }> {
         const localVarPath = this.basePath + '/1.0.0/virtualCenters/{vcUrn}/resourcePools/{moref}/kubernetesConfig'
             .replace('{' + 'vcUrn' + '}', String(vcUrn))
             .replace('{' + 'moref' + '}', String(moref));
@@ -49481,7 +49321,7 @@ export class VirtualCenterApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ResourcePoolKubernetesConfig;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ResourcePoolKubernetesConfig;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -49502,7 +49342,7 @@ export class VirtualCenterApi {
      * @param page Page to fetch, zero offset.
      * @param pageSize Results per page to fetch.
      */
-    public getRootResourcePools (vcUrn: string, page: number, pageSize: number) : Promise<{ response: http.ClientResponse; body: ResourcePools;  }> {
+    public getRootResourcePools (vcUrn: string, page: number, pageSize: number) : Promise<{ response: http.IncomingMessage; body: ResourcePools;  }> {
         const localVarPath = this.basePath + '/1.0.0/virtualCenters/{vcUrn}/resourcePools/browse'
             .replace('{' + 'vcUrn' + '}', String(vcUrn));
         let queryParameters: any = {};
@@ -49555,7 +49395,7 @@ export class VirtualCenterApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ResourcePools;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ResourcePools;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -49579,7 +49419,7 @@ export class VirtualCenterApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getStorageProfiles (vcUrn: string, page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: StorageProfiles;  }> {
+    public getStorageProfiles (vcUrn: string, page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: StorageProfiles;  }> {
         const localVarPath = this.basePath + '/1.0.0/virtualCenters/{vcUrn}/storageProfiles'
             .replace('{' + 'vcUrn' + '}', String(vcUrn));
         let queryParameters: any = {};
@@ -49644,7 +49484,7 @@ export class VirtualCenterApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: StorageProfiles;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: StorageProfiles;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -49664,7 +49504,7 @@ export class VirtualCenterApi {
      * @param vcUrn 
      * @param moref 
      */
-    public getSupportedHardwareVersions (vcUrn: string, moref: string) : Promise<{ response: http.ClientResponse; body: HardwareVersions;  }> {
+    public getSupportedHardwareVersions (vcUrn: string, moref: string) : Promise<{ response: http.IncomingMessage; body: HardwareVersions;  }> {
         const localVarPath = this.basePath + '/1.0.0/virtualCenters/{vcUrn}/resourcePools/{moref}/hwv'
             .replace('{' + 'vcUrn' + '}', String(vcUrn))
             .replace('{' + 'moref' + '}', String(moref));
@@ -49705,7 +49545,7 @@ export class VirtualCenterApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: HardwareVersions;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: HardwareVersions;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -49729,7 +49569,7 @@ export class VirtualCenterApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getUnmanagedVirtualMachines (vcUrn: string, page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: UnmanagedVirtualMachines;  }> {
+    public getUnmanagedVirtualMachines (vcUrn: string, page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: UnmanagedVirtualMachines;  }> {
         const localVarPath = this.basePath + '/1.0.0/virtualCenters/{vcUrn}/unmanagedVirtualMachines'
             .replace('{' + 'vcUrn' + '}', String(vcUrn));
         let queryParameters: any = {};
@@ -49794,7 +49634,7 @@ export class VirtualCenterApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: UnmanagedVirtualMachines;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: UnmanagedVirtualMachines;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -49814,7 +49654,7 @@ export class VirtualCenterApi {
      * @param vcUrn 
      * @param moref 
      */
-    public getVcStoragePolicyCapabilities (vcUrn: string, moref: string) : Promise<{ response: http.ClientResponse; body: Capabilities;  }> {
+    public getVcStoragePolicyCapabilities (vcUrn: string, moref: string) : Promise<{ response: http.IncomingMessage; body: Capabilities;  }> {
         const localVarPath = this.basePath + '/1.0.0/virtualCenters/{vcUrn}/storageProfiles/{moref}/capabilities'
             .replace('{' + 'vcUrn' + '}', String(vcUrn))
             .replace('{' + 'moref' + '}', String(moref));
@@ -49855,7 +49695,7 @@ export class VirtualCenterApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Capabilities;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Capabilities;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -49874,7 +49714,7 @@ export class VirtualCenterApi {
      * @summary Get Virtual Center server
      * @param vcUrn 
      */
-    public getVirtualCenter (vcUrn: string) : Promise<{ response: http.ClientResponse; body: VCenterServer;  }> {
+    public getVirtualCenter (vcUrn: string) : Promise<{ response: http.IncomingMessage; body: VCenterServer;  }> {
         const localVarPath = this.basePath + '/1.0.0/virtualCenters/{vcUrn}'
             .replace('{' + 'vcUrn' + '}', String(vcUrn));
         let queryParameters: any = {};
@@ -49909,7 +49749,7 @@ export class VirtualCenterApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VCenterServer;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VCenterServer;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -49928,7 +49768,7 @@ export class VirtualCenterApi {
      * @summary Get Virtual Center server metrics
      * @param vcUrn 
      */
-    public getVirtualCenterMetrics (vcUrn: string) : Promise<{ response: http.ClientResponse; body: VCenterServerMetrics;  }> {
+    public getVirtualCenterMetrics (vcUrn: string) : Promise<{ response: http.IncomingMessage; body: VCenterServerMetrics;  }> {
         const localVarPath = this.basePath + '/1.0.0/virtualCenters/{vcUrn}/metrics'
             .replace('{' + 'vcUrn' + '}', String(vcUrn));
         let queryParameters: any = {};
@@ -49963,7 +49803,7 @@ export class VirtualCenterApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VCenterServerMetrics;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VCenterServerMetrics;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -49986,7 +49826,7 @@ export class VirtualCenterApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryVirtualCenters (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: VCenterServers;  }> {
+    public queryVirtualCenters (page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: VCenterServers;  }> {
         const localVarPath = this.basePath + '/1.0.0/virtualCenters';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -50045,7 +49885,7 @@ export class VirtualCenterApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VCenterServers;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VCenterServers;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -50070,7 +49910,7 @@ export class VirtualCenterApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public queryVirtualMachineClasses (vcUrn: string, moref: string, page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: VirtualMachineClasses;  }> {
+    public queryVirtualMachineClasses (vcUrn: string, moref: string, page: number, pageSize: number, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: VirtualMachineClasses;  }> {
         const localVarPath = this.basePath + '/1.0.0/virtualCenters/{vcUrn}/resourcePools/{moref}/virtualMachineClasses'
             .replace('{' + 'vcUrn' + '}', String(vcUrn))
             .replace('{' + 'moref' + '}', String(moref));
@@ -50141,7 +49981,7 @@ export class VirtualCenterApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VirtualMachineClasses;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VirtualMachineClasses;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -50161,7 +50001,7 @@ export class VirtualCenterApi {
      * @param vcUrn 
      * @param updateVCenterServerParams 
      */
-    public updateNsxVManagerSettings (vcUrn: string, updateVCenterServerParams: NsxVManagerSettings) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateNsxVManagerSettings (vcUrn: string, updateVCenterServerParams: NsxVManagerSettings) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/virtualCenters/{vcUrn}/nsxVSettings'
             .replace('{' + 'vcUrn' + '}', String(vcUrn));
         let queryParameters: any = {};
@@ -50202,7 +50042,7 @@ export class VirtualCenterApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -50222,7 +50062,7 @@ export class VirtualCenterApi {
      * @param vcUrn 
      * @param updateVCenterServerParams 
      */
-    public updateVirtualCenter (vcUrn: string, updateVCenterServerParams: VCenterServer) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public updateVirtualCenter (vcUrn: string, updateVCenterServerParams: VCenterServer) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/virtualCenters/{vcUrn}'
             .replace('{' + 'vcUrn' + '}', String(vcUrn));
         let queryParameters: any = {};
@@ -50263,7 +50103,7 @@ export class VirtualCenterApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -50329,7 +50169,7 @@ export class VmcSddcsApi {
      * @summary Retrieves a list of SDDCs for a specific VMware service application that are available
      * @param serviceAppId 
      */
-    public getVmcSddcs (serviceAppId: string) : Promise<{ response: http.ClientResponse; body: VmcSddcs;  }> {
+    public getVmcSddcs (serviceAppId: string) : Promise<{ response: http.IncomingMessage; body: VmcSddcs;  }> {
         const localVarPath = this.basePath + '/1.0.0/serviceApps/{serviceAppId}/sddcs'
             .replace('{' + 'serviceAppId' + '}', String(serviceAppId));
         let queryParameters: any = {};
@@ -50364,7 +50204,7 @@ export class VmcSddcsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VmcSddcs;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VmcSddcs;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -50384,7 +50224,7 @@ export class VmcSddcsApi {
      * @param serviceAppSddc 
      * @param serviceAppId 
      */
-    public registerVmcSDDC (serviceAppSddc: VmcSddc, serviceAppId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public registerVmcSDDC (serviceAppSddc: VmcSddc, serviceAppId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/1.0.0/serviceApps/{serviceAppId}/sddcs'
             .replace('{' + 'serviceAppId' + '}', String(serviceAppId));
         let queryParameters: any = {};
@@ -50425,7 +50265,7 @@ export class VmcSddcsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -50493,7 +50333,7 @@ export class VrealizeBrowseApi {
      * @param target The &#39;plugin[:type]&#39; to serve as the starting point for the browsing
      * @param browsePaths Inventory search path to identify the VRO inventory node to get contents of
      */
-    public browseSdkObjects (vroId: string, target: string, browsePaths: string) : Promise<{ response: http.ClientResponse; body: VroRemoteItems;  }> {
+    public browseSdkObjects (vroId: string, target: string, browsePaths: string) : Promise<{ response: http.IncomingMessage; body: VroRemoteItems;  }> {
         const localVarPath = this.basePath + '/vro/servers/{vroId}/sdkObjects/{target}/{browsePaths:.+}'
             .replace('{' + 'vroId' + '}', String(vroId))
             .replace('{' + 'target' + '}', String(target))
@@ -50540,7 +50380,7 @@ export class VrealizeBrowseApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VroRemoteItems;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VroRemoteItems;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -50559,7 +50399,7 @@ export class VrealizeBrowseApi {
      * @summary Browse remote vRealize Orchestrator inventory
      * @param vroId The ID of the server to browse inventory items on
      */
-    public getPluginList (vroId: string) : Promise<{ response: http.ClientResponse; body: VroRemotePluginItems;  }> {
+    public getPluginList (vroId: string) : Promise<{ response: http.IncomingMessage; body: VroRemotePluginItems;  }> {
         const localVarPath = this.basePath + '/vro/servers/{vroId}/entityTypes'
             .replace('{' + 'vroId' + '}', String(vroId));
         let queryParameters: any = {};
@@ -50594,7 +50434,7 @@ export class VrealizeBrowseApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VroRemotePluginItems;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VroRemotePluginItems;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -50614,7 +50454,7 @@ export class VrealizeBrowseApi {
      * @param vroId The ID of the server to browse inventory items on
      * @param pluginName Inventory search path to identify the VRO inventory node to get contents of
      */
-    public getPluginTypeList (vroId: string, pluginName: string) : Promise<{ response: http.ClientResponse; body: VroRemotePluginTypes;  }> {
+    public getPluginTypeList (vroId: string, pluginName: string) : Promise<{ response: http.IncomingMessage; body: VroRemotePluginTypes;  }> {
         const localVarPath = this.basePath + '/vro/servers/{vroId}/entityTypes/{pluginName}'
             .replace('{' + 'vroId' + '}', String(vroId))
             .replace('{' + 'pluginName' + '}', String(pluginName));
@@ -50655,7 +50495,7 @@ export class VrealizeBrowseApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VroRemotePluginTypes;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VroRemotePluginTypes;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -50675,7 +50515,7 @@ export class VrealizeBrowseApi {
      * @param vroId The ID of the server to browse inventory items on
      * @param any Inventory search path to identify the VRO inventory node to get contents of
      */
-    public getRemoteInventory (vroId: string, any: string) : Promise<{ response: http.ClientResponse; body: VroRemoteInventoryItem;  }> {
+    public getRemoteInventory (vroId: string, any: string) : Promise<{ response: http.IncomingMessage; body: VroRemoteInventoryItem;  }> {
         const localVarPath = this.basePath + '/vro/servers/{vroId}/inventory{any:.*}'
             .replace('{' + 'vroId' + '}', String(vroId))
             .replace('{' + 'any' + '}', String(any));
@@ -50716,7 +50556,7 @@ export class VrealizeBrowseApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VroRemoteInventoryItem;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VroRemoteInventoryItem;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -50739,7 +50579,7 @@ export class VrealizeBrowseApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public searchSdkObjects (vroId: string, target: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: VroRemoteItems;  }> {
+    public searchSdkObjects (vroId: string, target: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: VroRemoteItems;  }> {
         const localVarPath = this.basePath + '/vro/servers/{vroId}/sdkObjects/{target}'
             .replace('{' + 'vroId' + '}', String(vroId))
             .replace('{' + 'target' + '}', String(target));
@@ -50792,7 +50632,7 @@ export class VrealizeBrowseApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VroRemoteItems;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VroRemoteItems;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -50863,7 +50703,7 @@ export class VrealizeWorkflowsApi {
      * @param sortAsc Field to use for ascending sort
      * @param sortDesc Field to use for descending sort
      */
-    public getRemoteWorkflows (page: number, pageSize: number, vroServerId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.ClientResponse; body: VroRemoteWorkflowItems;  }> {
+    public getRemoteWorkflows (page: number, pageSize: number, vroServerId: string, filter?: string, sortAsc?: string, sortDesc?: string) : Promise<{ response: http.IncomingMessage; body: VroRemoteWorkflowItems;  }> {
         const localVarPath = this.basePath + '/vro/servers/{vroServerId}/workflows'
             .replace('{' + 'vroServerId' + '}', String(vroServerId));
         let queryParameters: any = {};
@@ -50928,7 +50768,7 @@ export class VrealizeWorkflowsApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: VroRemoteWorkflowItems;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: VroRemoteWorkflowItems;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -50995,7 +50835,7 @@ export class VroWorkflowExecutionApi {
      * @param workflowId workflowId
      * @param executionId executionId
      */
-    public cancelWorkflowExecution (workflowId: string, executionId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public cancelWorkflowExecution (workflowId: string, executionId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/workflows/{workflowId}/executions/{executionId}/state'
             .replace('{' + 'workflowId' + '}', String(workflowId))
             .replace('{' + 'executionId' + '}', String(executionId));
@@ -51036,7 +50876,7 @@ export class VroWorkflowExecutionApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -51056,7 +50896,7 @@ export class VroWorkflowExecutionApi {
      * @param workflowId workflowId
      * @param executionId executionId
      */
-    public deleteWorkflowExecution (workflowId: string, executionId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteWorkflowExecution (workflowId: string, executionId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/workflows/{workflowId}/executions/{executionId}'
             .replace('{' + 'workflowId' + '}', String(workflowId))
             .replace('{' + 'executionId' + '}', String(executionId));
@@ -51097,7 +50937,7 @@ export class VroWorkflowExecutionApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -51116,7 +50956,7 @@ export class VroWorkflowExecutionApi {
      * @summary Get all executions
      * @param workflowId workflowId
      */
-    public getAllWorkflowExecutions (workflowId: string) : Promise<{ response: http.ClientResponse; body: PresentationExecutionsList;  }> {
+    public getAllWorkflowExecutions (workflowId: string) : Promise<{ response: http.IncomingMessage; body: PresentationExecutionsList;  }> {
         const localVarPath = this.basePath + '/workflows/{workflowId}/executions'
             .replace('{' + 'workflowId' + '}', String(workflowId));
         let queryParameters: any = {};
@@ -51151,7 +50991,7 @@ export class VroWorkflowExecutionApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: PresentationExecutionsList;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: PresentationExecutionsList;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -51169,7 +51009,7 @@ export class VroWorkflowExecutionApi {
      * This endpoint will not produce results. It is a placeholder to enforce code generation of ParameterTypes.
      * @summary This endpoint will not produce results. It is a placeholder to enforce code generation of ParameterTypes.
      */
-    public getParameterTypes () : Promise<{ response: http.ClientResponse; body: ParameterTypes;  }> {
+    public getParameterTypes () : Promise<{ response: http.IncomingMessage; body: ParameterTypes;  }> {
         const localVarPath = this.basePath + '/workflows/parameterTypes';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -51198,7 +51038,7 @@ export class VroWorkflowExecutionApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ParameterTypes;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ParameterTypes;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -51216,7 +51056,7 @@ export class VroWorkflowExecutionApi {
      * This endpoint will not produce results. It is a placeholder to enforce code generation of SupportedDecorators.
      * @summary This endpoint will not produce results. It is a placeholder to enforce code generation of SupportedDecorators.
      */
-    public getSupportedDecorators () : Promise<{ response: http.ClientResponse; body: SupportedDecorators;  }> {
+    public getSupportedDecorators () : Promise<{ response: http.IncomingMessage; body: SupportedDecorators;  }> {
         const localVarPath = this.basePath + '/workflows/decorators';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -51245,7 +51085,7 @@ export class VroWorkflowExecutionApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: SupportedDecorators;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: SupportedDecorators;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -51263,7 +51103,7 @@ export class VroWorkflowExecutionApi {
      * This endpoint will not produce results. It is a placeholder to enforce code generation of SupportedPresentationElements.
      * @summary This endpoint will not produce results. It is a placeholder to enforce code generation of SupportedPresentationElements.
      */
-    public getSupportedPresentationElements () : Promise<{ response: http.ClientResponse; body: SupportedPresentationElements;  }> {
+    public getSupportedPresentationElements () : Promise<{ response: http.IncomingMessage; body: SupportedPresentationElements;  }> {
         const localVarPath = this.basePath + '/workflows/presentationElements';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -51292,7 +51132,7 @@ export class VroWorkflowExecutionApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: SupportedPresentationElements;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: SupportedPresentationElements;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -51310,7 +51150,7 @@ export class VroWorkflowExecutionApi {
      * This endpoint will not produce results. It is a placeholder to enforce code generation of SupportedConstraints.
      * @summary This endpoint will not produce results. It is a placeholder to enforce code generation of SupportedConstraints.
      */
-    public getSupportedconstraints () : Promise<{ response: http.ClientResponse; body: SupportedConstraints;  }> {
+    public getSupportedconstraints () : Promise<{ response: http.IncomingMessage; body: SupportedConstraints;  }> {
         const localVarPath = this.basePath + '/workflows/constraints';
         let queryParameters: any = {};
         let headerParams: any = (<any>Object).assign({}, this.defaultHeaders);
@@ -51339,7 +51179,7 @@ export class VroWorkflowExecutionApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: SupportedConstraints;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: SupportedConstraints;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -51359,7 +51199,7 @@ export class VroWorkflowExecutionApi {
      * @param workflowId workflowId
      * @param executionId executionId
      */
-    public getWorkflowExecution (workflowId: string, executionId: string) : Promise<{ response: http.ClientResponse; body: WsWorkflowExecution;  }> {
+    public getWorkflowExecution (workflowId: string, executionId: string) : Promise<{ response: http.IncomingMessage; body: WsWorkflowExecution;  }> {
         const localVarPath = this.basePath + '/workflows/{workflowId}/executions/{executionId}'
             .replace('{' + 'workflowId' + '}', String(workflowId))
             .replace('{' + 'executionId' + '}', String(executionId));
@@ -51400,7 +51240,7 @@ export class VroWorkflowExecutionApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: WsWorkflowExecution;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: WsWorkflowExecution;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -51420,7 +51260,7 @@ export class VroWorkflowExecutionApi {
      * @param workflowId workflowId
      * @param executionId executionId
      */
-    public getWorkflowExecutionState (workflowId: string, executionId: string) : Promise<{ response: http.ClientResponse; body: ExecutionState;  }> {
+    public getWorkflowExecutionState (workflowId: string, executionId: string) : Promise<{ response: http.IncomingMessage; body: ExecutionState;  }> {
         const localVarPath = this.basePath + '/workflows/{workflowId}/executions/{executionId}/state'
             .replace('{' + 'workflowId' + '}', String(workflowId))
             .replace('{' + 'executionId' + '}', String(executionId));
@@ -51461,7 +51301,7 @@ export class VroWorkflowExecutionApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: ExecutionState;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: ExecutionState;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -51481,7 +51321,7 @@ export class VroWorkflowExecutionApi {
      * @param workflowId workflowId
      * @param executionContext executionContext
      */
-    public startWorkflowExecution (workflowId: string, executionContext: ExecutionContext) : Promise<{ response: http.ClientResponse; body: WsWorkflowExecution;  }> {
+    public startWorkflowExecution (workflowId: string, executionContext: ExecutionContext) : Promise<{ response: http.IncomingMessage; body: WsWorkflowExecution;  }> {
         const localVarPath = this.basePath + '/workflows/{workflowId}/executions'
             .replace('{' + 'workflowId' + '}', String(workflowId));
         let queryParameters: any = {};
@@ -51522,7 +51362,7 @@ export class VroWorkflowExecutionApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: WsWorkflowExecution;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: WsWorkflowExecution;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -51589,7 +51429,7 @@ export class VroWorkflowPresentationApi {
      * @param workflowId workflowId
      * @param presentationExecutionId presentationExecutionId
      */
-    public deleteWorkflowPresenationInstance (workflowId: string, presentationExecutionId: string) : Promise<{ response: http.ClientResponse; body?: any;  }> {
+    public deleteWorkflowPresenationInstance (workflowId: string, presentationExecutionId: string) : Promise<{ response: http.IncomingMessage; body?: any;  }> {
         const localVarPath = this.basePath + '/workflows/{workflowId}/presentation/instances/{presentationExecutionId}'
             .replace('{' + 'workflowId' + '}', String(workflowId))
             .replace('{' + 'presentationExecutionId' + '}', String(presentationExecutionId));
@@ -51630,7 +51470,7 @@ export class VroWorkflowPresentationApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body?: any;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body?: any;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -51649,7 +51489,7 @@ export class VroWorkflowPresentationApi {
      * @summary Get all presentations
      * @param workflowId workflowId
      */
-    public getAllWorkflowPresentationInstances (workflowId: string) : Promise<{ response: http.ClientResponse; body: PresentationExecutionsList;  }> {
+    public getAllWorkflowPresentationInstances (workflowId: string) : Promise<{ response: http.IncomingMessage; body: PresentationExecutionsList;  }> {
         const localVarPath = this.basePath + '/workflows/{workflowId}/presentation/instances'
             .replace('{' + 'workflowId' + '}', String(workflowId));
         let queryParameters: any = {};
@@ -51684,7 +51524,7 @@ export class VroWorkflowPresentationApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: PresentationExecutionsList;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: PresentationExecutionsList;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -51703,7 +51543,7 @@ export class VroWorkflowPresentationApi {
      * @summary Get presentation
      * @param workflowId workflowId
      */
-    public getWorkflowPresentation (workflowId: string) : Promise<{ response: http.ClientResponse; body: Presentation;  }> {
+    public getWorkflowPresentation (workflowId: string) : Promise<{ response: http.IncomingMessage; body: Presentation;  }> {
         const localVarPath = this.basePath + '/workflows/{workflowId}/presentation'
             .replace('{' + 'workflowId' + '}', String(workflowId));
         let queryParameters: any = {};
@@ -51738,7 +51578,7 @@ export class VroWorkflowPresentationApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: Presentation;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: Presentation;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -51758,7 +51598,7 @@ export class VroWorkflowPresentationApi {
      * @param workflowId workflowId
      * @param presentationExecutionId presentationExecutionId
      */
-    public getWorkflowPresentationInstance (workflowId: string, presentationExecutionId: string) : Promise<{ response: http.ClientResponse; body: PresentationExecution;  }> {
+    public getWorkflowPresentationInstance (workflowId: string, presentationExecutionId: string) : Promise<{ response: http.IncomingMessage; body: PresentationExecution;  }> {
         const localVarPath = this.basePath + '/workflows/{workflowId}/presentation/instances/{presentationExecutionId}'
             .replace('{' + 'workflowId' + '}', String(workflowId))
             .replace('{' + 'presentationExecutionId' + '}', String(presentationExecutionId));
@@ -51799,7 +51639,7 @@ export class VroWorkflowPresentationApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: PresentationExecution;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: PresentationExecution;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -51819,7 +51659,7 @@ export class VroWorkflowPresentationApi {
      * @param workflowId workflowId
      * @param executionContext executionContext
      */
-    public startWorkflowPresentation (workflowId: string, executionContext: ExecutionContext) : Promise<{ response: http.ClientResponse; body: PresentationExecution;  }> {
+    public startWorkflowPresentation (workflowId: string, executionContext: ExecutionContext) : Promise<{ response: http.IncomingMessage; body: PresentationExecution;  }> {
         const localVarPath = this.basePath + '/workflows/{workflowId}/presentation/instances'
             .replace('{' + 'workflowId' + '}', String(workflowId));
         let queryParameters: any = {};
@@ -51860,7 +51700,7 @@ export class VroWorkflowPresentationApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: PresentationExecution;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: PresentationExecution;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
@@ -51881,7 +51721,7 @@ export class VroWorkflowPresentationApi {
      * @param presentationExecutionId presentationExecutionId
      * @param executionContext executionContext
      */
-    public updateWorkflowPresentationInstance (workflowId: string, presentationExecutionId: string, executionContext: ExecutionContext) : Promise<{ response: http.ClientResponse; body: PresentationExecution;  }> {
+    public updateWorkflowPresentationInstance (workflowId: string, presentationExecutionId: string, executionContext: ExecutionContext) : Promise<{ response: http.IncomingMessage; body: PresentationExecution;  }> {
         const localVarPath = this.basePath + '/workflows/{workflowId}/presentation/instances/{presentationExecutionId}'
             .replace('{' + 'workflowId' + '}', String(workflowId))
             .replace('{' + 'presentationExecutionId' + '}', String(presentationExecutionId));
@@ -51928,7 +51768,7 @@ export class VroWorkflowPresentationApi {
                 requestOptions.form = formParams;
             }
         }
-        return new Promise<{ response: http.ClientResponse; body: PresentationExecution;  }>((resolve, reject) => {
+        return new Promise<{ response: http.IncomingMessage; body: PresentationExecution;  }>((resolve, reject) => {
             request(requestOptions, (error, response, body) => {
                 if (error) {
                     reject(error);
