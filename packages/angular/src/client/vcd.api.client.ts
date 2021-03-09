@@ -100,7 +100,7 @@ export enum LinkRelType {
 @Injectable()
 export class VcdApiClient {
     /** The default list of API versions (from most preferred to least) that the SDK supports. */
-    static readonly CANDIDATE_VERSIONS: string[] = ['35.0', '34.0', '33.0', '32.0', '31.0', '30.0'];
+    static readonly CANDIDATE_VERSIONS: string[] = ['35.2', '35.0', '34.0', '33.0', '32.0', '31.0', '30.0'];
 
     set baseUrl(_baseUrl: string) {
         this._baseUrl = _baseUrl;
@@ -299,15 +299,19 @@ export class VcdApiClient {
             );
     }
 
-    public updateSync<T>(endpoint: string, item: T): Observable<T> {
+    public updateSync<T>(endpoint: string, item: T, options?: {
+        headers: HttpHeaders
+    }): Observable<T> {
         return this.validateRequestContext().pipe(
-            concatMap(() => this.http.put<T>(`${this._baseUrl}/${endpoint}`, item))
+            concatMap(() => this.http.put<T>(`${this._baseUrl}/${endpoint}`, item, {headers: options.headers}))
         );
     }
 
-    public updateAsync<T>(endpoint: string, item: T): Observable<TaskType> {
+    public updateAsync<T>(endpoint: string, item: T, options?: {
+        headers: HttpHeaders
+    }): Observable<TaskType> {
         return this.validateRequestContext().pipe(
-            concatMap(() => this.http.put(`${this._baseUrl}/${endpoint}`, item, { observe: 'response' })),
+            concatMap(() => this.http.put(`${this._baseUrl}/${endpoint}`, item, { observe: 'response', headers: options.headers })),
             concatMap(response => this.mapResponseToTask(response, 'PUT'))
         );
     }
