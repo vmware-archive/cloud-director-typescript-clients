@@ -203,7 +203,7 @@ describe('API client pre-request validation', () => {
             versionInfo: VcdApiClient.CANDIDATE_VERSIONS.map(v => ({ version: v, mediaTypeMapping: [], deprecated: false }))
         };
 
-        apiClient.updateAsync('api/test', {}).subscribe(result => {
+        apiClient.updateAsync('api/test', {}, {headers: null}).subscribe(result => {
             expect(apiClient.version).toBe(VcdApiClient.CANDIDATE_VERSIONS[0]);
             expect(result.id).toBe(MOCK_TASK.id);
         });
@@ -219,7 +219,7 @@ describe('API client pre-request validation', () => {
         };
 
         const entity = { id: '12345', name: 'test', type: 'application/vnd.vmware.vcloud.test+json'} as EntityReferenceType;
-        apiClient.updateSync<EntityReferenceType>('api/test', entity).subscribe(result => {
+        apiClient.updateSync<EntityReferenceType>('api/test', entity, {headers: null}).subscribe(result => {
             expect(apiClient.version).toBe(VcdApiClient.CANDIDATE_VERSIONS[0]);
             expect(result.id).toBe(entity.id);
         });
