@@ -9,7 +9,7 @@ import { SupportedVersionsType } from '@vcd/bindings/vcloud/api/rest/schema/vers
 import { SessionType, TaskType, EntityReferenceType, QueryResultRecordsType } from '@vcd/bindings/vcloud/api/rest/schema_v1_5';
 import { Query } from '../query';
 import { ResponseNormalizationInterceptor } from './response.normalization.interceptor';
-import { HttpRequest } from '@angular/common/http';
+import {HttpHeaders, HttpRequest} from '@angular/common/http';
 import { ReflectiveInjector } from '@angular/core';
 import { concatMap } from 'rxjs/operators';
 
@@ -198,12 +198,12 @@ describe('API client pre-request validation', () => {
         httpMock.expectOne('rootUrl/api/test');
     });
 
-    it('performs validation chain on updateAsync', () => {
+    it('performs validation chain on updateAsync without options param', () => {
         const supportedVersions: SupportedVersionsType = {
             versionInfo: VcdApiClient.CANDIDATE_VERSIONS.map(v => ({ version: v, mediaTypeMapping: [], deprecated: false }))
         };
 
-        apiClient.updateAsync('api/test', {}, {headers: null}).subscribe(result => {
+        apiClient.updateAsync('api/test', {}).subscribe(result => {
             expect(apiClient.version).toBe(VcdApiClient.CANDIDATE_VERSIONS[0]);
             expect(result.id).toBe(MOCK_TASK.id);
         });
@@ -213,13 +213,48 @@ describe('API client pre-request validation', () => {
         httpMock.expectOne('rootUrl/api/test').flush(MOCK_TASK);
     });
 
-    it('performs validation chain on updateSync', () => {
+    it('performs validation chain on updateAsync with options param', () => {
+        const supportedVersions: SupportedVersionsType = {
+            versionInfo: VcdApiClient.CANDIDATE_VERSIONS.map(v => ({ version: v, mediaTypeMapping: [], deprecated: false }))
+        };
+
+        apiClient.updateAsync('api/test', {}, {headers: new HttpHeaders({
+                'If-Match': 'hcCcXsntrz91EhA/ggwn/KzJfsb96Jcn7f41DA5I3EM=--gzip'
+            })}).subscribe(result => {
+            expect(apiClient.version).toBe(VcdApiClient.CANDIDATE_VERSIONS[0]);
+            expect(result.id).toBe(MOCK_TASK.id);
+        });
+
+        handleVersionNegotiation(supportedVersions, httpMock);
+        handleSessionLoad(httpMock);
+        httpMock.expectOne('rootUrl/api/test').flush(MOCK_TASK);
+    });
+
+    it('performs validation chain on updateSync without options param', () => {
         const supportedVersions: SupportedVersionsType = {
             versionInfo: VcdApiClient.CANDIDATE_VERSIONS.map(v => ({ version: v, mediaTypeMapping: [], deprecated: false }))
         };
 
         const entity = { id: '12345', name: 'test', type: 'application/vnd.vmware.vcloud.test+json'} as EntityReferenceType;
-        apiClient.updateSync<EntityReferenceType>('api/test', entity, {headers: null}).subscribe(result => {
+        apiClient.updateSync<EntityReferenceType>('api/test', entity).subscribe(result => {
+            expect(apiClient.version).toBe(VcdApiClient.CANDIDATE_VERSIONS[0]);
+            expect(result.id).toBe(entity.id);
+        });
+
+        handleVersionNegotiation(supportedVersions, httpMock);
+        handleSessionLoad(httpMock);
+        httpMock.expectOne('rootUrl/api/test').flush(entity);
+    });
+
+    it('performs validation chain on updateSync with options param', () => {
+        const supportedVersions: SupportedVersionsType = {
+            versionInfo: VcdApiClient.CANDIDATE_VERSIONS.map(v => ({ version: v, mediaTypeMapping: [], deprecated: false }))
+        };
+
+        const entity = { id: '12345', name: 'test', type: 'application/vnd.vmware.vcloud.test+json'} as EntityReferenceType;
+        apiClient.updateSync<EntityReferenceType>('api/test', entity, {headers: new HttpHeaders({
+                'If-Match': 'hcCcXsntrz91EhA/ggwn/KzJfsb96Jcn7f41DA5I3EM=--gzip'
+            })}).subscribe(result => {
             expect(apiClient.version).toBe(VcdApiClient.CANDIDATE_VERSIONS[0]);
             expect(result.id).toBe(entity.id);
         });
