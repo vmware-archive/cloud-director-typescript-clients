@@ -300,18 +300,28 @@ export class VcdApiClient {
     }
 
     public updateSync<T>(endpoint: string, item: T, options?: {
-        headers: HttpHeaders
+        headers?: HttpHeaders
     }): Observable<T> {
         return this.validateRequestContext().pipe(
-            concatMap(() => this.http.put<T>(`${this._baseUrl}/${endpoint}`, item, {headers: options.headers}))
+            concatMap(() => this.http.put<T>(
+                `${this._baseUrl}/${endpoint}`,
+                item,
+                {
+                    ...options
+                }
+            ))
         );
     }
 
     public updateAsync<T>(endpoint: string, item: T, options?: {
-        headers: HttpHeaders
+        headers?: HttpHeaders
     }): Observable<TaskType> {
+
         return this.validateRequestContext().pipe(
-            concatMap(() => this.http.put(`${this._baseUrl}/${endpoint}`, item, { observe: 'response', headers: options.headers })),
+            concatMap(() => this.http.put(`${this._baseUrl}/${endpoint}`, item, {
+                observe: 'response',
+                ...options
+            })),
             concatMap(response => this.mapResponseToTask(response, 'PUT'))
         );
     }
