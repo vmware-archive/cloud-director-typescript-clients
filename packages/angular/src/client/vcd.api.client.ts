@@ -132,7 +132,8 @@ export class VcdApiClient {
         );
 
         const tokenHolder: AuthTokenHolderService = this.injector.get(AuthTokenHolderService, { token: '' });
-        this._getSession = this.setAuthentication(tokenHolder.token)
+        const token = tokenHolder.jwt ? `Bearer ${tokenHolder.jwt}` : tokenHolder.token;
+        this._getSession = this.setAuthentication(token)
             .pipe(
                 publishReplay(1),
                 refCount()

@@ -11,7 +11,7 @@ import { Query } from '../query';
 import { ResponseNormalizationInterceptor } from './response.normalization.interceptor';
 import {HttpHeaders, HttpRequest} from '@angular/common/http';
 import { ReflectiveInjector } from '@angular/core';
-import { concatMap } from 'rxjs/operators';
+import { concatMap, take } from 'rxjs/operators';
 
 // verifies that the GET api/versions endpoint is called exactly once, and returns the provided response
 function handleVersionNegotiation(versionResponse: SupportedVersionsType, httpMock: HttpTestingController): void {
@@ -65,6 +65,33 @@ describe('API client pre-request validation', () => {
 
     afterEach(() => {
         httpMock.verify();
+    });
+
+    describe('authentication', () => {
+
+        it('uses `x-vcloud-authorization` header if jwt is not provided', () => {
+            apiClient.setVersion('30.0');
+            apiClient.get('api/test').pipe(take(1)).subscribe(() => {
+            });
+            handleSessionLoad(httpMock);
+            const req: TestRequest = httpMock.expectOne('rootUrl/api/test');
+            expect(req.request.headers.get('x-vcloud-authorization')).toBe('authToken');
+        });
+
+        it('uses `Authorization` header with value `Bearer JWT` when jwt is provided', () => {
+            const injector = ReflectiveInjector.resolveAndCreate([VcdHttpClient,
+                {provide: AuthTokenHolderService, useValue: { token: 'authToken', jwt: 'JWT_TOKEN_which_is_longer_than_32' }},
+                {provide: API_ROOT_URL, useValue: 'rootUrl'}]);
+            apiClient = new VcdApiClient(httpClient, injector);
+
+            apiClient.setVersion('30.0');
+            apiClient.get('api/test').pipe(take(1)).subscribe(() => {
+            });
+            handleSessionLoad(httpMock);
+            const req: TestRequest = httpMock.expectOne('rootUrl/api/test');
+            expect(req.request.headers.get('x-vcloud-authorization')).toEqual(null);
+            expect(req.request.headers.get('Authorization')).toBe(`Bearer JWT_TOKEN_which_is_longer_than_32`);
+        });
     });
 
     it('negotiates with a server that supports most preferred/latest version', () => {

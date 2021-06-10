@@ -73,6 +73,12 @@ export interface AuthTokenHolderService {
      * The authentication token.
      */
     token: string;
+
+    /**
+     * JWT token
+     */
+    jwt?: string;
 }
 
-export const AuthTokenHolderService: {token: string} = containerHooks.AuthTokenHolderService;
+export const AuthTokenHolderService: AuthTokenHolderService = containerHooks.AuthTokenHolderService;
+
