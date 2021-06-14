@@ -3,6 +3,7 @@ import { HttpHandler, HttpInterceptor, HttpRequest, HttpEvent, HttpHeaders, Http
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { parseHeaderHateoasLinks } from '.';
+import { HTTP_HEADERS } from './constants';
 
 // tslint:disable:variable-name
 @Injectable()
@@ -25,11 +26,12 @@ export class RequestHeadersInterceptor implements HttpInterceptor {
         this._version = _version;
     }
 
-    private _authenticationHeader = 'Authorization';
+    private _authenticationHeader = HTTP_HEADERS.Authorization;
     private _authentication: string;
     set authentication(_authentication: string) {
         this._authentication = _authentication;
-        this._authenticationHeader = (this._authentication.length > 32) ? 'Authorization' : 'x-vcloud-authorization';
+        this._authenticationHeader = (this._authentication && this._authentication.length > 32) ?
+            HTTP_HEADERS.Authorization : HTTP_HEADERS.x_vcloud_authorization;
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -43,7 +45,7 @@ export class RequestHeadersInterceptor implements HttpInterceptor {
             headers = this.setContentTypeHeader(headers, req.url);
         }
 
-        if (this._authentication) {
+        if (this._authentication && !headers.has(HTTP_HEADERS.Authorization)) {
             headers = headers.set(this._authenticationHeader, this._authentication);
         }
 
@@ -62,16 +64,16 @@ export class RequestHeadersInterceptor implements HttpInterceptor {
                         return res;
                     }
 
-                    if (res.headers.has('link')) {
-                        res.body.link = parseHeaderHateoasLinks(res.headers.get('link'));
+                    if (res.headers.has(HTTP_HEADERS.link)) {
+                        res.body.link = parseHeaderHateoasLinks(res.headers.get(HTTP_HEADERS.link));
                     }
 
-                    if (res.headers.has('Link')) {
-                        res.body.link = parseHeaderHateoasLinks(res.headers.get('Link'));
+                    if (res.headers.has(HTTP_HEADERS.Link)) {
+                        res.body.link = parseHeaderHateoasLinks(res.headers.get(HTTP_HEADERS.Link));
                     }
 
-                    if (res.headers.has('etag')) {
-                        res.body.etag = res.headers.get('etag');
+                    if (res.headers.has(HTTP_HEADERS.etag)) {
+                        res.body.etag = parseHeaderHateoasLinks(res.headers.get(HTTP_HEADERS.etag));
                     }
                 }
                 return res;
