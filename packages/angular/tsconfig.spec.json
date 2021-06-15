@@ -24,6 +24,7 @@
     "src/test.ts"
   ],
   "include": [
+    "**/*.spec.data.ts",
     "**/*.spec.ts",
     "**/*.d.ts"
   ]
