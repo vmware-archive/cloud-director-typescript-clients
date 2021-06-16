@@ -6,6 +6,7 @@ import { BasicAuth, CloudDirectorAuthentication } from './auth';
 import * as mqtt from "mqtt";
 import * as tls from 'tls';
 import * as WS from 'ws';
+import * as jwt from 'jsonwebtoken';
 import { TransferClient } from "./transfer";
 
 
@@ -208,14 +209,31 @@ export class CloudDirectorConfig {
         const config = loadConfig(fileName)
         if (config) {
             const current = config[config.current]
-            return this.fromParams(current.basePath, {
-                authorized: current.authorized !== undefined ? current.authorized : false,
-            }, current.username, current.org, current.authorizationKey)
+            const connectionAuth = this.createConnectionAuth(current)
+            return this.fromParams(current.basePath, connectionAuth, current.username, current.org, current.authorizationKey)
         }
         throw new Error(`Config file missing at ${fileName}. Try logging in first.`)
     }
 
     static fromParams(basePath: string, connectionAuth: ConnectionAuth, username: string, org: string, authorizationKey: string): CloudDirectorConfig {
         return new CloudDirectorConfig(basePath, connectionAuth, new CloudDirectorAuthentication(username, org, authorizationKey))
+    }
+
+    static createConnectionAuth(current: any): ConnectionAuth {
+        if (this.isExpired(current.authorizationKey)) {
+            return {
+                authorized: false,
+                authorizationError: "Token expired"
+            }
+        }
+        return {
+            authorized: current.authorized !== undefined ? current.authorized : false,
+        }
+    }
+
+    static isExpired(authorizationKey: string): boolean {
+        const decoded = jwt.decode(authorizationKey)
+        const exp = decoded['exp']
+        return exp * 1000 < new Date().getTime()
     }
 }

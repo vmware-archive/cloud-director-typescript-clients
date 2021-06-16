@@ -1,5 +1,6 @@
 import { } from 'jasmine';
 import * as fs from 'fs';
+import * as jwt from 'jsonwebtoken';
 import * as nock from 'nock';
 import { CloudDirectorConfig } from './config';
 import { AccessControlsApi } from './api';
@@ -13,6 +14,7 @@ describe('Config Tests', () => {
     });
     it('Can created config from default location', () => {
         spyOn(fs, 'existsSync').and.returnValue(true)
+        spyOn(jwt, 'decode').and.returnValue({exp: new Date(3000, 4).getTime() / 1000})
         const readConfigSpy = spyOn(fs, 'readFileSync').and.returnValue(`{
             "current": "test",
             "test": {
