@@ -1,4 +1,7 @@
 # [Unreleased]
+-
+
+# 0.0.2-alpha.5 (2021-06-23)
 - Add cloud api authenticatication mechanism
 - Fix RequestHeadersInterceptor not to overwrite `Authorization` request header if it was already set
 
