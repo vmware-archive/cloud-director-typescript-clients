@@ -199,11 +199,15 @@ describe('RequestHeadersInterceptor', () => {
             });
         });
         describe('related to `etag` response headers', () => {
-            it('adds `etag` body property built from the `etag` response header', function(this: Test) {
+
+            it('adds `etag` body property built from the `etag` response header without case sensitivity', function(this: Test) {
                 const body = { someValue: 'test'};
                 const subscriptionSpy = jasmine.createSpy('subscriptionSpy');
+
+                const etagValue = 'feQNQBmFx1QgjJhLnvMoTA5Y5EWXQQQMshYuEEsyfig=--gzip';
+
                 const headers = {
-                    [HTTP_HEADERS.etag]: '<url1>;rel="down";type="application/json";model="model1";title="id1",<url2>',
+                    ['EtAg']: etagValue,
                 };
 
                 this.httpClient.get('endPoint').pipe(take(1)).subscribe(subscriptionSpy);
@@ -211,29 +215,15 @@ describe('RequestHeadersInterceptor', () => {
 
                 expect(subscriptionSpy).toHaveBeenCalledWith({
                     ...body,
-                    etag: parseHeaderHateoasLinks(headers[HTTP_HEADERS.etag])
+                    etag: etagValue
                 });
             });
-            it('adds `etag` body property built from the `etag` response header even for arrays', function(this: Test) {
-                const body = [1, 2, 3];
-                const subscriptionSpy = jasmine.createSpy('subscriptionSpy');
-                const headers = {
-                    [HTTP_HEADERS.etag]: '<url1>;rel="down";type="application/json";model="model1";title="id1",<url2>',
-                };
 
-                this.httpClient.get('endPoint').pipe(take(1)).subscribe(subscriptionSpy);
-                this.httpMock.expectOne('endPoint').flush(body, {headers});
-
-                const response = [...body];
-                // Yeh, link property is attached even for arrays
-                (response as any).etag = parseHeaderHateoasLinks(headers[HTTP_HEADERS.etag]);
-                expect(subscriptionSpy).toHaveBeenCalledWith(response);
-            });
             it('overwrites the original `etag` body property if such exists', function(this: Test) {
                 const body = { someValue: 'test', etag: 'some etag property'};
                 const subscriptionSpy = jasmine.createSpy('subscriptionSpy');
                 const headers = {
-                    [HTTP_HEADERS.etag]: '<url1>;rel="down";type="application/json";model="model1";title="id1",<url2>',
+                    [HTTP_HEADERS.etag]: 'feQNQBmFx1QgjJhLnvMoTA5Y5EWXQQQMshYuEEsyfig=--gzip',
                 };
 
                 this.httpClient.get('endPoint').pipe(take(1)).subscribe(subscriptionSpy);
@@ -241,11 +231,11 @@ describe('RequestHeadersInterceptor', () => {
 
                 expect(subscriptionSpy).toHaveBeenCalledWith({
                     ...body,
-                    etag: parseHeaderHateoasLinks(headers[HTTP_HEADERS.etag]),
+                    etag: headers[HTTP_HEADERS.etag],
                 });
             });
             it('does not modify the original `etag` body property if there are no `etag` response headers', function(this: Test) {
-                const body = { someValue: 'test', etag: 'some etag property'};
+                const body = { someValue: 'test', etag: 'feQNQBmFx1QgjJhLnvMoTA5Y5EWXQQQMshYuEEsyfig=--gzipss'};
                 const subscriptionSpy = jasmine.createSpy('subscriptionSpy');
                 const headers = {
                 };

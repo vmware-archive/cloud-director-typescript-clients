@@ -73,7 +73,7 @@ export class RequestHeadersInterceptor implements HttpInterceptor {
                     }
 
                     if (res.headers.has(HTTP_HEADERS.etag)) {
-                        res.body.etag = parseHeaderHateoasLinks(res.headers.get(HTTP_HEADERS.etag));
+                        res.body.etag = res.headers.get(HTTP_HEADERS.etag);
                     }
                 }
                 return res;
