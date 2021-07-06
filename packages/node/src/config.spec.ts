@@ -128,4 +128,23 @@ describe('Config Tests', () => {
             "pass")
         expect(scope.isDone()).toBeTrue()
     });
+    it('Can create authenticated client within tenant scope', async () => {
+        const scope = nock('http://www.example.com', {
+            reqheaders: {
+                'authorization': 'Bearer testKey',
+                'x-vmware-vcloud-tenant-context': 'tenant_id'
+            }
+        })
+            .post('/1.0.0/entities/test/accessControls')
+            .reply(200, { id: '123ABC' })
+        const config = CloudDirectorConfig.fromParams('http://www.example.com',
+            { authorized: true },
+            'administrator',
+            "system",
+            "testKey")
+        let actAsConfig = config.actAs('tenant_id');
+        const client = actAsConfig.makeApiClient(AccessControlsApi);
+        await client.createEntityAccessControlGrant("test", { accessLevelId: "", grantType: "", id: "", objectId: "test" })
+        expect(scope.isDone()).toBeTrue()
+    });
 })

@@ -1,4 +1,5 @@
 import { CloudDirectorConfig, DefinedEntityApi, DefinedEntityTypeApi, DefinedInterfaceBehaviorsApi, AccessControlsApi } from '../src'
+import {UserApi} from "../lib";
 const apiConfig = CloudDirectorConfig.fromDefault()
 
 const deApi: DefinedEntityApi = apiConfig.makeApiClient(DefinedEntityApi)
@@ -21,4 +22,12 @@ export function subscribe(topic: string) {
         client.on('message', (t, message) => {console.log(`${t}: ${message}`)})
         client.subscribe(topic)
     })
+}
+
+export function getUsersFromTenant() {
+    let actAsApiConfig = apiConfig.actAs('63d98607-9362-4c24-b3ca-bb004da22487');
+    let userApi = actAsApiConfig.makeApiClient(UserApi);
+    userApi.queryUsers(1,10)
+        .then(value => console.log(value.body))
+        .catch(console.error);
 }
