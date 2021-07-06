@@ -2,7 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import * as debug from 'debug';
 import * as api from './api';
-import { BasicAuth, CloudDirectorAuthentication } from './auth';
+import {BasicAuth, CloudDirectorAuthentication, CloudDirectorDefaultHeaders} from './auth';
 import * as mqtt from "mqtt";
 import * as tls from 'tls';
 import * as WS from 'ws';
@@ -86,11 +86,17 @@ export class CloudDirectorConfig {
     private constructor(
         public basePath: string,
         public connectionAuth: ConnectionAuth,
-        private authentication: api.Authentication
+        private authentication: CloudDirectorDefaultHeaders
     ) { }
 
     public get token(): string {
         return this.authentication['authorizationKey'];
+    }
+
+    public actAs(actAsId: string): CloudDirectorConfig {
+        let auth = this.authentication.clone();
+        auth.actAs(actAsId);
+        return new CloudDirectorConfig(this.basePath, this.connectionAuth, auth);
     }
 
     public makeApiClient<T extends ApiType>(apiClientType: ApiConstructor<T>) {
