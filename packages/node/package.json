@@ -1,7 +1,7 @@
 {
   "name": "@vcd/node-client",
   "description": "VMware Cloud Director Client bindings for NodeJS",
-  "version": "0.0.5",
+  "version": "0.0.6-alpha",
   "author": "VMware",
   "license": "BSD-2",
   "dependencies": {
@@ -15,6 +15,9 @@
     "request": "^2.88.2",
     "tslib": "^1.10.0"
   },
+  "peerDependencies": {
+    "@vcd/bindings": "9.1.1"
+  },
   "devDependencies": {
     "@types/debug": "^4.1.5",
     "@types/jasmine": "^3.5.4",
@@ -25,7 +28,8 @@
     "nock": "^13.0.4",
     "nyc": "^14.1.1",
     "ts-node": "^8.4.1",
-    "typescript": "^3.6.3"
+    "typescript": "^3.6.3",
+    "@vcd/bindings": "9.1.1"
   },
   "engines": {
     "node": ">=10.14.2 <13.0.0"
