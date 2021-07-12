@@ -1,28 +1,15 @@
 import * as https from 'https';
-import { CloudDirectorAuthentication } from './auth';
 import { VCloudExtensibleType } from '@vcd/bindings/vcloud/api/rest/schema_v1_5';
-
+import {CloudDirectorAuthentication} from "./auth";
 
 export class LegacyApiClient {
 
-    private readonly doubleSlash = '//';
     private readonly basePath: string;
 
     constructor(basePath: string,
                 private cloudDirectorAuthentication: CloudDirectorAuthentication,
                 private rejectUnauthorized: boolean) {
-        // remove the http protocol
-        let path: string;
-        if (basePath.startsWith('http')) {
-            path = basePath.substr(basePath.indexOf(this.doubleSlash) + this.doubleSlash.length);
-        }
-
-        // remove the /cloudApi suffix
-        if (path.indexOf('/cloudapi') >=0) {
-            path = path.substr(0, path.indexOf('/cloudapi'));
-        }
-
-        this.basePath = path;
+        this.basePath = new URL(basePath).host;
     }
 
     public get<T extends VCloudExtensibleType>(path: string): Promise<T> {
@@ -48,6 +35,10 @@ export class LegacyApiClient {
     private send<T extends VCloudExtensibleType>(requestOptions: any, body?: any) : Promise<T> {
         return new Promise<T>((resolve, reject) => {
             const clientRequest = https.request(requestOptions, res => {
+                if (res.statusCode < 200 || res.statusCode > 299) {
+                    reject('Something went wrong. Status code: ' + res.statusCode);
+                }
+
                 res.setEncoding('UTF8');
                 let data = '';
 
@@ -57,6 +48,10 @@ export class LegacyApiClient {
 
                 res.on('end', () => {
                     try {
+                        // empty body, usually result of a delete operation
+                        if (data === '') {
+                            resolve();
+                        }
                         const parsedData: T = JSON.parse(data);
                         resolve(parsedData);
                     } catch (e) {
@@ -91,8 +86,7 @@ export class LegacyApiClient {
         };
 
         this.cloudDirectorAuthentication.applyToRequest(requestOptions);
-        requestOptions.headers['Accept'] = 'application/*+json;version=35.0';
+        requestOptions.headers['accept'] = 'application/*+json;version=35.0';
         return requestOptions;
     }
-
 }
