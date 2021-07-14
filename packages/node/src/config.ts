@@ -8,6 +8,7 @@ import * as tls from 'tls';
 import * as WS from 'ws';
 import * as jwt from 'jsonwebtoken';
 import { TransferClient } from "./transfer";
+import { LegacyApiClient } from "./legacy.api.client";
 
 
 const log = debug('vcd:api-client')
@@ -118,7 +119,7 @@ export class CloudDirectorConfig {
 
     public makeMQTTClient(onConnect: (client: mqtt.MqttClient) => void) {
         if (!this.connectionAuth.authorized) {
-            throw new Error("Connection not authorized, please login again and accept and auth errors.");
+            throw new Error("Connection not authorized, please login again to fix any auth errors.");
         }
         const url = new URL(this.basePath);
         const urlString = `wss://${url.host}/messaging/mqtt`;
@@ -137,6 +138,20 @@ export class CloudDirectorConfig {
             client.on('error', (e) => console.error(e))
             client.on('connect', onConnect.bind(null, client))
         }
+    }
+
+    public makeLegacyApiClient() {
+        if (!this.connectionAuth.authorized) {
+            throw new Error("Connection not authorized, please login again to fix any auth errors.");
+        }
+
+        const username = this.authentication['username'];
+        const org = this.authentication['org'];
+        const token = this.authentication['authorizationKey'];
+
+        return new LegacyApiClient(this.basePath,
+            new CloudDirectorAuthentication(username, org, token),
+            false);
     }
 
     public saveConfig(alias: string, fileLocation?: string): void {

@@ -1,5 +1,6 @@
 import { CloudDirectorConfig, DefinedEntityApi, DefinedEntityTypeApi, DefinedInterfaceBehaviorsApi, AccessControlsApi } from '../src'
 import {UserApi} from "../lib";
+import { AdminOrgType } from "@vcd/bindings/vcloud/api/rest/schema_v1_5/AdminOrgType";
 const apiConfig = CloudDirectorConfig.fromDefault()
 
 const deApi: DefinedEntityApi = apiConfig.makeApiClient(DefinedEntityApi)
@@ -30,4 +31,18 @@ export function getUsersFromTenant() {
     userApi.queryUsers(1,10)
         .then(value => console.log(value.body))
         .catch(console.error);
+}
+
+export async function createOrg() {
+    const legacyApiClient = apiConfig.makeLegacyApiClient();
+    const orgType: AdminOrgType = {
+        name: 'testFromNodeClie3nt',
+        description: 'test',
+        fullName: 'testFromNode3Client',
+        isEnabled: true,
+        settings: {}
+    };
+
+    const org = await legacyApiClient.post<AdminOrgType>('/api/admin/orgs', orgType);
+    console.log(org);
 }
