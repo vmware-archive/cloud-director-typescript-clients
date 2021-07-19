@@ -4,6 +4,12 @@ export abstract class CloudDirectorDefaultHeaders implements api.Authentication 
 
     protected actAsId: string;
 
+    constructor(
+        public username: string,
+        public org: string,
+        public authorizationKey?: string
+    ) { }
+
     applyToRequest(requestOptions: any): void {
         requestOptions.headers['accept'] = 'application/json;version=35.0';
         requestOptions.strictSSL = false;
@@ -21,11 +27,11 @@ export abstract class CloudDirectorDefaultHeaders implements api.Authentication 
 
 export class BasicAuth extends CloudDirectorDefaultHeaders {
     constructor(
-        public username: string,
-        public org: string,
-        public password: string
+        username: string,
+        org: string,
+        private password: string
     ) { 
-        super()
+        super(username, org, null);
     }
 
     applyToRequest(requestOptions: any): void {
@@ -43,11 +49,11 @@ export class BasicAuth extends CloudDirectorDefaultHeaders {
 
 export class CloudDirectorAuthentication extends CloudDirectorDefaultHeaders {
     constructor(
-        public username: string,
-        public org: string,
-        public authorizationKey: string
+        username: string,
+        org: string,
+        authorizationKey: string
     ) { 
-        super()
+        super(username, org, authorizationKey)
     }
 
     applyToRequest(requestOptions: any): void {

@@ -87,11 +87,12 @@ export class CloudDirectorConfig {
     private constructor(
         public basePath: string,
         public connectionAuth: ConnectionAuth,
-        private authentication: CloudDirectorDefaultHeaders
+        public authentication: CloudDirectorDefaultHeaders
     ) { }
 
+    //TODO remove as not needed anymore authKey is exposed as public
     public get token(): string {
-        return this.authentication['authorizationKey'];
+        return this.authentication.authorizationKey;
     }
 
     public actAs(actAsId: string): CloudDirectorConfig {
@@ -114,7 +115,7 @@ export class CloudDirectorConfig {
         if (!this.connectionAuth.authorized) {
             throw new Error("Connection not authorized, please login again and accept and auth errors.");
         }
-        return new TransferClient(url, this.authentication['authorizationKey'], false);
+        return new TransferClient(url, this.authentication.authorizationKey, false);
     }
 
     public makeMQTTClient(onConnect: (client: mqtt.MqttClient) => void) {
@@ -130,8 +131,8 @@ export class CloudDirectorConfig {
                 urlString,
                 {
                     transformWsUrl: () => socket,
-                    username: `${this.authentication['username']}@${this.authentication['org']}`,
-                    password: this.authentication['authorizationKey'],
+                    username: `${this.authentication.username}@${this.authentication.org}`,
+                    password: this.authentication.authorizationKey,
                     clientId: "js_mqtt_" + Math.random().toString(16).substr(2, 8),
                     rejectUnauthorized: false
                 });
@@ -145,9 +146,9 @@ export class CloudDirectorConfig {
             throw new Error("Connection not authorized, please login again to fix any auth errors.");
         }
 
-        const username = this.authentication['username'];
-        const org = this.authentication['org'];
-        const token = this.authentication['authorizationKey'];
+        const username = this.authentication.username;
+        const org = this.authentication.org;
+        const token = this.authentication.authorizationKey;
 
         return new LegacyApiClient(this.basePath,
             new CloudDirectorAuthentication(username, org, token),
@@ -159,9 +160,9 @@ export class CloudDirectorConfig {
             config[alias] = {
                 basePath: this.basePath,
                 authorized: this.connectionAuth.authorized,
-                username: this.authentication['username'],
-                org: this.authentication['org'],
-                authorizationKey: this.authentication['authorizationKey']
+                username: this.authentication.username,
+                org: this.authentication.org,
+                authorizationKey: this.authentication.authorizationKey
             }
             config.current = alias
         }, fileLocation)
