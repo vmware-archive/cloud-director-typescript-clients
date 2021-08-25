@@ -79,7 +79,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Generate provenance files
     if: github.ref != 'refs/heads/main' && github.event_name != 'pull_request'
-    needs: [dependencies, test]
+    needs: [dependencies, build]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -96,10 +96,6 @@ jobs:
             git commit -s -m "Update provenance files"
             git push
           fi
-  #      - uses: actions/upload-artifact@v2
-  #        with:
-  #          name: dependecies-file
-  #          path: .github/workflows/dependencies.json
   publish:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
