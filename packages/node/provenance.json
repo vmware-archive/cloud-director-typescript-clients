@@ -1,16 +1,16 @@
 {
   "id": "http://vmware.com/schemas/software_provenance-0.2.0.json",
-  "root": "0.0.6-alpha.0",
+  "root": "0.0.6-alpha.1",
   "all-components": {
     "name": "@vcd/node-client",
-    "version": "0.0.6-alpha.0",
+    "version": "0.0.6-alpha.1",
     "source_repositories": [
       {
         "content": "source",
         "host": "github.com",
         "protocol": "git",
         "paths": [
-          "/vmware/vcd-ext-sdk/tree/main/ev/Documents/Projects/Solutions/cloud-director-typescript-clients/packages/node"
+          "/vmware/vcd-ext-sdk/tree/main/r/work/cloud-director-typescript-clients/cloud-director-typescript-clients/packages/node"
         ],
         "branch": "main"
       }
