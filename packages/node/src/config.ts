@@ -146,13 +146,7 @@ export class CloudDirectorConfig {
             throw new Error("Connection not authorized, please login again to fix any auth errors.");
         }
 
-        const username = this.authentication.username;
-        const org = this.authentication.org;
-        const token = this.authentication.authorizationKey;
-
-        return new LegacyApiClient(this.basePath,
-            new CloudDirectorAuthentication(username, org, token),
-            false);
+        return new LegacyApiClient(this.basePath, this.authentication, false);
     }
 
     public saveConfig(alias: string, fileLocation?: string): void {
