@@ -111,11 +111,11 @@ export class CloudDirectorConfig {
         return apiClient;
     }
 
-    public makeTransferClient(url: string) {
+    public makeTransferClient() {
         if (!this.connectionAuth.authorized) {
             throw new Error("Connection not authorized, please login again and accept and auth errors.");
         }
-        return new TransferClient(url, this.authentication.authorizationKey, false);
+        return new TransferClient(this.authentication, false);
     }
 
     public makeMQTTClient(onConnect: (client: mqtt.MqttClient) => void) {

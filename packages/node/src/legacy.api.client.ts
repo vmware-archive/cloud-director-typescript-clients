@@ -36,6 +36,7 @@ export class LegacyApiClient {
         return new Promise<T>((resolve, reject) => {
             const clientRequest = https.request(requestOptions, res => {
                 if (res.statusCode < 200 || res.statusCode > 299) {
+                    res.on('data', e => console.error(e));
                     reject('Something went wrong. Status code: ' + res.statusCode);
                 }
 

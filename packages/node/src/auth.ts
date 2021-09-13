@@ -22,6 +22,10 @@ export abstract class CloudDirectorDefaultHeaders implements api.Authentication 
         this.actAsId = id;
     }
 
+    public getActAsId() {
+        return this.actAsId;
+    }
+
     abstract clone(): CloudDirectorDefaultHeaders
 }
 
