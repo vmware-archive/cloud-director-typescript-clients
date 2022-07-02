@@ -96,6 +96,11 @@ jobs:
             git commit -s -m "Update provenance files"
             git push
           fi
+      - run: bash ./.github/scripts/provenance.sh
+        shell: bash
+        env:
+          SRP_CLIENT_ID: ${{ secrets.client_id }}
+          SRP_CLIENT_SECRET: ${{ secrets.client_secret }}
   publish:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
