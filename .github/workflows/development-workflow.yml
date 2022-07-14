@@ -23,6 +23,10 @@ jobs:
           path: |
             **/node_modules
           key: ${{github.sha}}-dependencies
+      - name: Setup node 12
+        uses: actions/setup-node@v2
+        with:
+          node-version: 12.16.3
       - run: |
           npm ci
           npm run bootstrap
@@ -75,10 +79,10 @@ jobs:
             **/lib
           key: ${{github.sha}}-artifacts
       - run: npm run build
-  generate-dependencies:
+  submit-provenance:
     runs-on: ubuntu-latest
-    name: Generate provenance files
-    if: github.ref != 'refs/heads/main' && github.event_name != 'pull_request'
+    name: Submit Provenance
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: [dependencies, build]
     steps:
       - uses: actions/checkout@v2
@@ -96,6 +100,11 @@ jobs:
             git commit -s -m "Update provenance files"
             git push
           fi
+      - run: bash ./.github/scripts/provenance.sh
+        shell: bash
+        env:
+          SRP_CLIENT_ID: ${{ secrets.client_id }}
+          SRP_CLIENT_SECRET: ${{ secrets.client_secret }}
   publish:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
