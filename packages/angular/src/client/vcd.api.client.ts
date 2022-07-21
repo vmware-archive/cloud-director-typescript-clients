@@ -119,7 +119,7 @@ export enum LinkRelType {
 @Injectable()
 export class VcdApiClient {
     /** The default list of API versions (from most preferred to least) that the SDK supports. */
-    static readonly CANDIDATE_VERSIONS: string[] = ['35.2', '35.0', '34.0', '33.0', '32.0', '31.0', '30.0'];
+    static readonly CANDIDATE_VERSIONS: string[] = ['37.0', '36.3', '36.2', '36.1', '36.0', '35.2', '35.0', '34.0', '33.0'];
 
     set baseUrl(_baseUrl: string) {
         this._baseUrl = _baseUrl;

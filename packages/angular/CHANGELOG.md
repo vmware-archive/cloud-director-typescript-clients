@@ -1,5 +1,12 @@
 # [Unreleased]
--
+
+# 0.0.2-alpha.8 (2022-07-22)
+Problem:
+- API versions '32.0', '31.0', '30.0' are deleted for VCD 10.4
+- API versions '37.0', '36.3', '36.2', '36.1', '36.0' are supported in 10.4
+
+Fix:
+Remove deleted and add missing supported API versions in the vcd API client.
 
 # 0.0.2-alpha.6 (2021-06-24)
 - Removed unnecessary parseHeaderHateoasLinks for etag headers in RequestHeadersInterceptor
