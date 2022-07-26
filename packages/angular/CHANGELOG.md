@@ -1,4 +1,6 @@
 # [Unreleased]
+- VcdApiClient can work with absolute URLs
+- VcdApiClient CRUD operations accept custom request HEADERS
 
 # 0.0.2-alpha.8 (2022-07-22)
 Problem:
