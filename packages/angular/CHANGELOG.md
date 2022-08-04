@@ -1,5 +1,9 @@
 # [Unreleased]
 
+# 0.0.2-alpha.9 (2022-08-01)
+- VcdApiClient can work with absolute URLs
+- VcdApiClient CRUD operations accept custom request HEADERS
+
 # 0.0.2-alpha.8 (2022-07-22)
 Problem:
 - API versions '32.0', '31.0', '30.0' are deleted for VCD 10.4
