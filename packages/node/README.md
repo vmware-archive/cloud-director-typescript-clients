@@ -1,5 +1,7 @@
 # VMware Cloud Director Client bindings for NodeJS
 
+> **ATTENTION:** This repository soon will be Archived, please refer to our new central point repository for Cloud Director Extensibility [Cloud Director Extension Standard Library](https://github.com/vmware/cloud-director-extension-standard-library)
+
 The Javascript clients for VMware Cloud Director is implemented in
 [typescript](https://typescriptlang.org), but can be called from either
 Javascript or Typescript.
