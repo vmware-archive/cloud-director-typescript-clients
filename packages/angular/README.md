@@ -1,3 +1,5 @@
+> **ATTENTION:** This repository soon will be Archived, please refer to our new central point repository for Cloud Director Extensibility [Cloud Director Extension Standard Library](https://github.com/vmware/cloud-director-extension-standard-library)
+
 ### Usage examples ###
 #### Authenticating ####
 If you don't have an existing session, you can create one:
