@@ -74,9 +74,9 @@ export function parseHeaderHateoasLinks(header: string): LinkType[] {
                 const valueStart = next('"');
                 const valueEnd = next('"');
                 const value = header.substring(valueStart + 1, valueEnd);
-                const mappedName = headerFieldMappings[name];
+                const mappedName: string = headerFieldMappings[name];
                 if (mappedName) {
-                    result[mappedName] = decodeURIComponent(value) as any;
+                    result[mappedName] = decodeURIComponent(value);
                 }
                 comma = peek(',');
                 semicolon = peek(';');

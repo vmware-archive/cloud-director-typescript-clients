@@ -7,10 +7,12 @@
     "packages/*"
   ],
   "devDependencies": {
-    "lerna": "^3.22.1"
+    "lerna": "^4.0.0"
   },
   "scripts": {
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": "lerna bootstrap && npm run install-security-fixes",
+    "install-security-fixes": "cd ./packages/angular && npm i",
+    "audit-check": "npm audit && cd packages/node && npm audit && cd ../angular && npm audit",
     "lint": "lerna run lint",
     "build": "lerna run build",
     "test": "lerna run test",

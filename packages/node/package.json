@@ -10,7 +10,7 @@
     "@types/request": "*",
     "debug": "^4.1.1",
     "jsonwebtoken": "^8.5.1",
-    "mqtt": "4.1.0",
+    "mqtt": "^4.2.8",
     "paho-mqtt": "^1.1.0",
     "request": "^2.88.2",
     "tslib": "^1.10.0"
@@ -24,9 +24,9 @@
     "@types/jsonwebtoken": "^8.5.1",
     "@types/node": "^10.14.20",
     "jasmine": "^3.5.0",
-    "jasmine-ts": "^0.3.0",
+    "jasmine-ts": "^0.4.0",
     "nock": "^13.0.4",
-    "nyc": "^14.1.1",
+    "nyc": "^15.1.0",
     "ts-node": "^8.4.1",
     "typescript": "^3.6.3",
     "@vcd/bindings": "9.1.1"
